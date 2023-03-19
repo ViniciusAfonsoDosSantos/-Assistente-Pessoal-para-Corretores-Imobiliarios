@@ -13,30 +13,7 @@ import javafx.scene.shape.Circle;
  *
  * @author Vinicius
  */
-public class TelaPrincipalController {
+public class TelaPrincipalController extends PadraoController{
     
-    @FXML
-    private void redirecionarCadastrarCliente() throws IOException {
-        App.setRoot("telaCadastroCliente");
-    }
     
-    @FXML
-    private void redirecionarTelaPrincipal() throws IOException {
-        App.setRoot("telaPrincipal");
-    }
-    
-    @FXML
-    private void redirecionarLogin() throws IOException {
-        App.setRoot("telaLogin");
-    }
-    
-    @FXML
-    private void redirecionarExpandirCliente() throws IOException {
-        App.setRoot("telaExpansaoCliente");
-    }
-    
-    @FXML
-    private void redirecionarOpcoesCliente() throws IOException {
-        App.setRoot("telaUsuario");
-    }
 }

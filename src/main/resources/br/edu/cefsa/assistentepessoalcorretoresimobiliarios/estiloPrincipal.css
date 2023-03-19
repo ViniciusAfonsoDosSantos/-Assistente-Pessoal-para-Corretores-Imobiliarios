@@ -107,6 +107,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .date-picker{
     -fx-border-color: #000000;
     -fx-border-width: 0px 0px 2px 0px;
+    -fx-background-color: transparent;
 }
 
 .date-picker .arrow-button {
@@ -157,4 +158,21 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .date-picker-popup .spinner .button .left-arrow,
 .date-picker-popup .spinner .button .right-arrow {
 	-fx-background-color: #000000;
+}
+
+.table-view{
+    -fx-border-width: 0;
+}
+.table-view .column-header-background{
+    -fx-background-color: #ffffff;
+    -fx-border-color:#2B49B3;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px 30px 0px 0px;
+    -fx-background-radius: 30px 30px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
 }

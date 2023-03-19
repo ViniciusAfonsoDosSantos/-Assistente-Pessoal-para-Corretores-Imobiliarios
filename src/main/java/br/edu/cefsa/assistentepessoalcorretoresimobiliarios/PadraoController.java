@@ -1,31 +1,17 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 
 /**
- * FXML Controller class
  *
  * @author Vinicius
  */
-public class TelaUsuarioController extends PadraoController {
-
-    /**
-     * Initializes the controller class.
-     */
-    /*
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    */
+public class PadraoController {
     
     @FXML
     private void redirecionarCadastrarCliente() throws IOException {
@@ -38,7 +24,23 @@ public class TelaUsuarioController extends PadraoController {
     }
     
     @FXML
-    private void redirecionarOpcoesCliente() throws IOException {
+    private void redirecionarLogin() throws IOException {
+        App.setRoot("telaLogin");
+    }
+    
+    @FXML
+    private void redirecionarExpandirCliente() throws IOException {
+        App.setRoot("telaExpansaoCliente");
+    }
+    
+    @FXML
+    private void redirecionarOpcoesUsuario() throws IOException {
         App.setRoot("telaUsuario");
     }
+    
+    @FXML
+    private void redirecionarAdministrador() throws IOException {
+        App.setRoot("telaAdministrador");
+    }
+    
 }

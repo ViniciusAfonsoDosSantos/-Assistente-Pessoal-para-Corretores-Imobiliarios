@@ -49,6 +49,9 @@ public class TelaLoginController implements Initializable {
     private Label lbTexto3;
     
     @FXML
+    private Label lbTexto4;
+    
+    @FXML
     private Label lbCadastrese;
     
     @FXML
@@ -108,7 +111,7 @@ public class TelaLoginController implements Initializable {
         lbCadastrese.setVisible(false);
         iconEmail.setVisible(false);
         iconChaveCadastrese.setVisible(false);
-        lbTexto3.setVisible(false);
+        lbTexto4.setVisible(false);
     }
     
     @FXML
@@ -119,17 +122,17 @@ public class TelaLoginController implements Initializable {
         slide.setDuration(Duration.seconds(0.7));
         slide.setNode(camada2);
         
-        slide.setToX(350);
+        slide.setToX(390);
         slide.play();
         
-        camada1.setTranslateX(-350);
+        camada1.setTranslateX(-390);
         /*
         slide.setOnFinished((e->{
         
         }));
         */
         
-        lbTexto3.setVisible(true);
+        lbTexto4.setVisible(true);
         txtSenhaCadastrese.setVisible(true);
         btnRedirecionarLogin.setVisible(true);
         btnCadastrese.setVisible(true);
@@ -143,14 +146,11 @@ public class TelaLoginController implements Initializable {
         txtSenhaLogin.setVisible(false);
         lbEsqueceuSenha.setVisible(false);
         iconChaveLogin.setVisible(false);
-        lbTexto2.setVisible(false);
-        lbTexto1.setVisible(false);
-        
+        lbTexto3.setVisible(false);
     }
     
     @FXML
     private void redirecionarLogin(){
-        
         
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.7));
@@ -167,7 +167,7 @@ public class TelaLoginController implements Initializable {
         }));
         */
         
-        lbTexto3.setVisible(false);
+        lbTexto4.setVisible(false);
         txtSenhaCadastrese.setVisible(false);
         btnRedirecionarLogin.setVisible(false);
         btnCadastrese.setVisible(false);
@@ -181,8 +181,7 @@ public class TelaLoginController implements Initializable {
         txtSenhaLogin.setVisible(true);
         lbEsqueceuSenha.setVisible(true);
         iconChaveLogin.setVisible(true);
-        lbTexto2.setVisible(true);
-        lbTexto1.setVisible(true);
+        lbTexto3.setVisible(true);
     }
     
     @FXML

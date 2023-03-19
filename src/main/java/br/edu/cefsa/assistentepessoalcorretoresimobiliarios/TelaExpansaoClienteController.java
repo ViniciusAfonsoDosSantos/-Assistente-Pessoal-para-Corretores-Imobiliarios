@@ -11,25 +11,7 @@ import javafx.fxml.FXML;
  *
  * @author Vinicius
  */
-public class TelaExpansaoClienteController {
+public class TelaExpansaoClienteController extends PadraoController{
     
-    @FXML
-    private void redirecionarCadastrarCliente() throws IOException {
-        App.setRoot("telaCadastroCliente");
-    }
     
-    @FXML
-    private void redirecionarTelaPrincipal() throws IOException {
-        App.setRoot("telaPrincipal");
-    }
-    
-    @FXML
-    private void redirecionarLogin() throws IOException {
-        App.setRoot("telaLogin");
-    }
-    
-    @FXML
-    private void redirecionarExpandirCliente() throws IOException {
-        App.setRoot("telaExpansaoCliente");
-    }
 }
