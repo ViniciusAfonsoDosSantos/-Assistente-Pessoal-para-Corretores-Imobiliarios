@@ -1,0 +1,160 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 15 de mar. de 2023, 19:50:13
+    Author     : Vinicius
+*/
+
+.button{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #4a4a4a;
+}
+
+.button_fundobranco{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2B49B3;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a4a4a;
+}
+
+.button_fundobranco:hover{
+    -fx-background-color: #2B49B3;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2B49B3;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button:hover{
+    -fx-background-color: #2B49B3;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button_verde:hover{
+    -fx-background-color: #7DCAA2;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button_verde:hover .icone {
+  -fx-fill: #FFFFFF;
+}
+
+.button_vermelho{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #E5707A;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a4a4a;
+}
+
+.button_vermelho:hover{
+    -fx-background-color: #E5707A;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button_vermelho:hover .icone {
+  -fx-fill: #FFFFFF;
+}
+
+.sidebar{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 30px 30px 0px 0px;
+}
+
+.icones{
+    -fx-fill: #000000;
+}
+
+.icones:hover{
+    -fx-fill: #2B49B3;
+}
+
+.pane{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:0px 0px 30px 30px;
+}
+
+.pane_boxcliente{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:30px 30px 30px 30px;
+}
+
+.pane_boxcliente_superior{
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:30px 30px 0px 0px;
+}
+
+.TextField{
+    -fx-background-color: transparent;
+    -fx-border-color: #000000;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.TextField:focused{
+    -fx-border-color: #2B49B3;
+}
+
+.date-picker{
+    -fx-border-color: #000000;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.date-picker .arrow-button {
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 0;
+        -fx-border-color: #FFFFFF;
+}
+.date-picker .arrow-button:hover {
+	-fx-background-color: #2B49B3;
+}
+.date-picker .arrow-button .arrow {
+	-fx-background-color: #2B49B3;
+}
+
+.date-picker .arrow-button:hover .arrow {
+	-fx-background-color: white;
+}
+
+.date-picker .cell {
+	-fx-background-color: white;
+}
+.date-picker .cell:hover {
+	-fx-background-color: #2B49B3;
+}
+.date-picker .cell:focused {
+	-fx-background-color: #2B49B3;
+}
+.date-picker .selected {
+	-fx-background-color: #2B49B3;
+	-fx-text-fill: white;
+}
+.date-picker .selected:focused {
+	-fx-background-color: #2B49B3;
+	-fx-text-fill: white;
+}
+.date-picker-popup  {
+	-fx-border-color: transparent;
+}
+.date-picker-popup .month-year-pane {
+	-fx-background-color: white;
+}
+.date-picker-popup .month-year-pane .label {
+	-fx-text-fill: #000000;
+}
+.date-picker-popup .week-number-cell {
+	-fx-text-fill: #000000;
+}
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+	-fx-background-color: #000000;
+}

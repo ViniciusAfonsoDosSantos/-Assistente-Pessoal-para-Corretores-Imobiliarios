@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="telaLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaLoginController">
+   <children>
+      <AnchorPane fx:id="camada1" layoutX="350.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="349.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <TextField fx:id="txtNomeUsuario" layoutX="91.0" layoutY="191.0" prefHeight="26.0" prefWidth="195.0" promptText="Nome de usuário" styleClass="TextField" />
+            <PasswordField fx:id="txtSenhaLogin" layoutX="92.0" layoutY="239.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
+            <Hyperlink fx:id="lbEsqueceuSenha" layoutX="121.0" layoutY="289.0" text="Esqueceu a senha?" />
+            <Button fx:id="btnEntrarLogin" layoutX="145.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#realizarLogin" styleClass="button_fundobranco" text="Entrar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <FontAwesomeIconView fx:id="iconUsuario" glyphName="USER" layoutX="53.0" layoutY="212.0" size="20" />
+            <FontAwesomeIconView fx:id="iconChaveLogin" glyphName="KEY" layoutX="50.0" layoutY="259.0" size="20" />
+            <FontAwesomeIconView fx:id="iconUsuarios" glyphName="USERS" layoutX="156.0" layoutY="85.0" size="35" />
+            <Label fx:id="lbLogin" layoutX="146.0" layoutY="104.0" text="Login">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="txtSenhaCadastrese" layoutX="92.0" layoutY="287.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
+            <FontAwesomeIconView fx:id="iconChaveCadastrese" glyphName="KEY" layoutX="50.0" layoutY="308.0" size="20" />
+            <FontAwesomeIconView fx:id="iconEmail" glyphName="ENVELOPE" layoutX="50.0" layoutY="257.0" size="20" />
+            <TextField fx:id="txtEmail" layoutX="91.0" layoutY="239.0" prefHeight="26.0" prefWidth="195.0" promptText="Email" styleClass="TextField" />
+            <Label fx:id="lbCadastrese" layoutX="115.0" layoutY="104.0" text="Cadastre-se">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnCadastrese" layoutX="134.0" layoutY="344.0" mnemonicParsing="false" onMouseClicked="#salvarUsuario" styleClass="button_fundobranco" text="Cadastrar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="camada2" prefHeight="500.0" prefWidth="350.0" style="-fx-background-color: #F5F5F5;">
+         <children>
+            <Label fx:id="lbLogo" layoutX="116.0" layoutY="145.0" text="LOGO">
+               <font>
+                  <Font name="Broadway" size="40.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbTexto1" layoutX="83.0" layoutY="222.0" text="Assistente pessoal para">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbTexto2" layoutX="86.0" layoutY="243.0" text="corretores imobiliários">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRedirecionarCadastro" layoutX="127.0" layoutY="349.0" mnemonicParsing="false" onAction="#redirecionarCadastro" text="Cadastre-se">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="lbTexto3" layoutX="91.0" layoutY="222.0" text="Crie sua conta gratis!">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Button fx:id="btnRedirecionarLogin" layoutX="144.0" layoutY="349.0" mnemonicParsing="false" text="Login">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
