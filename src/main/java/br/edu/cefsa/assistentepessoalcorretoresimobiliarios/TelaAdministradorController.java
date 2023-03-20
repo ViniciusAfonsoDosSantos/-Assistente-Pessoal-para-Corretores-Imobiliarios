@@ -49,24 +49,4 @@ public class TelaAdministradorController extends PadraoController {
         
     }
      */
-    
-    @FXML
-    private void redirecionarCadastrarCliente() throws IOException {
-        App.setRoot("telaCadastroCliente");
-    }
-    
-    @FXML
-    private void redirecionarTelaPrincipal() throws IOException {
-        App.setRoot("telaPrincipal");
-    }
-    
-     @FXML
-    private void redirecionarOpcoesUsuario() throws IOException {
-        App.setRoot("telaUsuario");
-    }
-    
-    @FXML
-    private void redirecionarAdministrador() throws IOException {
-        App.setRoot("telaAdministrador");
-    }
 }

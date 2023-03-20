@@ -14,7 +14,7 @@
    <children>
       <Pane layoutY="5.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar">
          <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
             <VBox layoutX="14.0" layoutY="200.0">
                <children>

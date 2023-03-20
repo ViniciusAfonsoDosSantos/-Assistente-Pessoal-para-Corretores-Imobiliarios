@@ -11,7 +11,9 @@ import javafx.fxml.FXML;
  *
  * @author Vinicius
  */
-public class PadraoController {
+public class PadraoController{
+    
+    DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
     
     @FXML
     private void redirecionarCadastrarCliente() throws IOException {
@@ -41,6 +43,13 @@ public class PadraoController {
     @FXML
     private void redirecionarAdministrador() throws IOException {
         App.setRoot("telaAdministrador");
+    }
+    
+    @FXML
+    private void logOff() throws IOException {
+        
+        usuarioLogado.setUsuario(null);
+        App.setRoot("telaLogin");
     }
     
 }

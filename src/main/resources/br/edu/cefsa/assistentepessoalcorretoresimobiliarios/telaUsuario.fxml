@@ -14,7 +14,7 @@
    <children>
       <Pane prefHeight="580.0" prefWidth="45.0" styleClass="sidebar">
          <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
             <VBox layoutX="14.0" layoutY="200.0">
                <children>
@@ -59,11 +59,11 @@
                </font>
             </Button>
             <Label layoutX="23.0" layoutY="42.0" prefWidth="89.0" text="Nome Completo" />
-            <TextField layoutX="20.0" layoutY="63.0" prefHeight="26.0" prefWidth="244.0" styleClass="TextField" />
+            <TextField fx:id="txtNome" layoutX="20.0" layoutY="63.0" prefHeight="26.0" prefWidth="244.0" styleClass="TextField" />
             <Label layoutX="327.0" layoutY="42.0" text="Email" />
-            <TextField layoutX="327.0" layoutY="63.0" prefHeight="28.0" prefWidth="306.0" styleClass="TextField" />
+            <TextField fx:id="txtEmail" layoutX="327.0" layoutY="63.0" prefHeight="28.0" prefWidth="306.0" styleClass="TextField" />
             <Label layoutX="23.0" layoutY="116.0" text="Senha" />
-            <TextField layoutX="20.0" layoutY="141.0" prefHeight="28.0" prefWidth="181.0" styleClass="TextField" />
+            <TextField fx:id="txtSenha" layoutX="20.0" layoutY="141.0" prefHeight="28.0" prefWidth="181.0" styleClass="TextField" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="82.0" layoutY="379.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente">

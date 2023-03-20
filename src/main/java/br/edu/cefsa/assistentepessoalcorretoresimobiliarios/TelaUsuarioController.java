@@ -4,41 +4,35 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
  *
  * @author Vinicius
  */
-public class TelaUsuarioController extends PadraoController {
+public class TelaUsuarioController extends PadraoController  implements Initializable{
 
-    /**
-     * Initializes the controller class.
-     */
-    /*
+    @FXML
+    private TextField txtNome;
+    
+    @FXML
+    private TextField txtEmail;
+    
+    @FXML
+    private TextField txtSenha;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-    */
-    
-    @FXML
-    private void redirecionarCadastrarCliente() throws IOException {
-        App.setRoot("telaCadastroCliente");
+        
+        txtNome.setText(usuarioLogado.getUsuario().Nome);
+        txtEmail.setText(usuarioLogado.getUsuario().Email);
+        txtSenha.setText(usuarioLogado.getUsuario().Senha);
     }
     
-    @FXML
-    private void redirecionarTelaPrincipal() throws IOException {
-        App.setRoot("telaPrincipal");
-    }
-    
-    @FXML
-    private void redirecionarOpcoesCliente() throws IOException {
-        App.setRoot("telaUsuario");
-    }
 }

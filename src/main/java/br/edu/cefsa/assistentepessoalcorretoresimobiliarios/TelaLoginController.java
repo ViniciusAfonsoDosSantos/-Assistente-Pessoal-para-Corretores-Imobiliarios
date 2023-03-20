@@ -100,6 +100,7 @@ public class TelaLoginController implements Initializable {
     @FXML
     private FontAwesomeIconView iconChaveCadastrese;
     
+    DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -226,6 +227,7 @@ public class TelaLoginController implements Initializable {
             if(userBanco != null){ //existe user com email
                 //ver se senha e email batem
                 if(verificaLogin(user, userBanco)){
+                    usuarioLogado.setUsuario(userBanco);
                     redirecionarTelaPrincipal();
                 }
                 txtEmail.clear();
