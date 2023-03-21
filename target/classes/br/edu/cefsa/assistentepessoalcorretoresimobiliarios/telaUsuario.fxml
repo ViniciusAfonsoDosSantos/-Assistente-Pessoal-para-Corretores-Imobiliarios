@@ -68,7 +68,7 @@
       </AnchorPane>
       <AnchorPane layoutX="82.0" layoutY="379.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente">
          <children>
-            <Button alignment="CENTER" layoutX="519.0" layoutY="25.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="108.0" styleClass="button_vermelho" text="Deletar" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="57.0">
+            <Button alignment="CENTER" layoutX="519.0" layoutY="25.0" mnemonicParsing="false" onAction="#deletarUsuario" prefHeight="27.0" prefWidth="108.0" styleClass="button_vermelho" text="Deletar" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="57.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

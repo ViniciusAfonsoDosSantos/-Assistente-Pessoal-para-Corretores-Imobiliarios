@@ -13,7 +13,7 @@
    <children>
       <AnchorPane fx:id="camada1" layoutX="390.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="390.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TextField fx:id="txtNomeUsuario" layoutX="108.0" layoutY="245.0" prefHeight="26.0" prefWidth="195.0" promptText="Nome de usuário" styleClass="TextField" />
+            <TextField fx:id="txtNomeUsuario" layoutX="108.0" layoutY="290.0" prefHeight="26.0" prefWidth="195.0" promptText="Nome de usuário" styleClass="TextField" />
             <PasswordField fx:id="txtSenhaLogin" layoutX="109.0" layoutY="290.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
             <Hyperlink fx:id="lbEsqueceuSenha" layoutX="139.0" layoutY="336.0" text="Esqueceu a senha?">
                <font>
@@ -24,7 +24,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <FontAwesomeIconView fx:id="iconUsuario" glyphName="USER" layoutX="70.0" layoutY="266.0" size="20" />
+            <FontAwesomeIconView fx:id="iconUsuario" glyphName="USER" layoutX="69.0" layoutY="311.0" size="22" />
             <FontAwesomeIconView fx:id="iconChaveLogin" glyphName="KEY" layoutX="67.0" layoutY="311.0" size="20" />
             <FontAwesomeIconView fx:id="iconUsuarios" glyphName="USERS" layoutX="176.0" layoutY="128.0" size="35" />
             <Label fx:id="lbLogin" layoutX="166.0" layoutY="150.0" text="Login">
@@ -34,8 +34,8 @@
             </Label>
             <PasswordField fx:id="txtSenhaCadastrese" layoutX="109.0" layoutY="334.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
             <FontAwesomeIconView fx:id="iconChaveCadastrese" glyphName="KEY" layoutX="67.0" layoutY="355.0" size="20" />
-            <FontAwesomeIconView fx:id="iconEmail" glyphName="ENVELOPE" layoutX="67.0" layoutY="311.0" size="20" />
-            <TextField fx:id="txtEmail" layoutX="108.0" layoutY="290.0" prefHeight="26.0" prefWidth="195.0" promptText="Email" styleClass="TextField" />
+            <FontAwesomeIconView fx:id="iconEmail" glyphName="ENVELOPE" layoutX="67.0" layoutY="266.0" size="20" />
+            <TextField fx:id="txtEmail" layoutX="108.0" layoutY="245.0" prefHeight="26.0" prefWidth="195.0" promptText="Email" styleClass="TextField" />
             <Label fx:id="lbCadastrese" layoutX="135.0" layoutY="150.0" text="Cadastre-se">
                <font>
                   <Font name="System Bold" size="22.0" />

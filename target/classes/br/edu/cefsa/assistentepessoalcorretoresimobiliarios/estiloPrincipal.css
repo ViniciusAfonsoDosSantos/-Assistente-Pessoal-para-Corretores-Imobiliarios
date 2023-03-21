@@ -176,3 +176,49 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .table-view .column-header {
     -fx-background-color: transparent;
 }
+
+.dialog{
+    -fx-background-color: #F3F3F3;
+}
+
+.dialog:header .header-panel{
+    -fx-background-color: #F3F3F3;
+}
+
+.dialog:header .header-panel .label{
+    -fx-font-size: 20px;
+    -fx-font-style: bold;
+}
+
+.dialog .button{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2B49B3;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a4a4a;
+}
+
+.dialog .button:hover{
+    -fx-background-color: #2B49B3;
+    -fx-background-radius: 5px;
+    -fx-border-color: #2B49B3;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.dialog .button:cancel{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #E5707A;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a4a4a;
+}
+
+.dialog .button:cancel:hover{
+    -fx-background-color: #E5707A;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #FFFFFF;
+}

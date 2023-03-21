@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 /**
@@ -108,9 +107,9 @@ public class TelaLoginController implements Initializable {
         txtSenhaCadastrese.setVisible(false);
         btnRedirecionarLogin.setVisible(false);
         btnCadastrese.setVisible(false);
-        txtEmail.setVisible(false);
+        txtNomeUsuario.setVisible(false);
         lbCadastrese.setVisible(false);
-        iconEmail.setVisible(false);
+        iconUsuario.setVisible(false);
         iconChaveCadastrese.setVisible(false);
         lbTexto4.setVisible(false);
     }
@@ -137,9 +136,9 @@ public class TelaLoginController implements Initializable {
         txtSenhaCadastrese.setVisible(true);
         btnRedirecionarLogin.setVisible(true);
         btnCadastrese.setVisible(true);
-        txtEmail.setVisible(true);
+        txtNomeUsuario.setVisible(true);
         lbCadastrese.setVisible(true);
-        iconEmail.setVisible(true);
+        iconUsuario.setVisible(true);
         iconChaveCadastrese.setVisible(true);
         lbLogin.setVisible(false);
         btnRedirecionarCadastro.setVisible(false);
@@ -172,9 +171,9 @@ public class TelaLoginController implements Initializable {
         txtSenhaCadastrese.setVisible(false);
         btnRedirecionarLogin.setVisible(false);
         btnCadastrese.setVisible(false);
-        txtEmail.setVisible(false);
+        txtNomeUsuario.setVisible(false);
         lbCadastrese.setVisible(false);
-        iconEmail.setVisible(false);
+        iconUsuario.setVisible(false);
         iconChaveCadastrese.setVisible(false);
         lbLogin.setVisible(true);
         btnRedirecionarCadastro.setVisible(true);
@@ -218,7 +217,7 @@ public class TelaLoginController implements Initializable {
     private void realizarLogin() throws IOException{
         UsuarioDAO DAO = new UsuarioDAO();
        
-        String emailUser = txtNomeUsuario.getText();
+        String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
         Usuario user = new Usuario("", senhaUser, emailUser);
         //verificar formato email

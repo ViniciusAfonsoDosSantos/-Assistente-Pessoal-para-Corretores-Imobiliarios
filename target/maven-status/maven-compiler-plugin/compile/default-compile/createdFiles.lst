@@ -5,7 +5,6 @@ br\edu\cefsa\model\Cliente.class
 br\edu\cefsa\assistentepessoalcorretoresimobiliarios\TelaAdministradorController.class
 module-info.class
 br\edu\cefsa\assistentepessoalcorretoresimobiliarios\TelaPrincipalController.class
-br\edu\cefsa\assistentepessoalcorretoresimobiliarios\TelaUsuarioController.class
 br\edu\cefsa\DAO\GenericoDAO.class
 br\edu\cefsa\DAO\UsuarioDAO.class
 br\edu\cefsa\assistentepessoalcorretoresimobiliarios\TelaCadastroCliente.class
