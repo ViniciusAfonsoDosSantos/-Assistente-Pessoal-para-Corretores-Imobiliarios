@@ -18,7 +18,7 @@ import java.util.logging.Level;
  *
  * @author gabri
  */
-public class UsuarioDAO implements GenericoDAO<Usuario>{
+public class UsuarioDAO implements IGenericoDAO<Usuario>{
     
     @Override
     public List listar() throws PersistenciaException {
@@ -75,12 +75,47 @@ public class UsuarioDAO implements GenericoDAO<Usuario>{
 
     @Override
     public void remover(Usuario usuario) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE USER_ID= ? ";
+        Connection connection = null;
+        try{
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setLong(1, usuario.getCodigo());
+            pStatement.execute();
+        }catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 
     @Override
     public Usuario listarPorID(Usuario usuario) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario WHERE USER_ID = ? ";
+        
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setLong(1, usuario.ID);
+            ResultSet result = pStatement.executeQuery();
+            if(result.next()){
+                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"));
+            }
+            else
+                return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível conectar à base de dados!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
     
     public Usuario listaPorEmail(String email) throws PersistenciaException{
