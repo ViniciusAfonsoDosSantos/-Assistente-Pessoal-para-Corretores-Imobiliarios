@@ -99,7 +99,7 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
             pStatement.setLong(1, usuario.ID);
             ResultSet result = pStatement.executeQuery();
             if(result.next()){
-                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"));
+                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
             }
             else
                 return null;

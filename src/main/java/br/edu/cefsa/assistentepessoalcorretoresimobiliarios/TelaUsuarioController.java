@@ -67,4 +67,10 @@ public class TelaUsuarioController extends PadraoController{
             System.out.println("OKKKKKKKK");
         }
     }
+    
+    @FXML
+    private void editarUsuario(ActionEvent actionEvent){
+        
+        //COLOCAR PARTE DE EDITAR AQUI!
+    }
 }

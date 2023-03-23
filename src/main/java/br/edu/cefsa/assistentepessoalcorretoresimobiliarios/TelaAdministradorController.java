@@ -26,13 +26,6 @@ public class TelaAdministradorController extends PadraoController {
     
     @FXML
     private FontAwesomeIconView iconeADM;
-
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        if(1 == 1){
-            iconeADM.setVisible(false);
-        }
-    }
     
     @FXML
     private void teste() throws IOException {
@@ -49,4 +42,10 @@ public class TelaAdministradorController extends PadraoController {
         
     }
      */
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+       //COLOCAR PARTE DE LISTAR TODOS OS USUARIOS!!
+    }
 }
