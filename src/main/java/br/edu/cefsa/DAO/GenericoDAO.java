@@ -5,21 +5,36 @@
 package br.edu.cefsa.DAO;
 
 import br.edu.cefsa.exception.PersistenciaException;
-import java.io.Serializable;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author gabri
+ * @author 082200014
  */
-public interface GenericoDAO<E> extends Serializable{
-    List<E> listar() throws PersistenciaException;
+public abstract class GenericoDAO<E>{
+    protected String tabela;
+    protected PreparedStatement parametrosSQL;
     
-    void inserir(E e) throws PersistenciaException;
+    List<E> listar() throws PersistenciaException{
+        String sql = "SELECT * FROM "
+    }
     
-    void alterar(E e) throws PersistenciaException;
+    void inserir(E e) throws PersistenciaException{
     
-    void remover(E e) throws PersistenciaException;
+    }
     
-    E listarPorID(E e) throws PersistenciaException;
+    void alterar(E e) throws PersistenciaException{
+    
+    }
+    
+    void remover(E e) throws PersistenciaException{
+    
+    }
+    
+    E listarPorID(E e) throws PersistenciaException{
+    
+    }
+    
 }
