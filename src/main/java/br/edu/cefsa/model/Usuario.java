@@ -13,6 +13,7 @@ public class Usuario {
     public String Nome;
     public String Email;
     public String Senha;
+    public Boolean Tipo;
 
     public String getNome() {
         return Nome;
@@ -49,10 +50,19 @@ public class Usuario {
     public void setSenha(String Senha) {
         this.Senha = Senha;
     }
+    
+     public void setTipo(Boolean Tipo) {
+        this.Tipo = Tipo;
+    }
 
-    public Usuario(String Nome, String Email, String Senha) {
+    public Boolean getTipo() {
+        return Tipo;
+    }
+
+    public Usuario(String Nome, String Email, String Senha, Boolean Tipo) {
         this.Nome = Nome;
         this.Email = Email;
         this.Senha = Senha;
+        this.Tipo = Tipo;
     }
 }

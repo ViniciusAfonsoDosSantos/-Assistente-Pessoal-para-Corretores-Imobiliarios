@@ -30,7 +30,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario>{
             PreparedStatement pStatement = connection.prepareStatement(sql);
             ResultSet result = pStatement.executeQuery();
             while (result.next()) {
-                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA")));
+                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO")));
             }
 		} catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -93,7 +93,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario>{
             pStatement.setString(1, email);
             ResultSet result = pStatement.executeQuery();
             if(result.next()){
-                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"));
+                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
             }
             else
                 return null;
@@ -113,7 +113,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario>{
     }
     @Override
     public void inserir(Usuario usuario) throws PersistenciaException {
-        String sql = "INSERT INTO ASSISTENTECORRETORES.USUARIO(Nome, Email, Senha) VALUES (?,?,?)";
+        String sql = "INSERT INTO ASSISTENTECORRETORES.USUARIO(Nome, Email, Senha, Tipo) VALUES (?,?,?,?)";
 
         Connection connection = null;
         try {
@@ -122,6 +122,7 @@ public class UsuarioDAO implements GenericoDAO<Usuario>{
             pStatement.setString(1, usuario.getNome());
             pStatement.setString(2, usuario.getEmail());
             pStatement.setString(3, usuario.getSenha());
+            pStatement.setBoolean(4, usuario.getTipo());
             pStatement.execute();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);

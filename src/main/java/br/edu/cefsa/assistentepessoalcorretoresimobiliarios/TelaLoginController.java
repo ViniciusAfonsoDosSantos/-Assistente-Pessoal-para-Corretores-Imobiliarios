@@ -196,7 +196,7 @@ public class TelaLoginController implements Initializable {
         String nomeUser = txtNomeUsuario.getText();
         String senhaUser = txtSenhaCadastrese.getText();
         String emailUser = txtEmail.getText();
-        Usuario user = new Usuario(nomeUser, senhaUser, emailUser);
+        Usuario user = new Usuario(nomeUser, senhaUser, emailUser, false);
         //checar se email já existe.
         //verificar formato email
         //hashear senha
@@ -219,7 +219,7 @@ public class TelaLoginController implements Initializable {
        
         String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
-        Usuario user = new Usuario("", senhaUser, emailUser);
+        Usuario user = new Usuario("", senhaUser, emailUser, false);
         //verificar formato email
         try {
             Usuario userBanco = buscaUsuarioEmail(emailUser, DAO);
@@ -247,7 +247,7 @@ public class TelaLoginController implements Initializable {
     }
     
     private boolean verificaLogin(Usuario user, Usuario userBanco){
-        if(user.getEmail().equals(userBanco.getEmail()) && user.getEmail().equals(userBanco.getEmail())){
+        if(user.getEmail().equals(userBanco.getEmail()) && user.getSenha().equals(userBanco.getSenha())){
             return true;
         }
         else

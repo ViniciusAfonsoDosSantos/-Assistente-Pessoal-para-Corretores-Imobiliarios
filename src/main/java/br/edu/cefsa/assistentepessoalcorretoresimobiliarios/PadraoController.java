@@ -4,16 +4,32 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 
 /**
  *
  * @author Vinicius
  */
-public class PadraoController{
+public class PadraoController  implements Initializable{
+    
+    @FXML
+    private FontAwesomeIconView iconeADM;
     
     DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        iconeADM.setVisible(false);
+        if(usuarioLogado.getUsuario().getTipo() == true){
+            iconeADM.setVisible(true);
+        }
+    }
     
     @FXML
     private void redirecionarCadastrarCliente() throws IOException {

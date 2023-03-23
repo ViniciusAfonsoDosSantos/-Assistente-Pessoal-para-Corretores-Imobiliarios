@@ -4,12 +4,12 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -21,8 +21,10 @@ import javafx.scene.control.TextField;
  *
  * @author Vinicius
  */
-public class TelaUsuarioController extends PadraoController  implements Initializable{
+public class TelaUsuarioController extends PadraoController{
 
+    @FXML
+    private FontAwesomeIconView iconeADM;
     
     @FXML
     private TextField txtNome;
@@ -37,6 +39,11 @@ public class TelaUsuarioController extends PadraoController  implements Initiali
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        iconeADM.setVisible(false);
+        if(usuarioLogado.getUsuario().getTipo() == true){
+            iconeADM.setVisible(true);
+        }
         
         txtNome.setText(usuarioLogado.getUsuario().Nome);
         txtEmail.setText(usuarioLogado.getUsuario().Email);

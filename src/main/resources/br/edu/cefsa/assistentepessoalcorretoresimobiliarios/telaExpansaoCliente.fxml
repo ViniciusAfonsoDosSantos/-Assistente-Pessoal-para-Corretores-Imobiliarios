@@ -50,7 +50,7 @@
             </Pane>
          </children>
       </AnchorPane>
-      <Pane layoutY="-1.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar">
+      <Pane layoutY="-1.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
@@ -69,7 +69,7 @@
                   </FontAwesomeIconView>
                </children>
             </VBox>
-            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="553.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
+            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="555.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
          </children>
       </Pane>
       <Pane layoutX="67.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="30.0">
