@@ -81,10 +81,6 @@ public class TelaLoginController implements Initializable {
     private TextField txtEmail;
     
     @FXML
-    private Hyperlink lbEsqueceuSenha;
-    
-    
-    @FXML
     private FontAwesomeIconView iconUsuarios;
     
     @FXML
@@ -144,7 +140,6 @@ public class TelaLoginController implements Initializable {
         btnRedirecionarCadastro.setVisible(false);
         btnEntrarLogin.setVisible(false);
         txtSenhaLogin.setVisible(false);
-        lbEsqueceuSenha.setVisible(false);
         iconChaveLogin.setVisible(false);
         lbTexto3.setVisible(false);
     }
@@ -179,7 +174,6 @@ public class TelaLoginController implements Initializable {
         btnRedirecionarCadastro.setVisible(true);
         btnEntrarLogin.setVisible(true);
         txtSenhaLogin.setVisible(true);
-        lbEsqueceuSenha.setVisible(true);
         iconChaveLogin.setVisible(true);
         lbTexto3.setVisible(true);
     }
