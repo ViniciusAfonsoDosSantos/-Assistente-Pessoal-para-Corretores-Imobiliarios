@@ -49,14 +49,15 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
     @Override
     public void alterar(Usuario usuario) throws PersistenciaException {
         //troca nome e senha
-        String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET NOME=? WHERE User_ID = ?";
+        String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET NOME=?,SENHA=? WHERE EMAIL = ?";
 
         Connection connection = null;
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
             pStatement.setString(1, usuario.getNome());
-            pStatement.setLong(2, usuario.getCodigo());
+            pStatement.setString(2, usuario.getSenha());
+            pStatement.setString(3, usuario.getEmail());
             pStatement.execute();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,12 +76,12 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
 
     @Override
     public void remover(Usuario usuario) throws PersistenciaException {
-        String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE USER_ID= ? ";
+        String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE EMAIL= ? ";
         Connection connection = null;
         try{
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setLong(1, usuario.getCodigo());
+            pStatement.setString(1, usuario.getEmail());
             pStatement.execute();
         }catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
