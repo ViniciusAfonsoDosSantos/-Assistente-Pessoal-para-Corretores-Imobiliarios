@@ -23,6 +23,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.util.Duration;
 
 /**
@@ -96,6 +97,8 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private FontAwesomeIconView iconChaveCadastrese;
+
+    private DialogPane dialog;
 
     DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
 
@@ -193,18 +196,21 @@ public class TelaLoginController implements Initializable {
         String nomeUser = txtNomeUsuario.getText();
         String senhaUser = txtSenhaCadastrese.getText();
         String emailUser = txtEmail.getText();
-        Usuario user = new Usuario(nomeUser, emailUser,senhaUser, false);
+        Usuario user = new Usuario(nomeUser, emailUser, senhaUser, false);
         //checar se email já existe.
         //verificar formato email
         //hashear senha
-        if(validateEmailRegex(emailUser) == false){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Email no formato incorreto");
-                alert.showAndWait();
-                return;
-        }       
+        if (validateEmailRegex(emailUser) == false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Email no formato incorreto");
+            dialog = alert.getDialogPane();
+            dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+            dialog.getStyleClass().add("dialog");
+            alert.showAndWait();
+            return;
+        }
         try {
-            if (buscaUsuarioEmail(emailUser, DAO ) == null) {
+            if (buscaUsuarioEmail(emailUser, DAO) == null) {
                 DAO.inserir(user);
                 redirecionarLogin();
                 txtEmail.clear();
@@ -225,11 +231,11 @@ public class TelaLoginController implements Initializable {
 
         String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
-        Usuario user = new Usuario("",emailUser, senhaUser, false);
+        Usuario user = new Usuario("", emailUser, senhaUser, false);
         //verificar formato email
         try {
             Usuario userBanco = buscaUsuarioEmail(emailUser, DAO);
-            if (userBanco != null ) { //existe user com email
+            if (userBanco != null) { //existe user com email
                 //ver se senha e email batem
                 if (verificaLogin(user, userBanco)) {
                     usuarioLogado.setUsuario(userBanco);
@@ -240,6 +246,9 @@ public class TelaLoginController implements Initializable {
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Senha Invalida!");
+                dialog = alert.getDialogPane();
+                dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+                dialog.getStyleClass().add("dialog");
                 alert.showAndWait();
 
             }

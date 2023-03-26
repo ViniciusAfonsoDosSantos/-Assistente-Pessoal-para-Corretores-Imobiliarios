@@ -9,7 +9,7 @@ package br.edu.cefsa.model;
  * @author gabri
  */
 public class Usuario {
-    public int ID;
+    public  int ID;
     public String Nome;
     public String Email;
     public String Senha;
@@ -64,5 +64,10 @@ public class Usuario {
         this.Email = Email;
         this.Senha = Senha;
         this.Tipo = Tipo;
+    }
+    
+    public Usuario(String Nome, String Email){
+        this.Nome = Nome;
+        this.Email = Email;
     }
 }

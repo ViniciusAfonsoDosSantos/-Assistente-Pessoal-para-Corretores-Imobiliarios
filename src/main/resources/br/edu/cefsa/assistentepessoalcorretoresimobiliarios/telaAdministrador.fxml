@@ -51,7 +51,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <TableView fx:id="tabelaUsuarios" layoutX="89.0" layoutY="136.0" prefHeight="235.0" prefWidth="660.0" styleClass="pane_boxcliente">
+      <TableView fx:id="tabelaUsuarios" layoutX="89.0" layoutY="136.0" prefHeight="305.0" prefWidth="660.0" styleClass="pane_boxcliente">
         <columns>
           <TableColumn fx:id="columnNome" editable="false" prefWidth="75.0" text="Nome" />
           <TableColumn fx:id="columnEmail" editable="false" prefWidth="75.0" text="Email" />

@@ -5,5 +5,7 @@ module br.edu.cefsa.assistentepessoalcorretoresimobiliarios {
     requires de.jensd.fx.glyphs.fontawesome;
     requires java.sql;
     opens br.edu.cefsa.assistentepessoalcorretoresimobiliarios to javafx.fxml;
+    opens br.edu.cefsa.model to javafx.fxml;
     exports br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
+    exports br.edu.cefsa.model;
 }
