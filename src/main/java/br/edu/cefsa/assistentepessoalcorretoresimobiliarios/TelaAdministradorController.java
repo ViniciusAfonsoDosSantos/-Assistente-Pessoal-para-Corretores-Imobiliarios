@@ -4,11 +4,21 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import java.io.IOException;
+import br.edu.cefsa.DAO.UsuarioDAO;
+import br.edu.cefsa.exception.PersistenciaException;
+import br.edu.cefsa.model.Usuario;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -16,6 +26,8 @@ import javafx.fxml.Initializable;
  * @author Vinicius
  */
 public class TelaAdministradorController extends PadraoController {
+
+    private List<Usuario> userLIst;
 
     /**
      * Initializes the controller class.
@@ -42,10 +54,32 @@ public class TelaAdministradorController extends PadraoController {
         
     }
      */
+    @FXML 
+    private TableView tabelaUsuarios;
     
+    @FXML 
+    private TableColumn columnNome;
+    
+    @FXML 
+    private TableColumn columnEmail;
+        
+    @FXML 
+    private TableColumn columnAcoes;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       //COLOCAR PARTE DE LISTAR TODOS OS USUARIOS!!
+
+        UsuarioDAO dao = new UsuarioDAO();
+        List<Usuario> userList = new ArrayList<Usuario>();
+        try {
+            userList = dao.listar();
+            columnNome.setCellValueFactory(new PropertyValueFactory<Usuario, String>("nome"));
+            columnEmail.setCellValueFactory(new PropertyValueFactory<Usuario, String>("Email"));
+            ObservableList ObList = FXCollections.observableList(userList);
+            tabelaUsuarios.setItems(ObList);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
 }

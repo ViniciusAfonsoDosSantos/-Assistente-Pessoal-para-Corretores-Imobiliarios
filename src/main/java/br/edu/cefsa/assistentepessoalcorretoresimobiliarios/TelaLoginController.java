@@ -193,12 +193,18 @@ public class TelaLoginController implements Initializable {
         String nomeUser = txtNomeUsuario.getText();
         String senhaUser = txtSenhaCadastrese.getText();
         String emailUser = txtEmail.getText();
-        Usuario user = new Usuario(nomeUser, senhaUser, emailUser, false);
+        Usuario user = new Usuario(nomeUser, emailUser,senhaUser, false);
         //checar se email já existe.
         //verificar formato email
         //hashear senha
+        if(validateEmailRegex(emailUser) == false){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Email no formato incorreto");
+                alert.showAndWait();
+                return;
+        }       
         try {
-            if (buscaUsuarioEmail(emailUser, DAO) == null) {
+            if (buscaUsuarioEmail(emailUser, DAO ) == null) {
                 DAO.inserir(user);
                 redirecionarLogin();
                 txtEmail.clear();
@@ -219,7 +225,7 @@ public class TelaLoginController implements Initializable {
 
         String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
-        Usuario user = new Usuario("", senhaUser, emailUser, false);
+        Usuario user = new Usuario("",emailUser, senhaUser, false);
         //verificar formato email
         try {
             Usuario userBanco = buscaUsuarioEmail(emailUser, DAO);

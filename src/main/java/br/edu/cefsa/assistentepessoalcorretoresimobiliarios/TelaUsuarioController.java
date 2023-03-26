@@ -80,7 +80,7 @@ public class TelaUsuarioController extends PadraoController {
     private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
         UsuarioDAO dao = new UsuarioDAO();
         
-        Usuario user = new Usuario(txtNome.getText(),usuarioLogado.getUsuario().getSenha(),txtSenha.getText(),usuarioLogado.getUsuario().getTipo());
+        Usuario user = new Usuario(txtNome.getText(),txtEmail.getText(),txtSenha.getText(),usuarioLogado.getUsuario().getTipo());
         dao.alterar(user);
         //COLOCAR PARTE DE EDITAR AQUI!
     }
