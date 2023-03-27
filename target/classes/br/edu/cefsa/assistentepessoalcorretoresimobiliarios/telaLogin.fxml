@@ -12,7 +12,7 @@
    <children>
       <AnchorPane fx:id="camada1" layoutX="390.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="390.0" style="-fx-background-color: #ffffff;">
          <children>
-            <TextField fx:id="txtNomeUsuario" layoutX="108.0" layoutY="290.0" prefHeight="26.0" prefWidth="195.0" promptText="Nome de usuário" styleClass="TextField" />
+            <TextField fx:id="txtNomeUsuario" layoutX="109.0" layoutY="290.0" prefHeight="26.0" prefWidth="195.0" promptText="Nome de usuário" styleClass="TextField" />
             <PasswordField fx:id="txtSenhaLogin" layoutX="109.0" layoutY="290.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
             <Button fx:id="btnEntrarLogin" layoutX="164.0" layoutY="389.0" mnemonicParsing="false" onAction="#realizarLogin" styleClass="button_fundobranco" text="Entrar">
                <font>
@@ -30,7 +30,7 @@
             <PasswordField fx:id="txtSenhaCadastrese" layoutX="109.0" layoutY="334.0" prefHeight="26.0" prefWidth="193.0" promptText="Senha" styleClass="TextField" />
             <FontAwesomeIconView fx:id="iconChaveCadastrese" glyphName="KEY" layoutX="67.0" layoutY="355.0" size="20" />
             <FontAwesomeIconView fx:id="iconEmail" glyphName="ENVELOPE" layoutX="67.0" layoutY="266.0" size="20" />
-            <TextField fx:id="txtEmail" layoutX="108.0" layoutY="245.0" prefHeight="26.0" prefWidth="195.0" promptText="Email" styleClass="TextField" />
+            <TextField fx:id="txtEmail" layoutX="109.0" layoutY="245.0" prefHeight="26.0" prefWidth="195.0" promptText="Email" styleClass="TextField" />
             <Label fx:id="lbCadastrese" layoutX="135.0" layoutY="150.0" text="Cadastre-se">
                <font>
                   <Font name="System Bold" size="22.0" />
@@ -41,6 +41,26 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
+            <Label fx:id="lbErroEmail" layoutX="109.0" layoutY="273.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroNomeUsuario" layoutX="109.0" layoutY="318.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroSenha" layoutX="109.0" layoutY="362.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroLogin" alignment="CENTER" layoutX="95.0" layoutY="362.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="camada2" prefHeight="580.0" prefWidth="390.0" style="-fx-background-color: #F5F5F5;">

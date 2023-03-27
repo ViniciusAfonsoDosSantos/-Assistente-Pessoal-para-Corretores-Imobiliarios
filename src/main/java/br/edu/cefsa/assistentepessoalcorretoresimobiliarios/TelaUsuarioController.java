@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 /**
@@ -40,6 +41,12 @@ public class TelaUsuarioController extends PadraoController {
     private TextField txtSenha;
 
     private DialogPane dialog;
+    
+     @FXML
+    private Label lbErroNomeUsuario; 
+    
+    @FXML
+    private Label lbErroSenha; 
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -78,10 +85,22 @@ public class TelaUsuarioController extends PadraoController {
 
     @FXML
     private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
-        UsuarioDAO dao = new UsuarioDAO();
         
-        Usuario user = new Usuario(txtNome.getText(),txtEmail.getText(),txtSenha.getText(),usuarioLogado.getUsuario().getTipo());
-        dao.alterar(user);
-        //COLOCAR PARTE DE EDITAR AQUI!
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Alterar Usuário");
+        alert.setContentText("Confirma as alterações?");
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+        dialog.getStyleClass().add("dialog");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            
+            UsuarioDAO dao = new UsuarioDAO();
+            Usuario user = new Usuario(txtNome.getText(),txtEmail.getText(),txtSenha.getText(),usuarioLogado.getUsuario().getTipo());
+            dao.alterar(user);
+           
+        }
+       
+        
     }
 }

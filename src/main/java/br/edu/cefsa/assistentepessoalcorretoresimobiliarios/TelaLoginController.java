@@ -97,6 +97,18 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private FontAwesomeIconView iconChaveCadastrese;
+    
+    @FXML
+    private Label lbErroLogin; 
+    
+    @FXML
+    private Label lbErroEmail; 
+    
+    @FXML
+    private Label lbErroNomeUsuario; 
+    
+    @FXML
+    private Label lbErroSenha; 
 
     private DialogPane dialog;
 
@@ -120,7 +132,8 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void redirecionarCadastro() {
-
+        apagaErros();
+        
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.7));
         slide.setNode(camada2);
@@ -153,7 +166,8 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void redirecionarLogin() {
-
+        apagaErros();
+        
         TranslateTransition slide = new TranslateTransition();
         slide.setDuration(Duration.seconds(0.7));
         slide.setNode(camada2);
@@ -191,8 +205,9 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void salvarUsuario() throws IOException {
+        apagaErros();
+        
         UsuarioDAO DAO = new UsuarioDAO();
-
         String nomeUser = txtNomeUsuario.getText();
         String senhaUser = txtSenhaCadastrese.getText();
         String emailUser = txtEmail.getText();
@@ -201,14 +216,10 @@ public class TelaLoginController implements Initializable {
         //verificar formato email
         //hashear senha
         if (validateEmailRegex(emailUser) == false) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Email no formato incorreto");
-            dialog = alert.getDialogPane();
-            dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-            dialog.getStyleClass().add("dialog");
-            alert.showAndWait();
+            lbErroEmail.setText("Email invalido");
             return;
         }
+        
         try {
             if (buscaUsuarioEmail(emailUser, DAO) == null) {
                 DAO.inserir(user);
@@ -217,7 +228,7 @@ public class TelaLoginController implements Initializable {
                 txtSenhaCadastrese.clear();
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Senha Invalida!");
+                alert.setTitle("Usuario Existente!");
                 alert.showAndWait();
             }
         } catch (PersistenciaException ex) {
@@ -227,8 +238,9 @@ public class TelaLoginController implements Initializable {
 
     @FXML
     private void realizarLogin() throws IOException {
+       apagaErros();
+       
         UsuarioDAO DAO = new UsuarioDAO();
-
         String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
         Usuario user = new Usuario("", emailUser, senhaUser, false);
@@ -241,15 +253,14 @@ public class TelaLoginController implements Initializable {
                     usuarioLogado.setUsuario(userBanco);
                     redirecionarTelaPrincipal();
                 }
+                else{
+                    lbErroLogin.setText("Usuário ou senha invalidos!");
+                }
+                
                 txtEmail.clear();
                 txtSenhaCadastrese.clear();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Senha Invalida!");
-                dialog = alert.getDialogPane();
-                dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-                dialog.getStyleClass().add("dialog");
-                alert.showAndWait();
+               lbErroLogin.setText("Usuário ou senha invalidos!");
 
             }
 
@@ -269,7 +280,7 @@ public class TelaLoginController implements Initializable {
     }
 
     private boolean verificaLogin(Usuario user, Usuario userBanco) {
-        if (user.getEmail().equals(userBanco.getEmail()) && user.getSenha().equals(userBanco.getSenha())) {
+        if(user.getEmail().equals(userBanco.getEmail()) && user.getSenha().equals(userBanco.getSenha())) {
             return true;
         } else {
             return false;
@@ -279,5 +290,13 @@ public class TelaLoginController implements Initializable {
     public static boolean validateEmailRegex(String emailStr) {
         Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
         return matcher.matches();
+    }
+    
+    public void apagaErros(){
+        lbErroLogin.setText("");
+        lbErroSenha.setText("");
+        lbErroNomeUsuario.setText("");
+        lbErroEmail.setText("");
+        
     }
 }
