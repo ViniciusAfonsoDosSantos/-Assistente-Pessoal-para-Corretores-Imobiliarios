@@ -74,6 +74,32 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
         }
     }
 
+    
+    public void alterarTipo(Usuario usuario) throws PersistenciaException {
+        //troca nome e senha
+        String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET TIPO=? WHERE EMAIL = ?";
+
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setBoolean(1, usuario.getTipo());
+            pStatement.setString(2, usuario.getEmail());
+            pStatement.execute();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível conectar à base de dados!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     @Override
     public void remover(Usuario usuario) throws PersistenciaException {
         String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE EMAIL= ? ";

@@ -84,12 +84,23 @@ public class TelaAdministradorController extends PadraoController {
 
                         } else {
 
+                            FontAwesomeIconView promoveIcon = new FontAwesomeIconView(FontAwesomeIcon.ARROW_UP);
+                            FontAwesomeIconView rebaixaIcon = new FontAwesomeIconView(FontAwesomeIcon.ARROW_DOWN);
                             FontAwesomeIconView deleteIcon = new FontAwesomeIconView(FontAwesomeIcon.REMOVE);
-
+                            
+                            promoveIcon.setStyleClass("icones");
+                            promoveIcon.setStyle(
+                                    "-glyph-size:1.3em;"
+                            );
+                            rebaixaIcon.setStyleClass("icones");
+                            rebaixaIcon.setStyle(
+                                    "-glyph-size:1.3em;"
+                            );
                             deleteIcon.setStyleClass("icones");
                             deleteIcon.setStyle(
                                     "-glyph-size:1.3em;"
                             );
+                            
                             deleteIcon.setOnMouseClicked((MouseEvent event) -> {
 
                                 try {
@@ -115,9 +126,63 @@ public class TelaAdministradorController extends PadraoController {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
+                            promoveIcon.setOnMouseClicked((MouseEvent event) -> {
 
-                            HBox managebtn = new HBox(deleteIcon);
+                                try {
+                                    
+                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                    alert.setTitle("Promover Usuário");
+                                    alert.setContentText("Confirma a promoção do usuário?");
+                                    dialog = alert.getDialogPane();
+                                    dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+                                    dialog.getStyleClass().add("dialog");
+                                    Optional<ButtonType> result = alert.showAndWait();
+                                    if (result.get() == ButtonType.OK) {
+
+                                        UsuarioDAO dao = new UsuarioDAO();
+                                        usuario = tabelaUsuarios.getSelectionModel().getSelectedItem();
+                                        usuario.setTipo(true);
+                                        dao.alterarTipo(usuario);
+                                        atualizaTabela();
+
+                                        System.out.println("OKKKKKKKK");
+                                    }
+
+                                } catch (PersistenciaException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            });
+                             rebaixaIcon.setOnMouseClicked((MouseEvent event) -> {
+
+                                try {
+                                    
+                                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                                    alert.setTitle("Rebaixar Usuário");
+                                    alert.setContentText("Confirma o rebaixamento do usuário?");
+                                    dialog = alert.getDialogPane();
+                                    dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+                                    dialog.getStyleClass().add("dialog");
+                                    Optional<ButtonType> result = alert.showAndWait();
+                                    if (result.get() == ButtonType.OK) {
+
+                                        UsuarioDAO dao = new UsuarioDAO();
+                                        usuario = tabelaUsuarios.getSelectionModel().getSelectedItem();
+                                        usuario.setTipo(false);
+                                        dao.alterarTipo(usuario);
+                                        atualizaTabela();
+
+                                        System.out.println("OKKKKKKKK");
+                                    }
+
+                                } catch (PersistenciaException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            });
+
+                            HBox managebtn = new HBox(promoveIcon, rebaixaIcon, deleteIcon);
                             managebtn.setStyle("-fx-alignment:center");
+                            HBox.setMargin(promoveIcon, new Insets(2, 2, 0, 3));
+                            HBox.setMargin(rebaixaIcon, new Insets(2, 2, 0, 3));
                             HBox.setMargin(deleteIcon, new Insets(2, 2, 0, 3));
                             setGraphic(managebtn);
 
