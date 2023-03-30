@@ -5,6 +5,7 @@
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
 import br.edu.cefsa.DAO.UsuarioDAO;
+import static br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaLoginController.VALID_EMAIL_ADDRESS_REGEX;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -86,6 +88,26 @@ public class TelaUsuarioController extends PadraoController {
     @FXML
     private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
         
+        apagaErros();
+        if (txtNome.getText().equals("")) {
+            lbErroNomeUsuario.setText("Nome de usuário vazio");
+        }
+
+        if (txtSenha.getText().equals("")) {
+            lbErroSenha.setText("Senha vazia");
+        }
+
+        if (txtNome.getText().equals("") || txtSenha.getText().equals("")) {
+            return;
+        }
+        
+        if (validateEmailRegex(txtEmail.getText()) == false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Email no formato incorreto");
+            alert.showAndWait();
+            return;
+        }
+        
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Alterar Usuário");
         alert.setContentText("Confirma as alterações?");
@@ -100,7 +122,16 @@ public class TelaUsuarioController extends PadraoController {
             dao.alterar(user);
            
         }
-       
         
+    }
+    
+    public static boolean validateEmailRegex(String emailStr) {
+        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
+        return matcher.matches();
+    }
+    
+    public void apagaErros(){
+        lbErroSenha.setText("");
+        lbErroNomeUsuario.setText(""); 
     }
 }
