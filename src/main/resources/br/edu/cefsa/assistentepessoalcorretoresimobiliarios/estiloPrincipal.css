@@ -110,6 +110,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-color: transparent;
 }
 
+.date-picker .text-field{
+    -fx-background-color: transparent;
+}
+
+.date-picker:focused{
+     -fx-border-color: #2B49B3;
+}
+
 .date-picker .arrow-button {
 	-fx-background-color: #FFFFFF;
 	-fx-background-radius: 0;
@@ -160,6 +168,46 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 	-fx-background-color: #000000;
 }
 
+.combo-box{
+    -fx-border-color: #000000;
+    -fx-border-width: 0px 0px 2px 0px;
+    -fx-background-color: transparent;
+}
+
+.combo-box:focused{
+     -fx-border-color: #2B49B3;
+}
+
+.combo-box .arrow-button {
+	-fx-background-color: #FFFFFF;
+	-fx-background-radius: 0;
+        -fx-border-color: #FFFFFF;
+}
+.combo-box .arrow-button:hover {
+	-fx-background-color: #2B49B3;
+}
+.combo-box .arrow-button .arrow {
+	-fx-background-color: #2B49B3;
+}
+
+.combo-box .arrow-button:hover .arrow {
+	-fx-background-color: white;
+}
+
+.text-area{
+    -fx-border-color: #000000;
+    -fx-border-width: 2px;
+    -fx-background-color: transparent;
+}
+
+.text-area:focused{
+    -fx-border-color: #2B49B3;
+}
+
+.text-area .content{
+    -fx-background-color: #FFFFFF;
+}
+
 .table-view{
     -fx-border-width: 0;
 }
@@ -179,6 +227,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .dialog{
     -fx-background-color: #F3F3F3;
+    margin: 10px;
 }
 
 .dialog:header .header-panel{
