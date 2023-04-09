@@ -18,7 +18,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="84.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="420.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente">
+      <AnchorPane layoutX="84.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="420.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="12.0">
          <children>
             <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
                <font>
@@ -58,6 +58,11 @@
                <children>
                   <FontAwesomeIconView fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
                   <FontAwesomeIconView glyphName="PLUS" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView glyphName="PLUS" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

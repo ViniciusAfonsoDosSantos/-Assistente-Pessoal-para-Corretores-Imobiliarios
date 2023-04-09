@@ -32,6 +32,11 @@ public class PadraoController  implements Initializable{
     }
     
     @FXML
+    private void redirecionarAdicionarImovel() throws IOException {
+        App.setRoot("telaAdicionarImovel");
+    }
+    
+    @FXML
     private void redirecionarCadastrarCliente() throws IOException {
         App.setRoot("telaCadastroCliente");
     }
