@@ -5,15 +5,15 @@
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
 import br.edu.cefsa.DAO.UsuarioDAO;
-import static br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaLoginController.VALID_EMAIL_ADDRESS_REGEX;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
+import br.edu.cefsa.utils.ComponentesUtils;
+import utils.ValidaDadosUtils;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -42,9 +42,10 @@ public class TelaUsuarioController extends PadraoController {
     @FXML
     private TextField txtSenha;
 
+    @FXML
     private DialogPane dialog;
     
-     @FXML
+    @FXML
     private Label lbErroNomeUsuario; 
     
     @FXML
@@ -58,80 +59,75 @@ public class TelaUsuarioController extends PadraoController {
             iconeADM.setVisible(true);
         }
 
-        txtNome.setText(usuarioLogado.getUsuario().Nome);
-        txtEmail.setText(usuarioLogado.getUsuario().Email);
-        txtSenha.setText(usuarioLogado.getUsuario().Senha);
+        txtNome.setText(usuarioLogado.getUsuario().getNome());
+        txtEmail.setText(usuarioLogado.getUsuario().getEmail());
+        txtSenha.setText(usuarioLogado.getUsuario().getSenha());
     }
 
+    //unica responsabilidade deve ser a de deletar usuario
     @FXML
     private void deletarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
-
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Deletar Usuário");
-        alert.setContentText("Confirma a exclusão do usuário?");
-        dialog = alert.getDialogPane();
-        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-        dialog.getStyleClass().add("dialog");
+        Alert alert = ComponentesUtils.criaAlerta(AlertType.CONFIRMATION, "Deletar Usuário", "Confirma a exclusão do usuário?");
+        atribuiDialog(alert, "estiloPrincipal.css", "dialog");
+        
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-
+        if (result.get() == ButtonType.OK){
             UsuarioDAO dao = new UsuarioDAO();
             dao.remover(usuarioLogado.getUsuario());
-
             usuarioLogado.setUsuario(null);
             App.setRoot("telaLogin");
-
             System.out.println("OKKKKKKKK");
         }
     }
 
+    private void atribuiDialog(Alert alert, String stylesheet, String styleClass){
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource(stylesheet).toString());
+        dialog.getStyleClass().add(styleClass);
+    }
+    
     @FXML
     private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
         
         apagaErros();
-        if (txtNome.getText().equals("")) {
-            lbErroNomeUsuario.setText("Nome de usuário vazio");
-        }
-
-        if (txtSenha.getText().equals("")) {
-            lbErroSenha.setText("Senha vazia");
-        }
-
-        if (txtNome.getText().equals("") || txtSenha.getText().equals("")) {
+        if(!validaDadosUsuario()){
             return;
         }
-        
-        if (validateEmailRegex(txtEmail.getText()) == false) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Email no formato incorreto");
-            alert.showAndWait();
-            return;
-        }
-        
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Alterar Usuário");
-        alert.setContentText("Confirma as alterações?");
-        dialog = alert.getDialogPane();
-        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-        dialog.getStyleClass().add("dialog");
+        Alert alert = ComponentesUtils.criaAlerta(AlertType.CONFIRMATION, "Confirma as alterações?", "Confirma as alterações?");
+        atribuiDialog(alert, "estiloPrincipal.css", "dialog");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            
+        if (result.get() == ButtonType.OK) {    
             UsuarioDAO dao = new UsuarioDAO();
             Usuario user = new Usuario(txtNome.getText(),txtEmail.getText(),txtSenha.getText(),usuarioLogado.getUsuario().getTipo());
             dao.alterar(user);
-           
+        }
+    }
+    
+    private boolean validaDadosUsuario(){
+        int status = 0;
+        if (!ValidaDadosUtils.ValidaTexto(txtNome.getText())) {
+            lbErroNomeUsuario.setText("Nome de usuário vazio");
+            status++;
+        }
+
+        if (!ValidaDadosUtils.ValidaTexto(txtSenha.getText())) {
+            lbErroSenha.setText("Senha vazia");
+            status++;
         }
         
+        //Utils para validarEmail
+        //Util para criar alerta (recebe o Title e ContentText)
+        if (!ValidaDadosUtils.VerificaEmail(txtEmail.getText())) {
+            Alert alert = ComponentesUtils.criaAlerta(Alert.AlertType.ERROR, "Email no formato incorreto", "");
+            alert.showAndWait();
+            status++;
+        }
+        return (status == 0); 
     }
     
-    public static boolean validateEmailRegex(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.matches();
-    }
-    
-    public void apagaErros(){
+    private void apagaErros(){
         lbErroSenha.setText("");
         lbErroNomeUsuario.setText(""); 
     }
+
 }

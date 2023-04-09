@@ -7,6 +7,9 @@ package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 import br.edu.cefsa.DAO.UsuarioDAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
+import br.edu.cefsa.utils.ComponentesUtils;
+import br.edu.cefsa.utils.PasswordUtils;
+import utils.ValidaDadosUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -19,8 +22,6 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
@@ -32,6 +33,7 @@ import javafx.util.Duration;
  */
 public class TelaLoginController implements Initializable {
 
+    
     @FXML
     private AnchorPane camada1;
 
@@ -113,9 +115,6 @@ public class TelaLoginController implements Initializable {
     private DialogPane dialog;
 
     DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
-
-    public static final Pattern VALID_EMAIL_ADDRESS_REGEX
-            = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -215,26 +214,9 @@ public class TelaLoginController implements Initializable {
         //checar se email já existe.
         //verificar formato email
         //hashear senha
-        if (validateEmailRegex(emailUser) == false) {
-            lbErroEmail.setText("Email invalido");
-        }
-
-        if (emailUser.equals("")) {
-            lbErroEmail.setText("Dado não Preenchido");
-        }
-
-        if (senhaUser.equals("")) {
-            lbErroSenha.setText("Dado não Preenchido");
-        }
-
-        if (nomeUser.equals("")) {
-            lbErroNomeUsuario.setText("Dado não Preenchido");
-        }
-
-        if (validateEmailRegex(emailUser) == false || emailUser.equals("") || senhaUser.equals("") || nomeUser.equals("")) {
+        if(!validaDadosUsuario())
             return;
-        }
-
+        
         try {
             if (buscaUsuarioEmail(emailUser, DAO) == null) {
                 DAO.inserir(user);
@@ -242,17 +224,46 @@ public class TelaLoginController implements Initializable {
                 txtEmail.clear();
                 txtSenhaCadastrese.clear();
             } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Erro!");
-                alert.setContentText("Usuário Existente!");
-                dialog = alert.getDialogPane();
-                dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-                dialog.getStyleClass().add("dialog");
+                
+                Alert alert = ComponentesUtils.criaAlerta(Alert.AlertType.ERROR, "Erro!", "Usuário Existente!");
+                atribuiDialog(alert, "estiloPrincipal.css", "dialog");
                 alert.showAndWait();
             }
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void atribuiDialog(Alert alert, String stylesheet, String styleClass){
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource(stylesheet).toString());
+        dialog.getStyleClass().add(styleClass);
+    }
+    
+    private boolean validaDadosUsuario(){
+        int status = 0;
+        
+        if (!ValidaDadosUtils.ValidaTexto(txtNomeUsuario.getText())) {
+            lbErroNomeUsuario.setText("Dado não Preenchido");
+            status++;
+        }
+
+        if (!ValidaDadosUtils.ValidaTexto(txtSenhaCadastrese.getText())) {
+            lbErroSenha.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtEmail.getText())) {
+            lbErroSenha.setText("Dado não Preenchido");
+            status++;
+        }
+        
+        //Utils para validarEmail
+        //Util para criar alerta (recebe o Title e ContentText)
+        if (!ValidaDadosUtils.VerificaEmail(txtEmail.getText())) {
+            lbErroEmail.setText("Email invalido");
+            status++;
+        }
+        return (status == 0); 
     }
 
     @FXML
@@ -264,7 +275,7 @@ public class TelaLoginController implements Initializable {
         String senhaUser = txtSenhaLogin.getText();
         Usuario user = new Usuario("", emailUser, senhaUser, false);
         //verificar formato email
-        if (emailUser.equals("") || senhaUser.equals("")) {
+        if (!ValidaDadosUtils.ValidaTexto(emailUser) || !ValidaDadosUtils.ValidaTexto(senhaUser)) {
             lbErroLogin.setText("Usuário ou senha invalidos!");
             return;
         }
@@ -303,16 +314,12 @@ public class TelaLoginController implements Initializable {
     }
 
     private boolean verificaLogin(Usuario user, Usuario userBanco) {
-        if (user.getEmail().equals(userBanco.getEmail()) && user.getSenha().equals(userBanco.getSenha())) {
+        String senhaUserHash = PasswordUtils.encryptPassword(user.getSenha());
+        if (user.getEmail().equals(userBanco.getEmail()) && senhaUserHash.equals(userBanco.getSenha())) {
             return true;
         } else {
             return false;
         }
-    }
-
-    public static boolean validateEmailRegex(String emailStr) {
-        Matcher matcher = VALID_EMAIL_ADDRESS_REGEX.matcher(emailStr);
-        return matcher.matches();
     }
 
     public void apagaErros() {
@@ -322,4 +329,5 @@ public class TelaLoginController implements Initializable {
         lbErroEmail.setText("");
 
     }
+
 }

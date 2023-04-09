@@ -6,6 +6,7 @@ package br.edu.cefsa.DAO;
 
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
+import br.edu.cefsa.utils.PasswordUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,13 +51,13 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
     public void alterar(Usuario usuario) throws PersistenciaException {
         //troca nome e senha
         String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET NOME=?,SENHA=? WHERE EMAIL = ?";
-
         Connection connection = null;
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
+            String senha = PasswordUtils.encryptPassword(usuario.getSenha());
             pStatement.setString(1, usuario.getNome());
-            pStatement.setString(2, usuario.getSenha());
+            pStatement.setString(2, senha);
             pStatement.setString(3, usuario.getEmail());
             pStatement.execute();
         } catch (ClassNotFoundException ex) {
@@ -123,7 +124,7 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setLong(1, usuario.ID);
+            pStatement.setLong(1, usuario.getID());
             ResultSet result = pStatement.executeQuery();
             if(result.next()){
                 return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
@@ -181,9 +182,10 @@ public class UsuarioDAO implements IGenericoDAO<Usuario>{
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
+            String senha = PasswordUtils.encryptPassword(usuario.getSenha());
             pStatement.setString(1, usuario.getNome());
             pStatement.setString(2, usuario.getEmail());
-            pStatement.setString(3, usuario.getSenha());
+            pStatement.setString(3, senha);
             pStatement.setBoolean(4, usuario.getTipo());
             pStatement.execute();
         } catch (ClassNotFoundException ex) {
