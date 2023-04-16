@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  *
  * @author gabri
  */
-public class Cliente {
+public class Cliente extends GenericoModel{
     public String Nome;
     public String CPF;
     public LocalDateTime DataNascimento; 
@@ -20,8 +20,18 @@ public class Cliente {
     public String Email;
     public String CEP;
     public String EnderecoResidencial;
-    public int Estado; //dado vai vir de um selectbox
+    public String Estado; //dado vai vir de um selectbox
+    public String Cidade;
     public String Bairro;
+    public String Anotacao;
+
+    public String getAnotacao() {
+        return Anotacao;
+    }
+
+    public void setAnotacao(String Anotacao) {
+        this.Anotacao = Anotacao;
+    }
     
     //falta dados de anotação da modal.
 
@@ -96,15 +106,7 @@ public class Cliente {
     public void setEnderecoResidencial(String EnderecoResidencial) {
         this.EnderecoResidencial = EnderecoResidencial;
     }
-
-    public int getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(int Estado) {
-        this.Estado = Estado;
-    }
-
+    
     public String getBairro() {
         return Bairro;
     }

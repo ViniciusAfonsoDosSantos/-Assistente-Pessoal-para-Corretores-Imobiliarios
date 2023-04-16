@@ -24,17 +24,29 @@ import java.util.logging.Logger;
  */
 public abstract class GenericoDAO<E extends GenericoModel>{
      
-    protected abstract List<Parametro> preparaParametros(GenericoModel entidade, boolean update);
-    protected String insertSQL;
-    protected String updateSQL;
-    protected String tabela;
+    protected abstract List<Parametro> preparaParametros(E entidade, boolean update);
+    private String insertSQL;
+    private String updateSQL;
+    private String tabela;
+
+    protected void setInsertSQL(String insertSQL) {
+        this.insertSQL = insertSQL;
+    }
+
+    protected void setUpdateSQL(String updateSQL) {
+        this.updateSQL = updateSQL;
+    }
+
+    protected void setTabela(String tabela) {
+        this.tabela = tabela;
+    }
     
-    public void inserir(GenericoModel entidade) throws PersistenciaException{
+    public void inserir(E entidade) throws PersistenciaException{
         HelperDAO.executaQuery(insertSQL, preparaParametros(entidade, false)); 
     }
     
-    public void alterar(GenericoModel entidade) throws PersistenciaException{
-        HelperDAO.executaQuery(updateSQL, preparaParametros(entidade, false));
+    public void alterar(E entidade) throws PersistenciaException{
+        HelperDAO.executaQuery(updateSQL, preparaParametros(entidade, true));
     }
 
     public ResultSet listar() throws PersistenciaException {
