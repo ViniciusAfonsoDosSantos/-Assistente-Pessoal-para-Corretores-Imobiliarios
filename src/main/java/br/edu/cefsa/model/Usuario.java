@@ -8,12 +8,11 @@ package br.edu.cefsa.model;
  *
  * @author gabri
  */
-public class Usuario {
-    public  int ID;
-    public String Nome;
-    public String Email;
-    public String Senha;
-    public Boolean Tipo;
+public class Usuario extends GenericoModel{
+    private String Nome;
+    private String Email;
+    private String Senha;
+    private Boolean Tipo;
 
     public String getNome() {
         return Nome;
@@ -33,18 +32,6 @@ public class Usuario {
 
     public String getSenha() {
         return Senha;
-    }
-    
-    public int getCodigo(){
-        return ID;
-    }
-
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
     }
 
     public void setSenha(String Senha) {

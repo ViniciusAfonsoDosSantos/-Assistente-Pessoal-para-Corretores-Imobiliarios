@@ -5,6 +5,7 @@
 package br.edu.cefsa.DAO;
 
 import br.edu.cefsa.exception.PersistenciaException;
+import br.edu.cefsa.model.Parametro;
 import br.edu.cefsa.model.Usuario;
 import br.edu.cefsa.utils.PasswordUtils;
 import java.sql.Connection;
@@ -19,190 +20,60 @@ import java.util.logging.Level;
  *
  * @author gabri
  */
-public class UsuarioDAO implements IGenericoDAO<Usuario>{
-    
-    @Override
-    public List listar() throws PersistenciaException {
-        List<Usuario> users = new ArrayList<Usuario>();
-		String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario";
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            ResultSet result = pStatement.executeQuery();
-            while (result.next()) {
-                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO")));
-            }
-		} catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        return users;
-    }
-    
-    @Override
-    public void alterar(Usuario usuario) throws PersistenciaException {
-        //troca nome e senha
-        String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET NOME=?,SENHA=? WHERE EMAIL = ?";
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            String senha = PasswordUtils.encryptPassword(usuario.getSenha());
-            pStatement.setString(1, usuario.getNome());
-            pStatement.setString(2, senha);
-            pStatement.setString(3, usuario.getEmail());
-            pStatement.execute();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível conectar à base de dados!");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+public class UsuarioDAO<U extends Usuario> extends GenericoDAO<U>{
 
+    public UsuarioDAO() {
+        super.setTabela("ASSISTENTECORRETORES.Usuario");
+        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.USUARIO(Nome, Email, Senha, Tipo) VALUES (?,?,?,?)");
+        super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.Usuario SET NOME=?,SENHA=? WHERE EMAIL = ?");
+    }
+    
+    @Override
+    protected List<Parametro> preparaParametros(U usuario, boolean update) {
+        List parametros = new ArrayList();
+        parametros.add(new Parametro(usuario.getNome(), "texto"));
+        if(!update)
+            parametros.add(new Parametro(usuario.getEmail(), "texto"));
+        parametros.add(new Parametro(usuario.getSenha(), "texto"));
+        if(!update)
+            parametros.add(new Parametro(String.valueOf(usuario.getTipo()), "boolean"));
+        if(update){
+            parametros.add(new Parametro(usuario.getEmail(), "texto"));
+        }
+        return parametros;
+    }
+    
+    public List listarUsuarios() throws PersistenciaException, SQLException {
+        List<Usuario> users = new ArrayList<>();
+//        ResultSet result = super.listar();
+//        while (result.next()) {
+//                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO")));
+//            }
+//        return users;
+        return null;
+    }
     
     public void alterarTipo(Usuario usuario) throws PersistenciaException {
         //troca nome e senha
         String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET TIPO=? WHERE EMAIL = ?";
-
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setBoolean(1, usuario.getTipo());
-            pStatement.setString(2, usuario.getEmail());
-            pStatement.execute();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível conectar à base de dados!");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
-    @Override
-    public void remover(Usuario usuario) throws PersistenciaException {
-        String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE EMAIL= ? ";
-        Connection connection = null;
-        try{
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setString(1, usuario.getEmail());
-            pStatement.execute();
-        }catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-
-    @Override
-    public Usuario listarPorID(Usuario usuario) throws PersistenciaException {
-        String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario WHERE USER_ID = ? ";
-        
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setLong(1, usuario.getID());
-            ResultSet result = pStatement.executeQuery();
-            if(result.next()){
-                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
-            }
-            else
-                return null;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível conectar à base de dados!");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        List parametros = new ArrayList();
+        parametros.add(new Parametro(String.valueOf(usuario.getTipo()), "boolean"));
+        parametros.add(new Parametro(usuario.getEmail(), "texto"));
+        HelperDAO.executaQuery(sql, parametros);
     }
     
-    public Usuario listaPorEmail(String email) throws PersistenciaException{
-        String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario WHERE Email = ? ";
-        
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setString(1, email);
-            ResultSet result = pStatement.executeQuery();
-            if(result.next()){
-                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
-            }
-            else
-                return null;
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível conectar à base de dados!");
-        } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+    public void remover(Usuario usuario) throws PersistenciaException {
+        String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE EMAIL= ? ";
+        List parametro = new ArrayList();
+        parametro.add(new Parametro(usuario.getEmail(), "texto"));
+        HelperDAO.executaQuery(sql,parametro);
     }
-    @Override
-    public void inserir(Usuario usuario) throws PersistenciaException {
-        String sql = "INSERT INTO ASSISTENTECORRETORES.USUARIO(Nome, Email, Senha, Tipo) VALUES (?,?,?,?)";
-
-        Connection connection = null;
-        try {
-            connection = Conexao.getInstance().getConnection();
-            PreparedStatement pStatement = connection.prepareStatement(sql);
-            String senha = PasswordUtils.encryptPassword(usuario.getSenha());
-            pStatement.setString(1, usuario.getNome());
-            pStatement.setString(2, usuario.getEmail());
-            pStatement.setString(3, senha);
-            pStatement.setBoolean(4, usuario.getTipo());
-            pStatement.execute();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            throw new PersistenciaException("Não foi possível carregar o driver de conexão com a base de dados");
-        } catch (SQLException ex) {
-            //.getLogger(UsuarioDAO.class.getName()).log(LEVEL.SEVERE, null, ex);
-            throw new PersistenciaException("Erro ao enviar o comando para a base de dados");
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }/*
-        public static UsuarioDAO getNewInstance(){
-            return new
-        }*/
+    
+    public Usuario listaPorEmail(String email) throws PersistenciaException, SQLException{
+        String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario WHERE Email = ? ";
+        List parametro = new ArrayList();
+        parametro.add(new Parametro(email, "texto"));
+        List result = HelperDAO.executaSelect(sql, parametro);
+        return null;
     }
 }

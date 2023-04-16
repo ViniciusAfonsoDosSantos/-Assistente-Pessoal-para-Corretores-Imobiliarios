@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,14 +59,18 @@ public class HelperDAO {
         }
     }
     
-    public static ResultSet executaSelect(String query, List<Parametro> parametrosStatement) throws PersistenciaException{
+    public static List executaSelect(String query, List<Parametro> parametrosStatement) throws PersistenciaException{
         Connection connection = null;
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(query);
             PreparedStatement newStatement = organizaParametros(pStatement, parametrosStatement);
             ResultSet result = newStatement.executeQuery();
-            return result;
+            List resultList = new ArrayList();
+            while(result.next()){
+                resultList.add(result);
+            }
+            return resultList;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             throw new PersistenciaException("Não foi possível carregar o driver de conexão com a base de dados");

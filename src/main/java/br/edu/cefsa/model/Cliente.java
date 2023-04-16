@@ -4,6 +4,7 @@
  */
 package br.edu.cefsa.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -11,19 +12,35 @@ import java.time.LocalDateTime;
  * @author gabri
  */
 public class Cliente extends GenericoModel{
-    public String Nome;
-    public String CPF;
-    public LocalDateTime DataNascimento; 
-    public String Conjuge;
-    public String Profissao;
-    public String Telefone;
-    public String Email;
-    public String CEP;
-    public String EnderecoResidencial;
-    public String Estado; //dado vai vir de um selectbox
-    public String Cidade;
-    public String Bairro;
-    public String Anotacao;
+    private String Nome;
+    private String CPF;
+    private LocalDate DataNascimento; 
+    private String Conjuge;
+    private String Profissao;
+    private String Telefone;
+    private String Email;
+    private String CEP;
+    private String EnderecoResidencial;
+    private String Estado; //dado vai vir de um selectbox
+
+    public String getEstado() {
+        return Estado;
+    }
+
+    public void setEstado(String Estado) {
+        this.Estado = Estado;
+    }
+
+    public String getCidade() {
+        return Cidade;
+    }
+
+    public void setCidade(String Cidade) {
+        this.Cidade = Cidade;
+    }
+    private String Cidade;
+    private String Bairro;
+    private String Anotacao;
 
     public String getAnotacao() {
         return Anotacao;
@@ -51,11 +68,11 @@ public class Cliente extends GenericoModel{
         this.CPF = CPF;
     }
 
-    public LocalDateTime getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return DataNascimento;
     }
 
-    public void setDataNascimento(LocalDateTime DataNascimento) {
+    public void setDataNascimento(LocalDate DataNascimento) {
         this.DataNascimento = DataNascimento;
     }
 
@@ -115,4 +132,21 @@ public class Cliente extends GenericoModel{
         this.Bairro = Bairro;
     }
 
+    public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
+        this.Nome = Nome;
+        this.CPF = CPF;
+        this.DataNascimento = DataNascimento;
+        this.Conjuge = Conjuge;
+        this.Profissao = Profissao;
+        this.Telefone = Telefone;
+        this.Email = Email;
+        this.CEP = CEP;
+        this.EnderecoResidencial = EnderecoResidencial;
+        this.Estado = Estado;
+        this.Cidade = Cidade;
+        this.Bairro = Bairro;
+        this.Anotacao = Anotacao;
+    }
+    
+    
 }

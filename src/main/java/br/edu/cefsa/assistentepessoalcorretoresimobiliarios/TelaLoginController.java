@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
@@ -203,7 +204,7 @@ public class TelaLoginController implements Initializable {
     }
 
     @FXML
-    private void salvarUsuario() throws IOException {
+    private void salvarUsuario() throws IOException, SQLException {
         apagaErros();
 
         UsuarioDAO DAO = new UsuarioDAO();
@@ -267,7 +268,7 @@ public class TelaLoginController implements Initializable {
     }
 
     @FXML
-    private void realizarLogin() throws IOException {
+    private void realizarLogin() throws IOException, SQLException {
         apagaErros();
 
         UsuarioDAO DAO = new UsuarioDAO();
@@ -303,7 +304,7 @@ public class TelaLoginController implements Initializable {
         }
     }
 
-    private Usuario buscaUsuarioEmail(String email, UsuarioDAO dao) throws PersistenciaException {
+    private Usuario buscaUsuarioEmail(String email, UsuarioDAO dao) throws PersistenciaException, SQLException {
         Usuario usuario = dao.listaPorEmail(email);
         if (usuario == null) //não existe nenhum email com esse nome 
         {
