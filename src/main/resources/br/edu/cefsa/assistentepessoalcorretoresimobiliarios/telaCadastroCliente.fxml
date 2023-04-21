@@ -20,33 +20,33 @@
       </Label>
       <AnchorPane layoutX="84.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="420.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="12.0">
          <children>
-            <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
+            <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
             <Label layoutX="23.0" layoutY="22.0" prefWidth="89.0" text="Nome Completo" />
-            <TextField layoutX="20.0" layoutY="40.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
+            <TextField fx:id="txtNome" layoutX="20.0" layoutY="40.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
             <Label layoutX="346.0" layoutY="164.0" text="Email" />
-            <TextField layoutX="348.0" layoutY="335.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
+            <TextField fx:id="txtEstado" layoutX="348.0" layoutY="335.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
             <Label layoutX="25.0" layoutY="238.0" text="CEP" />
-            <TextField layoutX="20.0" layoutY="259.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
+            <TextField fx:id="txtCEP" layoutX="20.0" layoutY="259.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
             <Label layoutX="19.0" layoutY="317.0" text="Bairro" />
-            <TextField layoutX="22.0" layoutY="335.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
+            <TextField fx:id="txtBairro" layoutX="22.0" layoutY="335.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
             <Label layoutX="25.0" layoutY="93.0" text="CPF" />
-            <TextField layoutX="20.0" layoutY="111.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
+            <TextField fx:id="txtCPF" layoutX="20.0" layoutY="111.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
             <Label layoutX="23.0" layoutY="164.0" text="Telefone" />
-            <TextField layoutX="20.0" layoutY="186.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
+            <TextField fx:id="txtTelefone" layoutX="20.0" layoutY="186.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
             <Label layoutX="352.0" layoutY="93.0" text="Profissão" />
-            <TextField layoutX="348.0" layoutY="111.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
+            <TextField fx:id="txtProfissao" layoutX="348.0" layoutY="111.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
             <Label layoutX="344.0" layoutY="238.0" text="Endereço Residencial" />
-            <TextField layoutX="348.0" layoutY="259.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
+            <TextField fx:id="txtEndereco" layoutX="348.0" layoutY="259.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
             <Label layoutX="342.0" layoutY="317.0" text="Estado" />
-            <TextField layoutX="348.0" layoutY="186.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
+            <TextField fx:id="txtEmail" layoutX="348.0" layoutY="186.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
             <Label layoutX="508.0" layoutY="22.0" text="Data Nascimento" />
-            <DatePicker layoutX="508.0" layoutY="41.0" prefHeight="28.0" prefWidth="152.0" />
+            <DatePicker fx:id="mskDataNascimento" layoutX="508.0" layoutY="41.0" prefHeight="28.0" prefWidth="152.0" />
             <Pane layoutX="248.0" layoutY="349.0" />
-            <TextField layoutX="320.0" layoutY="41.0" prefHeight="28.0" prefWidth="158.0" styleClass="TextField" />
+            <TextField fx:id="txtConjuge" layoutX="320.0" layoutY="41.0" prefHeight="28.0" prefWidth="158.0" styleClass="TextField" />
             <Label layoutX="320.0" layoutY="22.0" text="Conjuge" />
          </children>
       </AnchorPane>

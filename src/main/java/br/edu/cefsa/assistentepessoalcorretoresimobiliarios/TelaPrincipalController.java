@@ -4,6 +4,7 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
+import br.edu.cefsa.DAO.ClienteDAO;
 import br.edu.cefsa.model.Cliente;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
@@ -11,71 +12,70 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.util.Duration;
 
 /**
  *
  * @author Vinicius
  */
-public class TelaPrincipalController extends PadraoController{
-    
+public class TelaPrincipalController extends PadraoController {
+
     @FXML
     private Pane sidebarPane;
-    
+
     @FXML
     private FontAwesomeIconView iconeMenu;
-    
+
     @FXML
     private FontAwesomeIconView iconeADM;
-    
+
     @FXML
     private GridPane paneMostraClientes;
-    
+
     private List<Cliente> clientes;
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb){
-        
+    public void initialize(URL url, ResourceBundle rb) {
+
         iconeADM.setVisible(false);
-        if(usuarioLogado.getUsuario().getTipo() == true){
+        if (usuarioLogado.getUsuario().getTipo() == true) {
             iconeADM.setVisible(true);
         }
-        
-        clientes = new ArrayList<>(adicionaClientes());
-        int column = 0;
-        int row = 1;
-   
-        try{
-             for(Cliente cliente : clientes){
+
+        try {
+            
+            ClienteDAO clienteDAO = new ClienteDAO();
+            clientes = new ArrayList<>(clienteDAO.listar());
+            int column = 0;
+            int row = 1;
+
+            for (Cliente cliente : clientes) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("clienteBox.fxml"));
                 AnchorPane clienteBox = fxmlLoader.load();
                 ClienteBoxController clienteBoxController = fxmlLoader.getController();
                 clienteBoxController.setData(cliente);
-                
-                if(column == 2){
+
+                if (column == 2) {
                     column = 0;
                     ++row;
                 }
-                
+
                 paneMostraClientes.add(clienteBox, column++, row);
-                GridPane.setMargin(clienteBox, new Insets(10)); 
-            }      
-        }
-        catch(IOException e){
+                GridPane.setMargin(clienteBox, new Insets(10));
+            }
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
+    /*
     private List<Cliente> adicionaClientes(){
         List<Cliente> novosClientes = new ArrayList<Cliente>();
         
@@ -109,4 +109,5 @@ public class TelaPrincipalController extends PadraoController{
         
         return novosClientes;
     }
+     */
 }

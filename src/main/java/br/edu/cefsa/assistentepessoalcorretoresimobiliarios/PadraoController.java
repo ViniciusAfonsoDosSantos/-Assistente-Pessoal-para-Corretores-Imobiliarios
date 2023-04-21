@@ -42,7 +42,7 @@ public class PadraoController  implements Initializable{
     }
     
     @FXML
-    private void redirecionarTelaPrincipal() throws IOException {
+    protected void redirecionarTelaPrincipal() throws IOException {
         App.setRoot("telaPrincipal");
     }
     
