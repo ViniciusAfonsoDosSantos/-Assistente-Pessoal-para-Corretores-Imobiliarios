@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" styleClass="pane_boxcliente" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.ClienteBoxController">
+   <children>
+      <Pane layoutY="32.0" prefHeight="45.0" prefWidth="200.0" styleClass="pane_boxcliente_superior" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="nomeCliente" layoutX="14.0" layoutY="14.0" text="Nome Cliente">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox layoutX="214.0" layoutY="13.0" prefHeight="0.0" prefWidth="16.0" spacing="8.0">
+               <children>
+                  <FontAwesomeIconView fx:id="iconeVisualizar" glyphName="EYE" size="20" styleClass="icones" />
+                  <FontAwesomeIconView fx:id="iconeEditar" glyphName="EDIT" size="20" styleClass="icones" />
+                  <FontAwesomeIconView fx:id="iconeRemover" glyphName="REMOVE" size="20" styleClass="icones" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </Pane>
+      <Label fx:id="enderecoCliente" layoutX="14.0" layoutY="72.0" text="Endereço:" AnchorPane.topAnchor="60.0" />
+      <Label fx:id="emailCliente" layoutX="14.0" layoutY="102.0" text="Email:" AnchorPane.topAnchor="90.0" />
+      <Label fx:id="telefoneCliente" layoutX="14.0" layoutY="128.0" text="Telefone:" AnchorPane.topAnchor="120.0" />
+   </children>
+</AnchorPane>
