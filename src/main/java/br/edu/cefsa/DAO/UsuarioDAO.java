@@ -7,7 +7,6 @@ package br.edu.cefsa.DAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Parametro;
 import br.edu.cefsa.model.Usuario;
-import br.edu.cefsa.utils.PasswordUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,14 +42,29 @@ public class UsuarioDAO<U extends Usuario> extends GenericoDAO<U>{
         return parametros;
     }
     
-    public List listarUsuarios() throws PersistenciaException, SQLException {
-        List<Usuario> users = new ArrayList<>();
-//        ResultSet result = super.listar();
-//        while (result.next()) {
-//                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO")));
-//            }
-//        return users;
-        return null;
+    public List listar() throws PersistenciaException, SQLException {
+        List<Usuario> users = new ArrayList<Usuario>();
+        String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario";
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            ResultSet result = pStatement.executeQuery();
+            while (result.next()) {
+                users.add(new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO")));
+            }
+            } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return users;
     }
     
     public void alterarTipo(Usuario usuario) throws PersistenciaException {
@@ -71,9 +85,29 @@ public class UsuarioDAO<U extends Usuario> extends GenericoDAO<U>{
     
     public Usuario listaPorEmail(String email) throws PersistenciaException, SQLException{
         String sql = "SELECT * FROM ASSISTENTECORRETORES.Usuario WHERE Email = ? ";
-        List parametro = new ArrayList();
-        parametro.add(new Parametro(email, "texto"));
-        List result = HelperDAO.executaSelect(sql, parametro);
-        return null;
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setString(1, email);
+            ResultSet result = pStatement.executeQuery();
+            if(result.next()){
+                return new Usuario(result.getString("NOME"), result.getString("EMAIL"), result.getString("SENHA"), result.getBoolean("TIPO"));
+            }
+            else
+                return null;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível conectar à base de dados!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

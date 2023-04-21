@@ -49,23 +49,11 @@ public abstract class GenericoDAO<E extends GenericoModel>{
         HelperDAO.executaQuery(updateSQL, preparaParametros(entidade, true));
     }
     
-    public List listar() throws PersistenciaException {
-        String sql = String.format("SELECT * FROM %s", this.tabela);
-        return HelperDAO.executaSelect(sql, null);
-    }
-
     public void remover(GenericoModel e) throws PersistenciaException {
          String sql = String.format("DELETE FROM %s WHERE ID=?", this.tabela);
          List<Parametro> parametro = new ArrayList<>();
          
          parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
          HelperDAO.executaQuery(sql, parametro);
-    }
-
-    public List listarPorID(GenericoModel e) throws PersistenciaException {
-        String sql = String.format("SELECT * FROM %s WHERE ID=?", this.tabela);
-        List<Parametro> parametro = new ArrayList<>(); 
-        parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
-        return HelperDAO.executaSelect(sql, parametro);
     }
 }

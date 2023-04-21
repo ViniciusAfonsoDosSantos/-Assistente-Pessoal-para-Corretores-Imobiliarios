@@ -7,8 +7,6 @@ package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 import br.edu.cefsa.DAO.UsuarioDAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
-import br.edu.cefsa.utils.ComponentesUtils;
-import br.edu.cefsa.utils.PasswordUtils;
 import utils.ValidaDadosUtils;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,12 +19,15 @@ import javafx.scene.layout.AnchorPane;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 import javafx.util.Duration;
+import utils.ComponentesUtils;
+import utils.PasswordUtils;
 
 /**
  *
@@ -209,15 +210,15 @@ public class TelaLoginController implements Initializable {
 
         UsuarioDAO DAO = new UsuarioDAO();
         String nomeUser = txtNomeUsuario.getText();
-        String senhaUser = txtSenhaCadastrese.getText();
+        String senhaUserHasheada = PasswordUtils.encryptPassword(txtSenhaCadastrese.getText());
+        
         String emailUser = txtEmail.getText();
-        Usuario user = new Usuario(nomeUser, emailUser, senhaUser, false);
+        Usuario user = new Usuario(nomeUser, emailUser, senhaUserHasheada, false);
         //checar se email já existe.
         //verificar formato email
         //hashear senha
         if(!validaDadosUsuario())
             return;
-        
         try {
             if (buscaUsuarioEmail(emailUser, DAO) == null) {
                 DAO.inserir(user);
@@ -270,7 +271,6 @@ public class TelaLoginController implements Initializable {
     @FXML
     private void realizarLogin() throws IOException, SQLException {
         apagaErros();
-
         UsuarioDAO DAO = new UsuarioDAO();
         String emailUser = txtEmail.getText();
         String senhaUser = txtSenhaLogin.getText();
@@ -296,9 +296,7 @@ public class TelaLoginController implements Initializable {
                 txtSenhaLogin.clear();
             } else {
                 lbErroLogin.setText("Usuário ou senha invalidos!");
-
             }
-
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -328,7 +326,6 @@ public class TelaLoginController implements Initializable {
         lbErroSenha.setText("");
         lbErroNomeUsuario.setText("");
         lbErroEmail.setText("");
-
     }
 
 }

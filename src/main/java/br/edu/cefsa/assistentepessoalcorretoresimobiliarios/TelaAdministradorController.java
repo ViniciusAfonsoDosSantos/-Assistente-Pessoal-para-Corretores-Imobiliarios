@@ -216,7 +216,7 @@ public class TelaAdministradorController extends PadraoController {
             OBList.clear();
             UsuarioDAO dao = new UsuarioDAO();
             List<Usuario> userList = new ArrayList<Usuario>();
-            userList = dao.listarUsuarios();
+            userList = dao.listar();
             for (Usuario user : userList) {
                 OBList.add(user);
             }
