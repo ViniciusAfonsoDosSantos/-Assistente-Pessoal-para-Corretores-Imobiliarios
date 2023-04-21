@@ -7,7 +7,6 @@ package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 import br.edu.cefsa.DAO.UsuarioDAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Usuario;
-import br.edu.cefsa.utils.ComponentesUtils;
 import utils.ValidaDadosUtils;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
@@ -22,6 +21,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import utils.ComponentesUtils;
 
 /**
  * FXML Controller class

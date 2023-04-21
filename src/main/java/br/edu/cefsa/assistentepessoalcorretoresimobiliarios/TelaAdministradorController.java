@@ -10,6 +10,7 @@ import br.edu.cefsa.model.Usuario;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -124,6 +125,8 @@ public class TelaAdministradorController extends PadraoController {
 
                                 } catch (PersistenciaException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
                             promoveIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -150,6 +153,8 @@ public class TelaAdministradorController extends PadraoController {
 
                                 } catch (PersistenciaException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
                              rebaixaIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -175,6 +180,8 @@ public class TelaAdministradorController extends PadraoController {
                                     }
 
                                 } catch (PersistenciaException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (SQLException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
@@ -203,7 +210,7 @@ public class TelaAdministradorController extends PadraoController {
         }
     }
 
-    public void atualizaTabela() {
+    public void atualizaTabela() throws PersistenciaException, SQLException {
 
         try {
             OBList.clear();
