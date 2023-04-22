@@ -11,6 +11,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -127,6 +128,8 @@ public class TelaAdministradorController extends PadraoController {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (SQLException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ParseException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
                             promoveIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -155,6 +158,8 @@ public class TelaAdministradorController extends PadraoController {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (SQLException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ParseException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });
                              rebaixaIcon.setOnMouseClicked((MouseEvent event) -> {
@@ -182,6 +187,8 @@ public class TelaAdministradorController extends PadraoController {
                                 } catch (PersistenciaException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 } catch (SQLException ex) {
+                                    Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (ParseException ex) {
                                     Logger.getLogger(TelaAdministradorController.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             });

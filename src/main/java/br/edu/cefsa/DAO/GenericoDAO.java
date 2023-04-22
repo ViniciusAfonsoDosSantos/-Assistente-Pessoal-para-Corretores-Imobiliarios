@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,15 +42,15 @@ public abstract class GenericoDAO<E extends GenericoModel>{
         this.tabela = tabela;
     }
     
-    public void inserir(E entidade) throws PersistenciaException{
+    public void inserir(E entidade) throws PersistenciaException, ParseException{
         HelperDAO.executaQuery(insertSQL, preparaParametros(entidade, false)); 
     }
     
-    public void alterar(E entidade) throws PersistenciaException{
+    public void alterar(E entidade) throws PersistenciaException, ParseException{
         HelperDAO.executaQuery(updateSQL, preparaParametros(entidade, true));
     }
     
-    public void remover(GenericoModel e) throws PersistenciaException {
+    public void remover(GenericoModel e) throws PersistenciaException, ParseException {
          String sql = String.format("DELETE FROM %s WHERE ID=?", this.tabela);
          List<Parametro> parametro = new ArrayList<>();
          

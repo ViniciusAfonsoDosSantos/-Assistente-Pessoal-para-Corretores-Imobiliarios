@@ -9,6 +9,7 @@ import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Cliente;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -59,12 +60,12 @@ public class TelaCadastroCliente extends PadraoController{
     private TextField txtTelefone;
 
     @FXML
-    private void salvarCliente() throws IOException, SQLException {
+    private void salvarCliente() throws IOException, SQLException, PersistenciaException, ParseException {
 
         ClienteDAO DAO = new ClienteDAO();
-        Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(), 
-                txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), 
-                txtEndereco.getText(), txtEstado.getText(), "Não tem cidade", txtBairro.getText(), "Não tem Anotação");
+        Cliente cliente = new Cliente("a", "39468599841", mskDataNascimento.getValue(), "a", 
+                "a", "11945436335", "a", "a", 
+                "a", "AA", "Nao tem cidade", "a", "Nao tem Anotacao");
         try {
             DAO.inserir(cliente);
             redirecionarTelaPrincipal();

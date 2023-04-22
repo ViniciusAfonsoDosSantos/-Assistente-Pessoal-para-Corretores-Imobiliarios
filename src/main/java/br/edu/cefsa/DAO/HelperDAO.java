@@ -6,12 +6,14 @@ package br.edu.cefsa.DAO;
 
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Parametro;
-import br.edu.cefsa.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,26 +23,30 @@ import java.util.logging.Logger;
  * @author 082200014
  */
 public class HelperDAO {
-     private static PreparedStatement organizaParametros(PreparedStatement statement, List<Parametro> parametros) throws SQLException{
+     private static PreparedStatement organizaParametros(PreparedStatement statement, List<Parametro> parametros) throws SQLException, ParseException{
         if(parametros != null){
-         for(int i = 0; i < parametros.size(); i++){
-            String pTipo = parametros.get(i).tipo;
-            String pValor = parametros.get(i).valor;
-            if("texto".equals(pTipo)){
-                statement.setString(i+1, pValor);
-            }
-            if("long".equals(pTipo)){
-                statement.setLong(i+1, Long.parseLong(pValor));
-            }
-            if("boolean".equals(pTipo)){
-                statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
-            }
+            for(int i = 0; i < parametros.size(); i++){
+                String pTipo = parametros.get(i).tipo;
+                String pValor = parametros.get(i).valor;
+                if("texto".equals(pTipo)){
+                    statement.setString(i+1, pValor);
+                }
+                if("long".equals(pTipo)){
+                    statement.setLong(i+1, Long.parseLong(pValor));
+                }
+                if("boolean".equals(pTipo)){
+                    statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
+                }
+                if("data".equals(pTipo)){
+                    SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/yyyy");  
+                    statement.setDate(i+1, (java.sql.Date)dformat.parse(pValor));
+                }
             }
         }
         return statement;
     }
     
-    public static void executaQuery(String query, List<Parametro> parametrosStatement) throws PersistenciaException {
+    public static void executaQuery(String query, List<Parametro> parametrosStatement) throws PersistenciaException, ParseException {
         Connection connection = null;
         try {
             connection = Conexao.getInstance().getConnection();
@@ -61,4 +67,6 @@ public class HelperDAO {
             }
         }
     }
+    
+    
 }

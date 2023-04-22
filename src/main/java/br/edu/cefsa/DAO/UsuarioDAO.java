@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.*;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -67,7 +68,7 @@ public class UsuarioDAO<U extends Usuario> extends GenericoDAO<U>{
         return users;
     }
     
-    public void alterarTipo(Usuario usuario) throws PersistenciaException {
+    public void alterarTipo(Usuario usuario) throws PersistenciaException, ParseException {
         //troca nome e senha
         String sql = "UPDATE ASSISTENTECORRETORES.Usuario SET TIPO=? WHERE EMAIL = ?";
         List parametros = new ArrayList();
@@ -76,7 +77,7 @@ public class UsuarioDAO<U extends Usuario> extends GenericoDAO<U>{
         HelperDAO.executaQuery(sql, parametros);
     }
     
-    public void remover(Usuario usuario) throws PersistenciaException {
+    public void remover(Usuario usuario) throws PersistenciaException, ParseException {
         String sql = "DELETE FROM ASSISTENTECORRETORES.Usuario WHERE EMAIL= ? ";
         List parametro = new ArrayList();
         parametro.add(new Parametro(usuario.getEmail(), "texto"));

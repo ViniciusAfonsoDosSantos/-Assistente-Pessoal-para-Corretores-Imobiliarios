@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +29,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
 
     public ClienteDAO() {
         super.setTabela("ASSISTENTECORRETORES.CLIENTE");
-        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.CLIENTE"
-                        + "(Nome, CPF, Data_nascimento, Conjuge, "
-                        + "Profissao, Telefone, Email, EnderecoResidencial, "
-                        + "Estado, Cidade, Bairro, CEP, Anotacoes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.CLIENTE (Nome, CPF, Data_nascimento, Conjuge,Profissao, Telefone, Email, EnderecoResidencial, Estado, Cidade, Bairro, CEP, Anotacoes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.CLIENTE "
                         + "SET NOME=?,"
                         + "CPF=? "
@@ -53,16 +51,17 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
     protected List preparaParametros(Cliente cliente, boolean update) {
         List parametros = new ArrayList();
         parametros.add(new Parametro(cliente.getNome(), "texto"));
-        parametros.add(new Parametro(cliente.getCPF(), "long"));
-        parametros.add(new Parametro(cliente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "data"));
+        parametros.add(new Parametro(cliente.getCPF(), "texto"));
+        parametros.add(new Parametro(cliente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "texto"));
         parametros.add(new Parametro(cliente.getConjuge(), "texto"));
         parametros.add(new Parametro(cliente.getProfissao(), "texto"));
-        parametros.add(new Parametro(cliente.getTelefone(), "long"));
+        parametros.add(new Parametro(cliente.getTelefone(), "texto"));
         parametros.add(new Parametro(cliente.getEmail(), "texto"));
         parametros.add(new Parametro(cliente.getEnderecoResidencial(), "texto"));
         parametros.add(new Parametro(cliente.getEstado(), "texto"));
         parametros.add(new Parametro(cliente.getCidade(), "texto"));
         parametros.add(new Parametro(cliente.getBairro(), "texto"));
+        parametros.add(new Parametro(cliente.getCEP(), "texto"));
         parametros.add(new Parametro(cliente.getAnotacao(),"texto"));
         if(update){
             parametros.add(new Parametro(String.valueOf(cliente.getID()), "long"));
@@ -157,6 +156,10 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         String sql = "DELETE FROM ASSISTENTECORRETORES.Cliente WHERE CLIENTE_ID= ? ";
         List parametro = new ArrayList();
         parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
-        HelperDAO.executaQuery(sql,parametro);
+        try {
+            HelperDAO.executaQuery(sql,parametro);
+        } catch (ParseException ex) {
+            Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

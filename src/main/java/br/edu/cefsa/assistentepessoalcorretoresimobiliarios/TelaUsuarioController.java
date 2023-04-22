@@ -11,6 +11,7 @@ import utils.ValidaDadosUtils;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -66,7 +67,7 @@ public class TelaUsuarioController extends PadraoController {
 
     //unica responsabilidade deve ser a de deletar usuario
     @FXML
-    private void deletarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
+    private void deletarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException, ParseException {
         Alert alert = ComponentesUtils.criaAlerta(AlertType.CONFIRMATION, "Deletar Usuário", "Confirma a exclusão do usuário?");
         atribuiDialog(alert, "estiloPrincipal.css", "dialog");
         
@@ -87,7 +88,7 @@ public class TelaUsuarioController extends PadraoController {
     }
     
     @FXML
-    private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException {
+    private void editarUsuario(ActionEvent actionEvent) throws PersistenciaException, IOException, ParseException {
         
         apagaErros();
         if(!validaDadosUsuario()){

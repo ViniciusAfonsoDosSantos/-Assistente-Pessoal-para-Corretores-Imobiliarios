@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -205,7 +206,7 @@ public class TelaLoginController implements Initializable {
     }
 
     @FXML
-    private void salvarUsuario() throws IOException, SQLException {
+    private void salvarUsuario() throws IOException, SQLException, PersistenciaException, ParseException {
         apagaErros();
 
         UsuarioDAO DAO = new UsuarioDAO();
