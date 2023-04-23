@@ -47,6 +47,7 @@ public class TelaPrincipalController extends PadraoController {
             iconeADM.setVisible(true);
         }
 
+        //TESTEEEEEE
         try {
             
             ClienteDAO clienteDAO = new ClienteDAO();
