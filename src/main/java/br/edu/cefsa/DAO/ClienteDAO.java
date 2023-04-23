@@ -52,7 +52,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         List parametros = new ArrayList();
         parametros.add(new Parametro(cliente.getNome(), "texto"));
         parametros.add(new Parametro(cliente.getCPF(), "texto"));
-        parametros.add(new Parametro(cliente.getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), "texto"));
+        parametros.add(new Parametro(cliente.getDataNascimento(), "data"));
         parametros.add(new Parametro(cliente.getConjuge(), "texto"));
         parametros.add(new Parametro(cliente.getProfissao(), "texto"));
         parametros.add(new Parametro(cliente.getTelefone(), "texto"));

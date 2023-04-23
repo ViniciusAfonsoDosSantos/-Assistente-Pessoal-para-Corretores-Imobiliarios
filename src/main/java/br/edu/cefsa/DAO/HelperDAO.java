@@ -28,6 +28,7 @@ public class HelperDAO {
             for(int i = 0; i < parametros.size(); i++){
                 String pTipo = parametros.get(i).tipo;
                 String pValor = parametros.get(i).valor;
+                LocalDate pData = parametros.get(i).date;
                 if("texto".equals(pTipo)){
                     statement.setString(i+1, pValor);
                 }
@@ -37,9 +38,8 @@ public class HelperDAO {
                 if("boolean".equals(pTipo)){
                     statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
                 }
-                if("data".equals(pTipo)){
-                    SimpleDateFormat dformat = new SimpleDateFormat("dd/MM/yyyy");  
-                    statement.setDate(i+1, (java.sql.Date)dformat.parse(pValor));
+                if("data".equals(pTipo)){  
+                    statement.setDate(i+1, java.sql.Date.valueOf(pData));
                 }
             }
         }

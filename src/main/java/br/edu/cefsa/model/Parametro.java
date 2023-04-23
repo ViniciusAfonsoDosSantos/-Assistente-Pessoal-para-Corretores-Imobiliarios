@@ -4,6 +4,8 @@
  */
 package br.edu.cefsa.model;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author gabri
@@ -11,9 +13,15 @@ package br.edu.cefsa.model;
 public class Parametro {
     public String valor;
     public String tipo;
+    public LocalDate date;
     
     public Parametro(String valor, String tipo){
         this.valor = valor;
+        this.tipo = tipo;
+    }
+    
+    public Parametro(LocalDate date, String tipo){
+        this.date = date;
         this.tipo = tipo;
     }
 }
