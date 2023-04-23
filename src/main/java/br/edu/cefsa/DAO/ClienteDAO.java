@@ -69,7 +69,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         return parametros;
     }
     
-    @Override
+//////    @Override
     public List listar() throws PersistenciaException{
         List<Cliente> clientes = new ArrayList<Cliente>();
         String sql = "SELECT * FROM ASSISTENTECORRETORES.Cliente";
