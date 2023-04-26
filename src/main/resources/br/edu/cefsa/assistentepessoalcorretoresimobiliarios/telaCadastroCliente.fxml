@@ -3,59 +3,30 @@
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="telaCadastroCliente" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="780.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaCadastroCliente">
+<AnchorPane fx:id="telaCadastroCliente" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1014.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaCadastroClienteController">
    <children>
       <Label layoutX="84.0" layoutY="75.0" text="Adicionar Cliente" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <AnchorPane layoutX="84.0" layoutY="121.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="420.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="12.0">
-         <children>
-            <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Label layoutX="23.0" layoutY="22.0" prefWidth="89.0" text="Nome Completo" />
-            <TextField fx:id="txtNome" layoutX="20.0" layoutY="40.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
-            <Label layoutX="346.0" layoutY="164.0" text="Email" />
-            <TextField fx:id="txtEstado" layoutX="348.0" layoutY="335.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
-            <Label layoutX="25.0" layoutY="238.0" text="CEP" />
-            <TextField fx:id="txtCEP" layoutX="20.0" layoutY="259.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
-            <Label layoutX="19.0" layoutY="317.0" text="Bairro" />
-            <TextField fx:id="txtBairro" layoutX="22.0" layoutY="335.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
-            <Label layoutX="25.0" layoutY="93.0" text="CPF" />
-            <TextField fx:id="txtCPF" layoutX="20.0" layoutY="111.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
-            <Label layoutX="23.0" layoutY="164.0" text="Telefone" />
-            <TextField fx:id="txtTelefone" layoutX="20.0" layoutY="186.0" prefHeight="28.0" prefWidth="278.0" styleClass="TextField" />
-            <Label layoutX="352.0" layoutY="93.0" text="Profissão" />
-            <TextField fx:id="txtProfissao" layoutX="348.0" layoutY="111.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
-            <Label layoutX="344.0" layoutY="238.0" text="Endereço Residencial" />
-            <TextField fx:id="txtEndereco" layoutX="348.0" layoutY="259.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
-            <Label layoutX="342.0" layoutY="317.0" text="Estado" />
-            <TextField fx:id="txtEmail" layoutX="348.0" layoutY="186.0" prefHeight="28.0" prefWidth="310.0" styleClass="TextField" />
-            <Label layoutX="508.0" layoutY="22.0" text="Data Nascimento" />
-            <DatePicker fx:id="mskDataNascimento" layoutX="508.0" layoutY="41.0" prefHeight="28.0" prefWidth="152.0" />
-            <Pane layoutX="248.0" layoutY="349.0" />
-            <TextField fx:id="txtConjuge" layoutX="320.0" layoutY="41.0" prefHeight="28.0" prefWidth="158.0" styleClass="TextField" />
-            <Label layoutX="320.0" layoutY="22.0" text="Conjuge" />
-         </children>
-      </AnchorPane>
       <Pane prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="15.0" layoutY="688.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
-            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="555.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
-            <VBox alignment="CENTER" layoutX="14.0" layoutY="200.0">
+            <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
+            <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
@@ -79,15 +50,113 @@
       </Pane>
       <Pane layoutX="73.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0">
          <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="PLUS" layoutX="14.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="ADDRESS_BOOK" layoutX="20.0" layoutY="46.0" size="2em" />
             <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
             <Label layoutX="69.0" layoutY="28.0" text="Adicionar Cliente">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="647.0" layoutY="43.0" size="1.3em" styleClass="icones" />
+            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="865.0" layoutY="42.0" size="1.3em" styleClass="icones" />
          </children>
       </Pane>
+      <AnchorPane layoutX="75.0" layoutY="489.0" prefHeight="213.0" prefWidth="927.0" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0">
+         <children>
+            <Label layoutX="220.0" layoutY="70.0" text="Numero de vagas" />
+            <Label layoutX="23.0" layoutY="70.0" text="Numero de Dormitórios" />
+            <Label layoutX="430.0" layoutY="70.0" text="Metragem (M²)" />
+            <TextField fx:id="txtNumeroDormitorios" layoutX="20.0" layoutY="85.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
+            <TextField fx:id="txtNumeroVagas" layoutX="220.0" layoutY="85.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
+            <TextField fx:id="txtMetragem" layoutX="430.0" layoutY="85.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
+            <Label layoutX="20.0" layoutY="135.0" text="Bairros" />
+            <TextField fx:id="txtBairros" layoutX="21.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <TextField fx:id="txtFaixaPreco" layoutX="640.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <TextField fx:id="txtPrazoEntrega" layoutX="640.0" layoutY="85.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="640.0" layoutY="135.0" text="Faixa de preço" />
+            <Label layoutX="640.0" layoutY="70.0" text="Prazo máximo de entrega" />
+            <Label layoutX="330.0" layoutY="135.0" text="Condições" />
+            <TextField fx:id="txtCondicoes" layoutX="330.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <RadioButton layoutX="72.0" layoutY="21.0" mnemonicParsing="false" text="Apto">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tipoMoradia" />
+               </toggleGroup>
+               <font>
+                  <Font size="14.0" />
+               </font></RadioButton>
+            <RadioButton layoutX="148.0" layoutY="21.0" mnemonicParsing="false" text="Casa" toggleGroup="$tipoMoradia">
+               <font>
+                  <Font size="14.0" />
+               </font></RadioButton>
+            <RadioButton layoutX="224.0" layoutY="21.0" mnemonicParsing="false" text="Flat" toggleGroup="$tipoMoradia">
+               <font>
+                  <Font size="14.0" />
+               </font></RadioButton>
+            <RadioButton layoutX="291.0" layoutY="21.0" mnemonicParsing="false" text="Coml" toggleGroup="$tipoMoradia">
+               <font>
+                  <Font size="14.0" />
+               </font></RadioButton>
+            <Label layoutX="23.0" layoutY="21.0" text="Tipo:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="686.0" layoutY="21.0" text="Para:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <RadioButton layoutX="730.0" layoutY="21.0" mnemonicParsing="false" text="Uso">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <toggleGroup>
+                  <ToggleGroup fx:id="qualUso" />
+               </toggleGroup>
+            </RadioButton>
+            <RadioButton layoutX="793.0" layoutY="21.0" mnemonicParsing="false" text="Investimento" toggleGroup="$qualUso">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="75.0" layoutY="120.0" prefHeight="317.0" prefWidth="927.0" styleClass="pane_boxcliente" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <Label layoutX="20.0" layoutY="22.0" prefWidth="89.0" text="Nome Completo" />
+            <TextField fx:id="txtNome" layoutX="20.0" layoutY="40.0" prefHeight="28.0" prefWidth="253.0" styleClass="TextField" />
+            <Label layoutX="318.0" layoutY="22.0" text="Conjuge" />
+            <TextField fx:id="txtConjuge" layoutX="318.0" layoutY="40.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="616.0" layoutY="20.0" text="Data Nascimento" />
+            <DatePicker fx:id="mskDataNascimento" layoutX="616.0" layoutY="40.0" prefHeight="28.0" prefWidth="253.0" />
+            <Label layoutX="20.0" layoutY="93.0" text="CPF" />
+            <TextField fx:id="txtCPF" layoutX="22.0" layoutY="111.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="318.0" layoutY="93.0" text="Profissão" />
+            <TextField fx:id="txtProfissao" layoutX="316.0" layoutY="111.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="616.0" layoutY="93.0" text="Telefone" />
+            <TextField fx:id="txtTelefone" layoutX="615.0" layoutY="111.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="20.0" layoutY="170.0" text="Email" />
+            <TextField fx:id="txtEmail" layoutX="20.0" layoutY="184.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="318.0" layoutY="170.0" text="CEP" />
+            <TextField fx:id="txtCEP" layoutX="316.0" layoutY="184.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="616.0" layoutY="172.0" text="Endereço Residencial" />
+            <TextField fx:id="txtEndereco" layoutX="615.0" layoutY="184.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="20.0" layoutY="238.0" prefWidth="89.0" text="Cidade" />
+            <TextField fx:id="txtCidade" layoutX="20.0" layoutY="259.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="318.0" layoutY="238.0" text="Bairro" />
+            <TextField fx:id="txtBairro" layoutX="318.0" layoutY="261.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="616.0" layoutY="238.0" text="Estado" />
+            <ComboBox fx:id="txtEstado" layoutX="615.0" layoutY="263.0" prefHeight="28.0" prefWidth="254.0" />
+         </children>
+      </AnchorPane>
+      <Label layoutX="84.0" layoutY="446.0" text="Imóvel Procurado" AnchorPane.leftAnchor="98.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button alignment="CENTER" layoutX="903.0" layoutY="712.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

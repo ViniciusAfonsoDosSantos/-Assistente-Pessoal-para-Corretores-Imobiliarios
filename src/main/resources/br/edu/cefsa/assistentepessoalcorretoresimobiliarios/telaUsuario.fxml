@@ -10,14 +10,73 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="telaUsuario" prefHeight="580.0" prefWidth="780.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaUsuarioController">
+<AnchorPane id="AnchorPane" fx:id="telaUsuario" prefHeight="754.0" prefWidth="1014.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaUsuarioController">
    <children>
-      <Pane prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="85.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0">
          <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="USER" layoutX="14.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
+            <Label layoutX="69.0" layoutY="28.0" text="Usuário">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="864.0" layoutY="43.0" size="1.3em" styleClass="icones" />
+         </children>
+      </Pane>
+      <Label layoutX="89.0" layoutY="89.0" text="Usuário" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="82.0" layoutY="132.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="162.0" prefWidth="927.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
+         <children>
+            <Button alignment="CENTER" layoutX="575.0" layoutY="166.0" mnemonicParsing="false" onAction="#editarUsuario" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Label layoutX="392.0" layoutY="33.0" prefWidth="89.0" text="Nome Completo" />
+            <TextField fx:id="txtNome" layoutX="392.0" layoutY="60.0" prefHeight="26.0" prefWidth="244.0" styleClass="TextField" />
+            <Label layoutX="25.0" layoutY="33.0" text="Email" />
+            <TextField fx:id="txtEmail" editable="false" layoutX="25.0" layoutY="60.0" prefHeight="28.0" prefWidth="306.0" styleClass="TextField" />
+            <Label layoutX="709.0" layoutY="33.0" text="Senha" />
+            <TextField fx:id="txtSenha" layoutX="709.0" layoutY="60.0" prefHeight="28.0" prefWidth="181.0" styleClass="TextField" />
+            <Label fx:id="lbErroNomeUsuario" layoutX="392.0" layoutY="88.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroSenha" layoutX="25.0" layoutY="166.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="75.0" layoutY="325.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0">
+         <children>
+            <Button alignment="CENTER" layoutX="519.0" layoutY="25.0" mnemonicParsing="false" onAction="#deletarUsuario" prefHeight="27.0" prefWidth="108.0" styleClass="button_vermelho" text="Deletar" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="57.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="TRASH" size="1.5em" styleClass="icone" />
+               </graphic>
+            </Button>
+            <Label layoutX="37.0" layoutY="29.0" text="Deseja deletar a sua conta?">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="15.0" layoutY="688.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
-            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="555.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
-            <VBox alignment="CENTER" layoutX="14.0" layoutY="200.0">
+            <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
+            <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
@@ -39,64 +98,5 @@
             </VBox>
          </children>
       </Pane>
-      <Pane layoutX="85.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0">
-         <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="USER" layoutX="14.0" layoutY="46.0" size="2em" />
-            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
-            <Label layoutX="69.0" layoutY="28.0" text="Usuário">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="647.0" layoutY="43.0" size="1.3em" styleClass="icones" />
-         </children>
-      </Pane>
-      <Label layoutX="89.0" layoutY="89.0" text="Usuário" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <AnchorPane layoutX="82.0" layoutY="132.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="208.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente">
-         <children>
-            <Button alignment="CENTER" layoutX="575.0" layoutY="166.0" mnemonicParsing="false" onAction="#editarUsuario" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Button>
-            <Label layoutX="392.0" layoutY="33.0" prefWidth="89.0" text="Nome Completo" />
-            <TextField fx:id="txtNome" layoutX="392.0" layoutY="60.0" prefHeight="26.0" prefWidth="244.0" styleClass="TextField" />
-            <Label layoutX="25.0" layoutY="33.0" text="Email" />
-            <TextField fx:id="txtEmail" editable="false" layoutX="25.0" layoutY="60.0" prefHeight="28.0" prefWidth="306.0" styleClass="TextField" />
-            <Label layoutX="25.0" layoutY="117.0" text="Senha" />
-            <TextField fx:id="txtSenha" layoutX="25.0" layoutY="138.0" prefHeight="28.0" prefWidth="181.0" styleClass="TextField" />
-            <Label fx:id="lbErroNomeUsuario" layoutX="392.0" layoutY="88.0" prefWidth="200.0" textFill="#ff001a">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
-            <Label fx:id="lbErroSenha" layoutX="25.0" layoutY="166.0" prefWidth="200.0" textFill="#ff001a">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="82.0" layoutY="379.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="684.0" style="-fx-background-color: white;" styleClass="pane_boxcliente">
-         <children>
-            <Button alignment="CENTER" layoutX="519.0" layoutY="25.0" mnemonicParsing="false" onAction="#deletarUsuario" prefHeight="27.0" prefWidth="108.0" styleClass="button_vermelho" text="Deletar" AnchorPane.bottomAnchor="23.0" AnchorPane.rightAnchor="57.0">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIconView glyphName="TRASH" size="1.5em" styleClass="icone" />
-               </graphic>
-            </Button>
-            <Label layoutX="37.0" layoutY="29.0" text="Deseja deletar a sua conta?">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

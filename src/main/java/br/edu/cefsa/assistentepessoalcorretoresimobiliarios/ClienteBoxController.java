@@ -10,9 +10,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -31,9 +33,6 @@ public class ClienteBoxController {
     private Label enderecoCliente;
 
     @FXML
-    private FontAwesomeIconView iconeVisualizar;
-
-    @FXML
     private FontAwesomeIconView iconeEditar;
 
     @FXML
@@ -45,20 +44,34 @@ public class ClienteBoxController {
     @FXML
     private Label telefoneCliente;
 
+    DadoClienteSelecionado clienteSelecionado = DadoClienteSelecionado.getInstancia();
+
     public void setData(Cliente cliente) throws IOException {
 
-       
-            iconeVisualizar.setOnMouseClicked((MouseEvent event) -> {
-                
-                try {
-                    App.setRoot("telaExpansaoCliente");
-                } catch (IOException ex) {
-                    Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            });
-            nomeCliente.setText(cliente.getNome());
-            enderecoCliente.setText("Endereço: " + cliente.getEnderecoResidencial());
-            telefoneCliente.setText("Telefone: " + cliente.getTelefone());
-            emailCliente.setText("Email: " + cliente.getEmail());
+        nomeCliente.setText(cliente.getNome());
+        enderecoCliente.setText("Endereço: " + cliente.getEnderecoResidencial());
+        telefoneCliente.setText("Telefone: " + cliente.getTelefone());
+        emailCliente.setText("Email: " + cliente.getEmail());
+        iconeEditar.setOnMouseClicked((MouseEvent event) -> {
+
+            try {
+                clienteSelecionado.setCliente(cliente);
+                App.setRoot("telaCadastroCliente");
+            } catch (IOException ex) {
+                Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            /*
+            Node node = (Node) event.getSource();
+            Stage stage = (Stage) node.getScene().getWindow();
+            
+            try {
+                stage.setUserData(cliente);
+                App.setRoot("telaCadastroCliente");
+            } catch (IOException e) {
+                Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, e);
+            }
+             */
+        });
     }
 }

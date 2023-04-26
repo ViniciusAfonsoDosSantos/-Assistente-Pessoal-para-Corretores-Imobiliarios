@@ -12,44 +12,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="telaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="780.0" style="-fx-background-color: #F3F3F3;" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaPrincipalController">
+<AnchorPane fx:id="telaPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1014.0" style="-fx-background-color: #F3F3F3;" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaPrincipalController">
    <children>
-      <Pane fx:id="sidebarPane" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
-            <FontAwesomeIconView fx:id="iconeMenu" glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
-            <VBox alignment="CENTER" layoutX="14.0" layoutY="200.0">
-               <children>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin></FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </FontAwesomeIconView>
-                  <FontAwesomeIconView fx:id="iconeADM" boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="USER_CIRCLE" onMouseClicked="#redirecionarAdministrador" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </FontAwesomeIconView>
-               </children>
-            </VBox>
-            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="555.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
-         </children>
-      </Pane>
       <Pane layoutX="75.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="0.0">
          <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="HOME" layoutX="14.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="HOME" layoutX="21.0" layoutY="46.0" size="2em" />
             <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
             <Label layoutX="69.0" layoutY="28.0" text="Clientes">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="647.0" layoutY="43.0" size="1.3em" styleClass="icones" />
+            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="874.0" layoutY="43.0" size="1.3em" styleClass="icones" />
          </children></Pane>
       <Label layoutX="98.0" layoutY="84.0" text="Todos os Clientes" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
          <font>
@@ -64,7 +38,7 @@
             <FontAwesomeIconView glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icone" />
          </graphic>
       </Button>
-      <VBox layoutX="75.0" layoutY="137.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="135.0">
+      <VBox layoutX="75.0" layoutY="115.0" prefHeight="619.0" prefWidth="904.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="120.0">
          <children>
             <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F3F3F3;" VBox.vgrow="ALWAYS">
                <content>
@@ -77,5 +51,32 @@
             </ScrollPane>
          </children>
       </VBox>
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="15.0" layoutY="688.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
+            <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
+            <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
+               <children>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView fx:id="iconeADM" boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="USER_CIRCLE" onMouseClicked="#redirecionarAdministrador" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+               </children>
+            </VBox>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

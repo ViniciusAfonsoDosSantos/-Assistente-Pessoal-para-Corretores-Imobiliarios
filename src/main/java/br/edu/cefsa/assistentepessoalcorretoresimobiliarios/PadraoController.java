@@ -21,6 +21,7 @@ public class PadraoController  implements Initializable{
     private FontAwesomeIconView iconeADM;
     
     DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
+    DadoClienteSelecionado clienteSelecionado = DadoClienteSelecionado.getInstancia();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -38,6 +39,7 @@ public class PadraoController  implements Initializable{
     
     @FXML
     private void redirecionarCadastrarCliente() throws IOException {
+        clienteSelecionado.setCliente(null);
         App.setRoot("telaCadastroCliente");
     }
     

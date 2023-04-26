@@ -206,6 +206,18 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 	-fx-background-color: white;
 }
 
+.radio-button .radio{
+    -fx-background-color: transparent;
+    -fx-border-color:#000000;
+    -fx-border-radius: 45px;
+    -fx-border-width: 1px;
+}
+
+.radio-button:selected .radio .dot{
+    -fx-background-color: #2B49B3;
+    -fx-background-insets: 0;
+}
+
 .text-area{
     -fx-border-color: #000000;
     -fx-border-width: 2px;

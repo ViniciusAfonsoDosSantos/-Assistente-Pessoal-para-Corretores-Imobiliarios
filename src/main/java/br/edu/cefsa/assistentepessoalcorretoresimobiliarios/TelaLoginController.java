@@ -140,10 +140,10 @@ public class TelaLoginController implements Initializable {
         slide.setDuration(Duration.seconds(0.7));
         slide.setNode(camada2);
 
-        slide.setToX(390);
+        slide.setToX(507);
         slide.play();
 
-        camada1.setTranslateX(-390);
+        camada1.setTranslateX(-507);
         /*
         slide.setOnFinished((e->{
         

@@ -10,14 +10,41 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="telaAdministrador" prefHeight="580.0" prefWidth="780.0" style="-fx-background-color: #F3F3F3;" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaAdministradorController">
+<AnchorPane id="AnchorPane" fx:id="telaAdministrador" prefHeight="754.0" prefWidth="1014.0" style="-fx-background-color: #F3F3F3;" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaAdministradorController">
    <children>
-      <Pane layoutY="5.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Pane layoutX="71.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="30.0">
          <children>
-            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="14.0" layoutY="515.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="USER_CIRCLE" layoutX="14.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
+            <Label layoutX="69.0" layoutY="28.0" text="Usuários">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="874.0" layoutY="43.0" size="1.3em" styleClass="icones" />
+         </children>
+      </Pane>
+      <Label layoutX="108.0" layoutY="94.0" text="Todos os Usuários" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <TableView fx:id="tabelaUsuarios" layoutX="89.0" layoutY="136.0" prefHeight="305.0" prefWidth="660.0" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
+        <columns>
+          <TableColumn fx:id="columnNome" editable="false" prefWidth="75.0" text="Nome" />
+          <TableColumn fx:id="columnEmail" editable="false" prefWidth="75.0" text="Email" />
+            <TableColumn fx:id="columnAcoes" prefWidth="89.60003662109375" text="Ações" />
+        </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Pane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <FontAwesomeIconView glyphName="SIGN_OUT" layoutX="15.0" layoutY="688.0" onMouseClicked="#logOff" size="1.5em" styleClass="icones" />
             <FontAwesomeIconView glyphName="BARS" layoutX="15.0" layoutY="31.0" size="1.5em" styleClass="icones" text="" />
-            <FontAwesomeIconView glyphName="USER" layoutX="11.0" layoutY="555.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
-            <VBox alignment="CENTER" layoutX="14.0" layoutY="200.0">
+            <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
+            <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
@@ -39,32 +66,5 @@
             </VBox>
          </children>
       </Pane>
-      <Pane layoutX="71.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="30.0">
-         <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="USER_CIRCLE" layoutX="14.0" layoutY="46.0" size="2em" />
-            <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
-            <Label layoutX="69.0" layoutY="28.0" text="Usuários">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="647.0" layoutY="43.0" size="1.3em" styleClass="icones" />
-         </children>
-      </Pane>
-      <Label layoutX="108.0" layoutY="94.0" text="Todos os Usuários" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-      </Label>
-      <TableView fx:id="tabelaUsuarios" layoutX="89.0" layoutY="136.0" prefHeight="305.0" prefWidth="660.0" styleClass="pane_boxcliente">
-        <columns>
-          <TableColumn fx:id="columnNome" editable="false" prefWidth="75.0" text="Nome" />
-          <TableColumn fx:id="columnEmail" editable="false" prefWidth="75.0" text="Email" />
-            <TableColumn fx:id="columnAcoes" prefWidth="89.60003662109375" text="Ações" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
    </children>
 </AnchorPane>
