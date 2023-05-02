@@ -57,6 +57,11 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
                   <FontAwesomeIconView fx:id="iconeADM" boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="USER_CIRCLE" onMouseClicked="#redirecionarAdministrador" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />

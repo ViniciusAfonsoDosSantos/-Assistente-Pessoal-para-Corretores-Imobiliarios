@@ -131,6 +131,10 @@ public class Cliente extends GenericoModel{
     public void setBairro(String Bairro) {
         this.Bairro = Bairro;
     }
+    
+    public Cliente(String Nome){
+         this.Nome = Nome;
+    }
 
     public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
         this.Nome = Nome;

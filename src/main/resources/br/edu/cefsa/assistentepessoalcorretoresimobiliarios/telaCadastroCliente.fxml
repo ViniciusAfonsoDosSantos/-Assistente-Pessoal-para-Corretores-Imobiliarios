@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="telaCadastroCliente" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="754.0" prefWidth="1014.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaCadastroClienteController">
    <children>
-      <Label layoutX="84.0" layoutY="75.0" text="Adicionar Cliente" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
+      <Label fx:id="lbTituloCliente" layoutX="84.0" layoutY="75.0" text="Adicionar Cliente" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -35,6 +35,11 @@
                      </VBox.margin>
                   </FontAwesomeIconView>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -148,7 +153,7 @@
             <ComboBox fx:id="txtEstado" layoutX="615.0" layoutY="263.0" prefHeight="28.0" prefWidth="254.0" />
          </children>
       </AnchorPane>
-      <Label layoutX="84.0" layoutY="446.0" text="Imóvel Procurado" AnchorPane.leftAnchor="98.0">
+      <Label fx:id="lbTituloImovel" layoutX="84.0" layoutY="446.0" text="Imóvel Procurado" AnchorPane.leftAnchor="98.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

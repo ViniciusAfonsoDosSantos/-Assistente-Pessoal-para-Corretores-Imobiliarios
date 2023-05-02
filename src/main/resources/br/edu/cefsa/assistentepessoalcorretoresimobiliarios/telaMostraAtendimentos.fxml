@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="telaMostraAtendimentos" prefHeight="629.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaMostraAtendimentos">
+   <children>
+      <Label fx:id="lbTituloAtendimento" layoutX="14.0" layoutY="14.0" text="Atendimentos no dia ##" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <VBox layoutX="42.0" layoutY="57.0" prefHeight="558.0" prefWidth="817.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0">
+         <children>
+            <ScrollPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #F3F3F3;" VBox.vgrow="ALWAYS">
+               <content>
+                  <GridPane fx:id="paneMostraAtendimentos">
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

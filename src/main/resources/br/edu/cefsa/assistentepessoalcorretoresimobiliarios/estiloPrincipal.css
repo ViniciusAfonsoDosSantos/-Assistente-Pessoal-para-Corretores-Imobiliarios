@@ -220,8 +220,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .text-area{
     -fx-border-color: #000000;
-    -fx-border-width: 2px;
-    -fx-background-color: transparent;
+    -fx-border-width: 0 0 2px 0;
+    -fx-background-color: #F3F3F3;
 }
 
 .text-area:focused{

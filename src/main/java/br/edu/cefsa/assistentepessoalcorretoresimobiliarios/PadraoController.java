@@ -33,6 +33,11 @@ public class PadraoController  implements Initializable{
     }
     
     @FXML
+    private void redirecionarCalendario() throws IOException {
+        App.setRoot("telaCalendario");
+    }
+    
+    @FXML
     private void redirecionarAdicionarImovel() throws IOException {
         App.setRoot("telaAdicionarImovel");
     }

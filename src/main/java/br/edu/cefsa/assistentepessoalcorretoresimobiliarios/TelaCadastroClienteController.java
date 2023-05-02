@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -32,6 +33,12 @@ import javafx.scene.layout.AnchorPane;
  */
 public class TelaCadastroClienteController extends PadraoController {
 
+    @FXML
+    private Label lbTituloCliente;
+
+    @FXML
+    private Label lbTituloImovel;
+    
     @FXML
     private FontAwesomeIconView iconeADM;
 
@@ -115,6 +122,8 @@ public class TelaCadastroClienteController extends PadraoController {
 
         if (clienteSelecionado.getCliente() != null){
 
+            lbTituloCliente.setText("Atualizar Cliente");
+            lbTituloImovel.setText("Atualizar Imóvel Procurado");
             txtNome.setText(clienteSelecionado.getCliente().getNome());
             txtConjuge.setText(clienteSelecionado.getCliente().getConjuge());
             txtCidade.setText(clienteSelecionado.getCliente().getCidade());
@@ -127,6 +136,10 @@ public class TelaCadastroClienteController extends PadraoController {
             txtEndereco.setText(clienteSelecionado.getCliente().getEnderecoResidencial());
             txtEstado.setValue(EnumEstados.valueOf(clienteSelecionado.getCliente().getEstado()));
             txtBairro.setText(clienteSelecionado.getCliente().getBairro());
+        }
+        else{
+            lbTituloCliente.setText("Cadastrar Cliente");
+            lbTituloImovel.setText("Imóvel Procurado");
         }
     }
 
@@ -154,13 +167,14 @@ public class TelaCadastroClienteController extends PadraoController {
         txtConjuge.setText(cliente.getConjuge());
         txtCidade.setText(cliente.getCidade());
     }
-
+    
     @FXML
-    public void mostraUsuario(Cliente cliente) throws IOException {
+    public static void mostraUsuario(Cliente cliente) throws IOException {
         txtNome.setText(cliente.getNome());
         txtConjuge.setText(cliente.getConjuge());
         txtCidade.setText(cliente.getCidade());
         
     }
-     */
+*/
+     
 }
