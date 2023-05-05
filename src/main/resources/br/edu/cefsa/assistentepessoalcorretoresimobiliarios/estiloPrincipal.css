@@ -79,6 +79,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-fill: #2B49B3;
 }
 
+.icones_verde:hover{
+    -fx-fill: #7DCAA2;
+}
+
 .icones_branco{
     -fx-fill: #000000;
 }
@@ -94,6 +98,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .pane_boxcliente{
     -fx-border-color: linear-gradient(to right, #1A3384, #2B49B3);
+    -fx-border-width: 3px;
+    -fx-border-radius: 30px 30px 30px 30px;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:30px 30px 30px 30px;
+}
+
+.pane_boxcliente_selecionado{
+    -fx-border-color: #7DCAA2;
     -fx-border-width: 3px;
     -fx-border-radius: 30px 30px 30px 30px;
     -fx-background-color:#FFFFFF;
@@ -295,3 +307,6 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-background-radius: 5px;
     -fx-text-fill: #FFFFFF;
 }
+
+
+

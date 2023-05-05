@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="telaMostraAtendimentos" prefHeight="629.0" prefWidth="845.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaMostraAtendimentos">
+<AnchorPane id="AnchorPane" fx:id="telaMostraAtendimentos" prefHeight="629.0" prefWidth="845.0" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.TelaMostraAtendimentos">
    <children>
       <Label fx:id="lbTituloAtendimento" layoutX="14.0" layoutY="14.0" text="Atendimentos no dia ##" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -28,5 +30,13 @@
             </ScrollPane>
          </children>
       </VBox>
+      <Button layoutX="635.0" layoutY="15.0" mnemonicParsing="false" onAction="#adicionaAtendimento" styleClass="button_verde" text="Adicionar Novo Atendimento">
+         <graphic>
+            <FontAwesomeIconView glyphName="PLUS" styleClass="icone" />
+         </graphic>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -9,7 +9,6 @@ import br.edu.cefsa.model.Cliente;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -140,18 +139,7 @@ public class TelaCalendarioController extends PadraoController {
                 pane.setPrefHeight(rectangleHeight);
                 pane.setOnMouseClicked(mouseEvent -> {
 
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader();
-                        fxmlLoader.setLocation(getClass().getResource("telaMostraAtendimentos.fxml"));
-                        Scene scene = new Scene(fxmlLoader.load());
-                        Stage stage = new Stage();
-                        stage.setTitle("Atendimentos");
-                        stage.setScene(scene);
-                        stage.show();
-
-                    } catch (Exception ex) {
-                        Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    criaEventoCliqueMouse(currentDate);
 
                 });
                 stackPane.getChildren().add(pane);
@@ -166,7 +154,7 @@ public class TelaCalendarioController extends PadraoController {
 
                         List<CalendarioAtendimento> calendarActivities = calendarActivityMap.get(currentDate);
                         if (calendarActivities != null) {
-                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane);
+                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane, currentDate);
                         }
 
                     }
@@ -185,7 +173,7 @@ public class TelaCalendarioController extends PadraoController {
         }
     }
 
-    private void createCalendarActivity(List<CalendarioAtendimento> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane) {
+    private void createCalendarActivity(List<CalendarioAtendimento> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane, int currentDate) {
         VBox calendarActivityBox = new VBox();
         Pane pane = new Pane();
         Label text = new Label("+ Ações");
@@ -201,6 +189,11 @@ public class TelaCalendarioController extends PadraoController {
         calendarActivityBox.setMaxHeight(rectangleHeight * 0.65);
         calendarActivityBox.setSpacing(5);
         calendarActivityBox.setStyle("    -fx-background-color: transparent;");
+        calendarActivityBox.setOnMouseClicked(mouseEvent -> {
+
+            criaEventoCliqueMouse(currentDate);
+
+        });
         stackPane.getChildren().add(calendarActivityBox);
     }
 
@@ -236,4 +229,23 @@ public class TelaCalendarioController extends PadraoController {
 
         return createCalendarMap(calendarActivities);
     }
+
+    private void criaEventoCliqueMouse(int currentDate) {
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("telaMostraAtendimentos.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setTitle("Atendimentos");
+            stage.setScene(scene);
+            stage.show();
+            TelaMostraAtendimentos telaMostraAtendimentos = fxmlLoader.getController();
+            telaMostraAtendimentos.setAtendimento(currentDate, txtMes.getText(), dateFocus.getYear());
+
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="191.0" prefWidth="800.0" styleClass="pane_boxcliente" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.AtendimentoBoxController">
+<AnchorPane id="AnchorPane" fx:id="atendimentoBox" prefHeight="191.0" prefWidth="780.0" styleClass="pane_boxcliente" stylesheets="@estiloPrincipal.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.AtendimentoBoxController">
    <children>
       <Pane layoutX="3.0" prefHeight="45.0" prefWidth="200.0" styleClass="pane_boxcliente_superior" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -19,10 +19,10 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <HBox layoutX="728.0" layoutY="13.0" prefHeight="0.0" prefWidth="16.0" spacing="8.0">
+            <HBox alignment="CENTER" layoutX="708.0" layoutY="15.0" prefHeight="0.0" prefWidth="16.0" spacing="8.0">
                <children>
-                  <FontAwesomeIconView fx:id="iconeEditar" glyphName="EDIT" onMouseClicked="#permiteAtualizar" size="20" styleClass="icones" />
-                  <FontAwesomeIconView fx:id="iconeRemover" glyphName="REMOVE" size="20" styleClass="icones" />
+                  <FontAwesomeIconView fx:id="iconeEditar" boundsType="LOGICAL_VERTICAL_CENTER" glyphName="EDIT" size="20" styleClass="icones" />
+                  <FontAwesomeIconView fx:id="iconeRemover" boundsType="LOGICAL_VERTICAL_CENTER" glyphName="REMOVE" size="20" styleClass="icones" />
                </children>
                <opaqueInsets>
                   <Insets />
@@ -30,9 +30,9 @@
             </HBox>
          </children>
       </Pane>
-      <ComboBox layoutX="14.0" layoutY="70.0" prefHeight="28.0" prefWidth="200.0" />
-      <ComboBox layoutX="14.0" layoutY="124.0" prefHeight="28.0" prefWidth="200.0" />
-      <TextArea fx:id="txtAnotacao" layoutX="240.0" layoutY="70.0" prefHeight="82.0" prefWidth="542.0" />
+      <ComboBox fx:id="cbImovel" layoutX="14.0" layoutY="70.0" prefHeight="28.0" prefWidth="200.0" />
+      <ComboBox fx:id="cbCliente" layoutX="14.0" layoutY="124.0" prefHeight="28.0" prefWidth="200.0" />
+      <TextArea fx:id="txtAnotacao" layoutX="240.0" layoutY="70.0" prefHeight="82.0" prefWidth="526.0" />
       <Label layoutX="14.0" layoutY="52.0" text="Imóvel:" />
       <Label layoutX="13.0" layoutY="102.0" text="Cliente:" />
       <Label layoutX="240.0" layoutY="52.0" text="Anotação:" />
