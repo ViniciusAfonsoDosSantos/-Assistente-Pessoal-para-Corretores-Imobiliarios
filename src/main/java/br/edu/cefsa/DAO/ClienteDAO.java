@@ -8,6 +8,7 @@ import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Cliente;
 import br.edu.cefsa.model.GenericoModel;
 import br.edu.cefsa.model.Parametro;
+import br.edu.cefsa.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,18 +32,18 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         super.setTabela("ASSISTENTECORRETORES.CLIENTE");
         super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.CLIENTE (Nome, CPF, Data_nascimento, Conjuge,Profissao, Telefone, Email, EnderecoResidencial, Estado, Cidade, Bairro, CEP, Anotacoes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.CLIENTE "
-                        + "SET NOME=?,"
-                        + "CPF=? "
-                        + "Data_nascimento=? "
-                        + "Conjuge=? "
-                        + "Profissao=? "
-                        + "Telefone=? "
-                        + "Email=? "
-                        + "EnderecoResidencial=? "
-                        + "Estado=? "
-                        + "Cidade=? "
-                        + "Bairro=? "
-                        + "CEP=? "
+                        + "SET Nome=?,"
+                        + "CPF=?, "
+                        + "Data_nascimento=?, "
+                        + "Conjuge=?, "
+                        + "Profissao=?, "
+                        + "Telefone=?, "
+                        + "Email=?, "
+                        + "EnderecoResidencial=?, "
+                        + "Estado=?, "
+                        + "Cidade=?, "
+                        + "Bairro=?, "
+                        + "CEP=?, "
                         + "Anotacoes=? "
                         + "WHERE CLIENTE_ID = ?");
     }
@@ -50,6 +51,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
     @Override
     protected List preparaParametros(Cliente cliente, boolean update) {
         List parametros = new ArrayList();
+        
         parametros.add(new Parametro(cliente.getNome(), "texto"));
         parametros.add(new Parametro(cliente.getCPF(), "texto"));
         parametros.add(new Parametro(cliente.getDataNascimento(), "data"));
@@ -64,7 +66,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         parametros.add(new Parametro(cliente.getCEP(), "texto"));
         parametros.add(new Parametro(cliente.getAnotacao(),"texto"));
         if(update){
-            parametros.add(new Parametro(String.valueOf(cliente.getID()), "long"));
+            parametros.add(new Parametro(String.valueOf(cliente.getClienteId()), "long"));
         }
         return parametros;
     }
@@ -81,6 +83,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             
             while (result.next()) {
                 clientes.add(new Cliente(
+                        Integer.valueOf(result.getString("CLIENTE_ID")), 
                         result.getString("NOME"), 
                         result.getString("CPF"), 
                         result.getDate("DATA_NASCIMENTO").toLocalDate(), 
@@ -155,11 +158,41 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
     public void remover(C e) throws PersistenciaException {
         String sql = "DELETE FROM ASSISTENTECORRETORES.Cliente WHERE CLIENTE_ID= ? ";
         List parametro = new ArrayList();
-        parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
+        parametro.add(new Parametro(Integer.toString(e.getClienteId()), "long"));
         try {
             HelperDAO.executaQuery(sql,parametro);
         } catch (ParseException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+    public Boolean vericaId(Cliente cliente) throws PersistenciaException, SQLException{
+        String sql = "SELECT * FROM ASSISTENTECORRETORES.Cliente WHERE CLIENTE_ID = ? ";
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            try{
+                pStatement.setString(1, Integer.toString(cliente.getClienteId()));  
+            }
+            catch(Exception ex){
+                return true;
+            }
+            ResultSet result = pStatement.executeQuery();
+            if(result == null){
+                return true;
+            }
+            else
+                return false;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível conectar à base de dados!");
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            throw new PersistenciaException("Não foi possível enviar o comando para a base de dados!");
+        } finally {
+                connection.close();
         }
     }
 }

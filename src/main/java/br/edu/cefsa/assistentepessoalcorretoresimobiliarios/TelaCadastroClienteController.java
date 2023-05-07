@@ -38,7 +38,7 @@ public class TelaCadastroClienteController extends PadraoController {
 
     @FXML
     private Label lbTituloImovel;
-    
+
     @FXML
     private FontAwesomeIconView iconeADM;
 
@@ -120,7 +120,7 @@ public class TelaCadastroClienteController extends PadraoController {
         txtEstado.getItems().setAll(listaEnum);
         //txtEstado.getSelectionModel().select(0);
 
-        if (clienteSelecionado.getCliente() != null){
+        if (clienteSelecionado.getCliente() != null) {
 
             lbTituloCliente.setText("Atualizar Cliente");
             lbTituloImovel.setText("Atualizar Imóvel Procurado");
@@ -136,8 +136,9 @@ public class TelaCadastroClienteController extends PadraoController {
             txtEndereco.setText(clienteSelecionado.getCliente().getEnderecoResidencial());
             txtEstado.setValue(EnumEstados.valueOf(clienteSelecionado.getCliente().getEstado()));
             txtBairro.setText(clienteSelecionado.getCliente().getBairro());
-        }
-        else{
+            txtCPF.setDisable(true);
+
+        } else {
             lbTituloCliente.setText("Cadastrar Cliente");
             lbTituloImovel.setText("Imóvel Procurado");
         }
@@ -148,10 +149,19 @@ public class TelaCadastroClienteController extends PadraoController {
 
         ClienteDAO DAO = new ClienteDAO();
         Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
-                txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(),
-                txtEndereco.getText(), txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+                txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
+                txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+
         try {
-            DAO.inserir(cliente);
+            if (clienteSelecionado.getCliente() != null) {
+                Cliente clienteAlterar;
+                clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
+                        txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(),txtCEP.getText(), txtEndereco.getText(),
+                        txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+                DAO.alterar(clienteAlterar);
+            } else {
+                DAO.inserir(cliente);
+            }
             redirecionarTelaPrincipal();
         } catch (PersistenciaException ex) {
             Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
@@ -175,6 +185,5 @@ public class TelaCadastroClienteController extends PadraoController {
         txtCidade.setText(cliente.getCidade());
         
     }
-*/
-     
+     */
 }
