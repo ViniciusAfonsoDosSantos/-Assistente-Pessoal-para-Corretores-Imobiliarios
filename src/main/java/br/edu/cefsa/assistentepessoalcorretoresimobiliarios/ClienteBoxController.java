@@ -106,8 +106,7 @@ public class ClienteBoxController {
         if (result.get() == ButtonType.OK) {
             ClienteDAO dao = new ClienteDAO();
             dao.remover(cliente);
-            //FXMLLoader fxmlLoader = new FXMLLoader();
-            //fxmlLoader.setLocation(getClass().getResource("telaPrincipal.fxml"));
+            App.setRoot("telaPrincipal");
             System.out.println("cliente => " + cliente);
         }
     }
