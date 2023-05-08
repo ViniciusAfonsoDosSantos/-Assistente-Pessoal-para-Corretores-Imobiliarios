@@ -108,6 +108,69 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private TextField txtTelefone;
 
+     @FXML
+    private Label lbErroBairro;
+
+    @FXML
+    private Label lbErroBairros;
+
+    @FXML
+    private Label lbErroCEP;
+
+    @FXML
+    private Label lbErroCPF;
+
+    @FXML
+    private Label lbErroCidade;
+
+    @FXML
+    private Label lbErroCondicoes;
+
+    @FXML
+    private Label lbErroConjuge;
+
+    @FXML
+    private Label lbErroDataNascimento;
+
+    @FXML
+    private Label lbErroEmail;
+
+    @FXML
+    private Label lbErroEndereço;
+
+    @FXML
+    private Label lbErroEstado;
+
+    @FXML
+    private Label lbErroFaixaPreco;
+
+    @FXML
+    private Label lbErroMetragem;
+
+    @FXML
+    private Label lbErroNome;
+
+    @FXML
+    private Label lbErroNumeroDormitorios;
+
+    @FXML
+    private Label lbErroNumeroVagas;
+
+    @FXML
+    private Label lbErroPara;
+
+    @FXML
+    private Label lbErroPrazoEntrega;
+
+    @FXML
+    private Label lbErroProfissao;
+
+    @FXML
+    private Label lbErroTelefone;
+
+    @FXML
+    private Label lbErroTipo;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
