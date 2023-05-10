@@ -11,8 +11,11 @@ import br.edu.cefsa.model.Cliente;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +29,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
+import utils.ValidaDadosUtils;
 
 /**
  *
@@ -108,7 +112,7 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private TextField txtTelefone;
 
-     @FXML
+    @FXML
     private Label lbErroBairro;
 
     @FXML
@@ -210,25 +214,30 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private void salvarCliente() throws IOException, SQLException, PersistenciaException, ParseException {
 
-        ClienteDAO DAO = new ClienteDAO();
-        Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
-                txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
-                txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+        int status = ValidaCampos();
 
-        try {
-            if (clienteSelecionado.getCliente() != null) {
-                Cliente clienteAlterar;
-                clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
-                        txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(),txtCEP.getText(), txtEndereco.getText(),
-                        txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
-                DAO.alterar(clienteAlterar);
-            } else {
-                DAO.inserir(cliente);
+        if (status != 1) {
+            ClienteDAO DAO = new ClienteDAO();
+            Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
+                    txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
+                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+
+            try {
+                if (clienteSelecionado.getCliente() != null) {
+                    Cliente clienteAlterar;
+                    clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
+                            txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), txtEndereco.getText(),
+                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+                    DAO.alterar(clienteAlterar);
+                } else {
+                    DAO.inserir(cliente);
+                }
+                redirecionarTelaPrincipal();
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            redirecionarTelaPrincipal();
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /*
@@ -249,4 +258,91 @@ public class TelaCadastroClienteController extends PadraoController {
         
     }
      */
+    @FXML
+    private int ValidaCampos() {
+        LocalDate dataAtual = LocalDate.now();
+        Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
+        int idade = periodo.getYears();
+        int statusFinal = 0;
+        int status = validaCamposEmBranco();
+        if (status == 1) {
+            return status;
+        }
+        if (!ValidaDadosUtils.VerificaEmail(txtEmail.getText())) {
+            lbErroEmail.setText("Email no Formato Incorreto");
+            statusFinal++;
+        }
+        if (!ValidaDadosUtils.VerificaCPF(txtCPF.getText())) {
+            lbErroCPF.setText("CPF No Formato Incorreto");
+            statusFinal++;
+        }
+        if (!ValidaDadosUtils.VerificaPhone(txtTelefone.getText())) {
+            lbErroTelefone.setText("Celular no Formato Incorreto");
+            statusFinal++;
+        }
+        if (!ValidaDadosUtils.VerificaCEP(txtCEP.getText())) {
+            lbErroCEP.setText("CEP no Formato incorreto");
+            statusFinal++;
+        }
+        if ( idade < 18) {
+            lbErroDataNascimento.setText("Clientes menor de idade");
+            statusFinal++;
+        }
+
+        return statusFinal;
+    }
+
+    private int validaCamposEmBranco() {
+        int status = 0;
+
+        if (!ValidaDadosUtils.ValidaTexto(txtNome.getText())) {
+            lbErroNome.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCPF.getText())) {
+            lbErroCPF.setText("Dado não Preenchido");
+            status++;
+        }
+        if (mskDataNascimento.getValue() == null) {
+            lbErroDataNascimento.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtProfissao.getText())) {
+            lbErroProfissao.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtConjuge.getText())) {
+            lbErroConjuge.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtTelefone.getText())) {
+            lbErroTelefone.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtEmail.getText())) {
+            lbErroEmail.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtEndereco.getText())) {
+            lbErroEndereço.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCEP.getText())) {
+            lbErroCEP.setText("Dado não Preenchido");
+            status++;
+        }
+        if (txtEstado.getValue() == null) {
+            lbErroEstado.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCidade.getText())) {
+            lbErroCidade.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtBairro.getText())) {
+            lbErroBairro.setText("Dado não Preenchido");
+            status++;
+        }
+        return status;
+    }
 }
