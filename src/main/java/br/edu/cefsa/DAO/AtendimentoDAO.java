@@ -11,6 +11,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -55,8 +58,9 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             PreparedStatement pStatement = connection.prepareStatement(sql);
             ResultSet result = pStatement.executeQuery();
             while (result.next()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 atendimentos.add(new Atendimento(
-                        result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
+                        LocalDateTime.parse(result.getDate("DATA_ATENDIMENTO").toString(), formatter), 
                         result.getString("ANOTACAO_ATENDIMENTO"), 
                         result.getInt("CLIENTE_ID"),
                         result.getInt("IMOVEL_ID")
@@ -99,8 +103,9 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             ResultSet result = pStatement.executeQuery();
             
             if (result.next()) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 return new Atendimento(
-                        result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
+                        LocalDateTime.parse(result.getDate("DATA_ATENDIMENTO").toString(), formatter), 
                         result.getString("ANOTACAO_ATENDIMENTO"), 
                         result.getInt("CLIENTE_ID"),
                         result.getInt("IMOVEL_ID"));
