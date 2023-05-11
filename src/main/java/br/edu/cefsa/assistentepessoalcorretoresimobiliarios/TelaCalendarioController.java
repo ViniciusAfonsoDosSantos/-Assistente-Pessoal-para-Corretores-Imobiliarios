@@ -4,18 +4,14 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import br.edu.cefsa.model.CalendarioAtendimento;
-import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.DAO.AtendimentoDAO;
+import br.edu.cefsa.exception.PersistenciaException;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -87,93 +83,99 @@ public class TelaCalendarioController extends PadraoController {
     @FXML
     private void desenharCalendario() {
 
-        txtAno.setText(String.valueOf(dateFocus.getYear()));
-        txtMes.setText(String.valueOf(dateFocus.getMonth().getDisplayName(TextStyle.FULL, new Locale("pt", "BR"))));
+        try {
+            txtAno.setText(String.valueOf(dateFocus.getYear()));
+            txtMes.setText(String.valueOf(dateFocus.getMonth().getDisplayName(TextStyle.FULL, new Locale("pt", "BR"))));
 
-        double calendarWidth = calendar.getPrefWidth();
-        double calendarHeight = calendar.getPrefHeight();
-        double strokeWidth = 1.5;
-        double spacingH = calendar.getHgap();
-        double spacingV = calendar.getVgap();
+            double calendarWidth = calendar.getPrefWidth();
+            double calendarHeight = calendar.getPrefHeight();
+            double strokeWidth = 1.5;
+            double spacingH = calendar.getHgap();
+            double spacingV = calendar.getVgap();
 
-        //List of activities for a given month
-        Map<Integer, List<CalendarioAtendimento>> calendarActivityMap = getCalendarActivitiesMonth(dateFocus);
+            AtendimentoDAO dao = new AtendimentoDAO();
+           
+            int monthMaxDate = dateFocus.getMonth().maxLength();
+            //Check for leap year
+            if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
+                monthMaxDate = 28;
+            }
+            int dateOffset = LocalDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1, 0, 0, 0, 0).getDayOfWeek().getValue();
 
-        int monthMaxDate = dateFocus.getMonth().maxLength();
-        //Check for leap year
-        if (dateFocus.getYear() % 4 != 0 && monthMaxDate == 29) {
-            monthMaxDate = 28;
-        }
-        int dateOffset = LocalDateTime.of(dateFocus.getYear(), dateFocus.getMonthValue(), 1, 0, 0, 0, 0).getDayOfWeek().getValue();
+            for (int i = 0; i < 6; i++) {
+                for (int j = 0; j < 7; j++) {
+                    StackPane stackPane = new StackPane();
+                    Pane pane = new Pane();
 
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 7; j++) {
-                StackPane stackPane = new StackPane();
-                Pane pane = new Pane();
-
-                int calculatedDate = (j + 1) + (7 * i);
-                int currentDate = calculatedDate - dateOffset;
-                if (calculatedDate > dateOffset && currentDate <= monthMaxDate) {
-                    pane.setStyle(
-                            "-fx-border-color: linear-gradient(to right, #1A3384, #2B49B3);\n"
-                            + "    -fx-border-width: 1.5px;\n"
-                            + "    -fx-border-radius: 30px 30px 30px 30px;\n"
-                            + "    -fx-background-color:#FFFFFF;\n"
-                            + "    -fx-background-radius:30px 30px 30px 30px;"
-                    );
-                } else {
-
-                    pane.setStyle(
-                            "-fx-border-color: transparent ;\n"
-                            + "    -fx-border-width: 1.5px;\n"
-                            + "    -fx-border-radius: 30px 30px 30px 30px;\n"
-                            + "    -fx-background-color: transparent;\n"
-                            + "    -fx-background-radius:30px 30px 30px 30px;"
-                    );
-
-                }
-
-                double rectangleWidth = (calendarWidth / 7) - strokeWidth - spacingH;
-                pane.setPrefWidth(rectangleWidth);
-                double rectangleHeight = (calendarHeight / 6) - strokeWidth - spacingV;
-                pane.setPrefHeight(rectangleHeight);
-                pane.setOnMouseClicked(mouseEvent -> {
-
-                    criaEventoCliqueMouse(currentDate);
-
-                });
-                stackPane.getChildren().add(pane);
-
-                if (calculatedDate > dateOffset) {
-
-                    if (currentDate <= monthMaxDate) {
-                        Text date = new Text(String.valueOf(currentDate));
-                        double textTranslationY = -(rectangleHeight / 2) * 0.75;
-                        date.setTranslateY(textTranslationY);
-                        stackPane.getChildren().add(date);
-
-                        List<CalendarioAtendimento> calendarActivities = calendarActivityMap.get(currentDate);
-                        if (calendarActivities != null) {
-                            createCalendarActivity(calendarActivities, rectangleHeight, rectangleWidth, stackPane, currentDate);
-                        }
-
-                    }
-                    if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate) {
+                    int calculatedDate = (j + 1) + (7 * i);
+                    int currentDate = calculatedDate - dateOffset;
+                    if (calculatedDate > dateOffset && currentDate <= monthMaxDate) {
                         pane.setStyle(
-                                "-fx-border-color: #7DCAA2;\n"
+                                "-fx-border-color: linear-gradient(to right, #1A3384, #2B49B3);\n"
                                 + "    -fx-border-width: 1.5px;\n"
                                 + "    -fx-border-radius: 30px 30px 30px 30px;\n"
                                 + "    -fx-background-color:#FFFFFF;\n"
                                 + "    -fx-background-radius:30px 30px 30px 30px;"
                         );
+                    } else {
+
+                        pane.setStyle(
+                                "-fx-border-color: transparent ;\n"
+                                + "    -fx-border-width: 1.5px;\n"
+                                + "    -fx-border-radius: 30px 30px 30px 30px;\n"
+                                + "    -fx-background-color: transparent;\n"
+                                + "    -fx-background-radius:30px 30px 30px 30px;"
+                        );
+
                     }
+
+                    double rectangleWidth = (calendarWidth / 7) - strokeWidth - spacingH;
+                    pane.setPrefWidth(rectangleWidth);
+                    double rectangleHeight = (calendarHeight / 6) - strokeWidth - spacingV;
+                    pane.setPrefHeight(rectangleHeight);
+                    pane.setOnMouseClicked(mouseEvent -> {
+
+                        criaEventoCliqueMouse(currentDate);
+
+                    });
+                    stackPane.getChildren().add(pane);
+
+                    if (calculatedDate > dateOffset) {
+
+                        if (currentDate <= monthMaxDate) {
+                            Text date = new Text(String.valueOf(currentDate));
+                            double textTranslationY = -(rectangleHeight / 2) * 0.75;
+                            date.setTranslateY(textTranslationY);
+                            stackPane.getChildren().add(date);
+
+                            LocalDate data = LocalDate.of( dateFocus.getYear(), dateFocus.getMonth(), currentDate);
+                            
+                            if(!dao.listarPorData(data).isEmpty()) {
+                                createCalendarActivity(rectangleHeight, rectangleWidth, stackPane, currentDate);
+                            }
+
+                        }
+                        if (today.getYear() == dateFocus.getYear() && today.getMonth() == dateFocus.getMonth() && today.getDayOfMonth() == currentDate) {
+                            pane.setStyle(
+                                    "-fx-border-color: #7DCAA2;\n"
+                                    + "    -fx-border-width: 1.5px;\n"
+                                    + "    -fx-border-radius: 30px 30px 30px 30px;\n"
+                                    + "    -fx-background-color:#FFFFFF;\n"
+                                    + "    -fx-background-radius:30px 30px 30px 30px;"
+                            );
+                        }
+                    }
+                    calendar.getChildren().add(stackPane);
                 }
-                calendar.getChildren().add(stackPane);
+
             }
+
+        } catch (PersistenciaException ex){
+            Logger.getLogger(TelaCalendarioController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    private void createCalendarActivity(List<CalendarioAtendimento> calendarActivities, double rectangleHeight, double rectangleWidth, StackPane stackPane, int currentDate) {
+    private void createCalendarActivity( double rectangleHeight, double rectangleWidth, StackPane stackPane, int currentDate) {
         VBox calendarActivityBox = new VBox();
         Pane pane = new Pane();
         Label text = new Label("+ Ações");
@@ -197,39 +199,7 @@ public class TelaCalendarioController extends PadraoController {
         stackPane.getChildren().add(calendarActivityBox);
     }
 
-    private Map<Integer, List<CalendarioAtendimento>> createCalendarMap(List<CalendarioAtendimento> calendarActivities) {
-        Map<Integer, List<CalendarioAtendimento>> calendarActivityMap = new HashMap<>();
-
-        for (CalendarioAtendimento activity : calendarActivities) {
-            int activityDate = activity.getData().getDayOfMonth();
-            if (!calendarActivityMap.containsKey(activityDate)) {
-                calendarActivityMap.put(activityDate, List.of(activity));
-            } else {
-                List<CalendarioAtendimento> OldListByDate = calendarActivityMap.get(activityDate);
-
-                List<CalendarioAtendimento> newList = new ArrayList<>(OldListByDate);
-                newList.add(activity);
-                calendarActivityMap.put(activityDate, newList);
-            }
-        }
-        return calendarActivityMap;
-    }
-
-    private Map<Integer, List<CalendarioAtendimento>> getCalendarActivitiesMonth(LocalDateTime dateFocus) {
-        List<CalendarioAtendimento> calendarActivities = new ArrayList<>();
-        int year = dateFocus.getYear();
-        int month = dateFocus.getMonth().getValue();
-
-        Cliente cliente = new Cliente("Testeee");
-        Random random = new Random();
-        for (int i = 0; i < 10; i++) {
-            LocalDateTime time = LocalDateTime.of(year, month, random.nextInt(27) + 1, 16, 0, 0, 0);
-            calendarActivities.add(new CalendarioAtendimento(time, "Anotação", cliente));
-        }
-
-        return createCalendarMap(calendarActivities);
-    }
-
+   
     private void criaEventoCliqueMouse(int currentDate) {
 
         try {
@@ -241,7 +211,7 @@ public class TelaCalendarioController extends PadraoController {
             stage.setScene(scene);
             stage.show();
             TelaMostraAtendimentos telaMostraAtendimentos = fxmlLoader.getController();
-            telaMostraAtendimentos.setAtendimento(currentDate, txtMes.getText(), dateFocus.getYear());
+            telaMostraAtendimentos.setAtendimento(currentDate, dateFocus.getMonth(), dateFocus.getYear());
 
         } catch (Exception ex) {
             Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);

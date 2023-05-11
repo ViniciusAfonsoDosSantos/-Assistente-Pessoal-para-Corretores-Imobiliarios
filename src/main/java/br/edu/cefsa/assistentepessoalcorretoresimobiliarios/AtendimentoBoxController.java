@@ -4,9 +4,17 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import br.edu.cefsa.model.CalendarioAtendimento;
+import br.edu.cefsa.DAO.AtendimentoDAO;
+import br.edu.cefsa.DAO.ClienteDAO;
+import br.edu.cefsa.exception.PersistenciaException;
+import br.edu.cefsa.model.Atendimento;
+import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.model.GenericComboModel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -43,11 +51,12 @@ public class AtendimentoBoxController {
     @FXML
     private ComboBox<?> cbImovel;
 
-    public void setData(CalendarioAtendimento atendimento) throws IOException {
+    public void setData(Atendimento atendimento) throws IOException {
 
-        txtAnotacao.setText(atendimento.getAnotacao());
-        atendimentoTitulo.setText("Atendimento ##");
-        cbCliente.setValue(atendimento.getCliente().getNome());
+        ClienteDAO dao = new ClienteDAO();
+        txtAnotacao.setText(atendimento.getAnotacoes());
+        atendimentoTitulo.setText("Atendimento #");
+        //cbCliente.setValue(atendimento.getCliente().getNome());
         txtAnotacao.setDisable(true);
         cbCliente.setDisable(true);
         cbImovel.setDisable(true);
@@ -61,7 +70,7 @@ public class AtendimentoBoxController {
         });
     }
 
-    public void setNovoAtendimento() throws IOException {
+    public void setNovoAtendimento(LocalDate data) throws IOException {
 
         atendimentoTitulo.setText("Atendimento ##");
         txtAnotacao.setDisable(false);
@@ -74,11 +83,27 @@ public class AtendimentoBoxController {
 
             try {
                 permiteSalvar();
+                inserirOuAtualizar(data);
             } catch (Exception ex) {
                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         });
+    }
+
+    @FXML
+    private void inserirOuAtualizar(LocalDate data) throws IOException {
+
+        try {
+            Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), 1, 1);
+            AtendimentoDAO dao = new AtendimentoDAO();
+            dao.inserir(atendimento);
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     @FXML

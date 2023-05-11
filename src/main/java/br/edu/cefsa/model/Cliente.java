@@ -11,11 +11,12 @@ import java.time.LocalDateTime;
  *
  * @author gabri
  */
-public class Cliente extends GenericoModel{
+public class Cliente extends GenericoModel {
+
     private Integer ClienteId;
     private String Nome;
     private String CPF;
-    private LocalDate DataNascimento; 
+    private LocalDate DataNascimento;
     private String Conjuge;
     private String Profissao;
     private String Telefone;
@@ -50,9 +51,8 @@ public class Cliente extends GenericoModel{
     public void setAnotacao(String Anotacao) {
         this.Anotacao = Anotacao;
     }
-    
-    //falta dados de anotação da modal.
 
+    //falta dados de anotação da modal.
     public String getNome() {
         return Nome;
     }
@@ -124,7 +124,7 @@ public class Cliente extends GenericoModel{
     public void setEnderecoResidencial(String EnderecoResidencial) {
         this.EnderecoResidencial = EnderecoResidencial;
     }
-    
+
     public String getBairro() {
         return Bairro;
     }
@@ -132,11 +132,11 @@ public class Cliente extends GenericoModel{
     public void setBairro(String Bairro) {
         this.Bairro = Bairro;
     }
-    
-    public Cliente(String Nome){
-         this.Nome = Nome;
+
+    public Cliente(String Nome) {
+        this.Nome = Nome;
     }
-    
+
     public int getClienteId() {
         return ClienteId;
     }
@@ -145,24 +145,8 @@ public class Cliente extends GenericoModel{
         this.ClienteId = ClienteId;
     }
 
-    public Cliente(Integer ClienteId,String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
+    public Cliente(Integer ClienteId, String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
         this.ClienteId = ClienteId;
-        this.Nome = Nome;
-        this.CPF = CPF;
-        this.DataNascimento = DataNascimento;
-        this.Conjuge = Conjuge;
-        this.Profissao = Profissao;
-        this.Telefone = Telefone;
-        this.Email = Email;
-        this.CEP = CEP;        
-        this.EnderecoResidencial = EnderecoResidencial;
-        this.Estado = Estado;
-        this.Cidade = Cidade;
-        this.Bairro = Bairro;
-        this.Anotacao = Anotacao;
-    }   
-    
-        public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
         this.Nome = Nome;
         this.CPF = CPF;
         this.DataNascimento = DataNascimento;
@@ -177,5 +161,25 @@ public class Cliente extends GenericoModel{
         this.Bairro = Bairro;
         this.Anotacao = Anotacao;
     }
-    
+
+    public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
+        this.Nome = Nome;
+        this.CPF = CPF;
+        this.DataNascimento = DataNascimento;
+        this.Conjuge = Conjuge;
+        this.Profissao = Profissao;
+        this.Telefone = Telefone;
+        this.Email = Email;
+        this.CEP = CEP;
+        this.EnderecoResidencial = EnderecoResidencial;
+        this.Estado = Estado;
+        this.Cidade = Cidade;
+        this.Bairro = Bairro;
+        this.Anotacao = Anotacao;
+    }
+
+    @Override
+    public String toString() {
+        return this.Nome;
+    }
 }

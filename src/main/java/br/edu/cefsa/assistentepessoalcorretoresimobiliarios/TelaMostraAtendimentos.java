@@ -4,14 +4,15 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import br.edu.cefsa.model.CalendarioAtendimento;
-import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.DAO.AtendimentoDAO;
+import br.edu.cefsa.model.Atendimento;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.time.Month;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,17 +34,19 @@ public class TelaMostraAtendimentos implements Initializable {
     @FXML
     private GridPane paneMostraAtendimentos;
 
-    private List<CalendarioAtendimento> atendimentos;
+    private List<Atendimento> atendimentos;
+    
+    private LocalDate data;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //TESTEEEEEE
     }
 
-    public void setAtendimento(Integer diaAtendimento, String mes, Integer ano) throws IOException {
+    public void setAtendimento(Integer diaAtendimento, Month mes, Integer ano) throws IOException {
 
-        lbTituloAtendimento.setText("Atendimentos do dia: " + diaAtendimento.toString() + " de " + mes + " de " + ano.toString());
-
+        lbTituloAtendimento.setText("Atendimentos do dia: " + diaAtendimento.toString() + " de " + String.valueOf(mes.getDisplayName(TextStyle.FULL, new Locale("pt", "BR"))) + " de " + ano.toString());
+        data = LocalDate.of(ano, mes, diaAtendimento);
         criaAtendimentos(0, 1);
     }
 
@@ -54,7 +57,7 @@ public class TelaMostraAtendimentos implements Initializable {
         fxmlLoader.setLocation(getClass().getResource("atendimentoBox.fxml"));
         AnchorPane atendimentoBox = fxmlLoader.load();
         AtendimentoBoxController atendimentoBoxController = fxmlLoader.getController();
-        atendimentoBoxController.setNovoAtendimento();
+        atendimentoBoxController.setNovoAtendimento(data);
         paneMostraAtendimentos.add(atendimentoBox, 0, 1);
         GridPane.setMargin(atendimentoBox, new Insets(10));
         criaAtendimentos(0, 2);
@@ -65,9 +68,10 @@ public class TelaMostraAtendimentos implements Initializable {
 
         try {
 
-            atendimentos = new ArrayList<>(adicionaAtendimentos());
+            AtendimentoDAO dao = new AtendimentoDAO();
+            atendimentos = dao.listarPorData(data);
 
-            for (CalendarioAtendimento atendimento : atendimentos) {
+            for (Atendimento atendimento : atendimentos) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("atendimentoBox.fxml"));
@@ -90,23 +94,5 @@ public class TelaMostraAtendimentos implements Initializable {
 
     }
 
-    private List<CalendarioAtendimento> adicionaAtendimentos() {
-
-        List<CalendarioAtendimento> novosAtendimentos = new ArrayList<CalendarioAtendimento>();
-
-        LocalDateTime zone = LocalDateTime.parse("2019-03-28T10:15:30");
-        Cliente cliente = new Cliente("Gabriel");
-        CalendarioAtendimento atendimento = new CalendarioAtendimento(zone, "Testando textos muito longos, só que não!!!", cliente);
-
-        novosAtendimentos.add(atendimento);
-
-        LocalDateTime zone2 = LocalDateTime.parse("2019-03-28T10:15:30");
-        Cliente cliente2 = new Cliente("Vinicius");
-        CalendarioAtendimento atendimento2 = new CalendarioAtendimento(zone2, "Testando textos muito longos, só que não!!!", cliente2);
-
-        novosAtendimentos.add(atendimento2);
-
-        return novosAtendimentos;
-    }
-
+    
 }

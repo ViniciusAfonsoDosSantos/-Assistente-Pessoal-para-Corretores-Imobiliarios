@@ -12,9 +12,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,9 +59,8 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             PreparedStatement pStatement = connection.prepareStatement(sql);
             ResultSet result = pStatement.executeQuery();
             while (result.next()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 atendimentos.add(new Atendimento(
-                        LocalDateTime.parse(result.getDate("DATA_ATENDIMENTO").toString(), formatter), 
+                        result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
                         result.getString("ANOTACAO_ATENDIMENTO"), 
                         result.getInt("CLIENTE_ID"),
                         result.getInt("IMOVEL_ID")
@@ -103,9 +103,8 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             ResultSet result = pStatement.executeQuery();
             
             if (result.next()) {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
                 return new Atendimento(
-                        LocalDateTime.parse(result.getDate("DATA_ATENDIMENTO").toString(), formatter), 
+                        result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
                         result.getString("ANOTACAO_ATENDIMENTO"), 
                         result.getInt("CLIENTE_ID"),
                         result.getInt("IMOVEL_ID"));
@@ -125,5 +124,38 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             }
         }
         return null;
+    }
+    
+    public List listarPorData(LocalDate e) throws PersistenciaException {
+        List<Atendimento> atendimentos = new ArrayList<Atendimento>();
+        String sql = "SELECT * FROM ASSISTENTECORRETORES.Atendimento WHERE DATA_ATENDIMENTO=?";
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            Date date = java.sql.Date.valueOf(e);
+            java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+            pStatement.setDate(1, sqlDate);
+            ResultSet result = pStatement.executeQuery();
+            while (result.next()) {
+                atendimentos.add(new Atendimento(
+                        result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
+                        result.getString("ANOTACAO_ATENDIMENTO"), 
+                        result.getInt("CLIENTE_ID"),
+                        result.getInt("IMOVEL_ID")
+                        ));
+            }
+            } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return atendimentos;
     }
 }

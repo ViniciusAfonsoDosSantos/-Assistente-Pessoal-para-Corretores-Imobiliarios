@@ -4,6 +4,7 @@
  */
 package br.edu.cefsa.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -11,25 +12,25 @@ import java.time.LocalDateTime;
  * @author gabri
  */
 public class Atendimento extends GenericoModel{
-    private LocalDateTime dataAtendimento;
+    private LocalDate dataAtendimento;
     private String anotacoes;
     private int clienteID;
     private int imovelID;
     private Cliente cliente;
     private Imovel imovel;
 
-    public Atendimento(LocalDateTime dataAtendimento, String anotacoes, int clienteID, int imovelID) {
+    public Atendimento(LocalDate dataAtendimento, String anotacoes, int clienteID, int imovelID) {
         this.dataAtendimento = dataAtendimento;
         this.anotacoes = anotacoes;
         this.clienteID = clienteID;
         this.imovelID = imovelID;
     }
 
-    public LocalDateTime getDataAtendimento() {
+    public LocalDate getDataAtendimento() {
         return dataAtendimento;
     }
 
-    public void setDataAtendimento(LocalDateTime dataAtendimento) {
+    public void setDataAtendimento(LocalDate dataAtendimento) {
         this.dataAtendimento = dataAtendimento;
     }
 
