@@ -8,6 +8,7 @@ import br.edu.cefsa.DAO.ClienteDAO;
 import br.edu.cefsa.enumeradores.EnumEstados;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.model.ImovelProcuradoCliente;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
@@ -220,14 +221,14 @@ public class TelaCadastroClienteController extends PadraoController {
             ClienteDAO DAO = new ClienteDAO();
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                     txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
-                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
 
             try {
                 if (clienteSelecionado.getCliente() != null) {
                     Cliente clienteAlterar;
                     clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                             txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), txtEndereco.getText(),
-                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), "Nao tem Anotacao");
+                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
                     DAO.alterar(clienteAlterar);
                 } else {
                     DAO.inserir(cliente);

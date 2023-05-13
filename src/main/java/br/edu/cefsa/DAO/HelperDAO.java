@@ -38,6 +38,9 @@ public class HelperDAO {
                 if("boolean".equals(pTipo)){
                     statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
                 }
+                if("inteiro".equals(pTipo)){
+                    statement.setInt(i+1, Integer.parseInt(pValor));
+                }
                 if("data".equals(pTipo)){  
                     statement.setDate(i+1, java.sql.Date.valueOf(pData));
                 }

@@ -24,6 +24,9 @@ public class Cliente extends GenericoModel {
     private String CEP;
     private String EnderecoResidencial;
     private String Estado; //dado vai vir de um selectbox
+    private String Cidade;
+    private String Bairro;
+    private ImovelProcuradoCliente imovelProcuradoCliente;
 
     public String getEstado() {
         return Estado;
@@ -40,18 +43,7 @@ public class Cliente extends GenericoModel {
     public void setCidade(String Cidade) {
         this.Cidade = Cidade;
     }
-    private String Cidade;
-    private String Bairro;
-    private String Anotacao;
-
-    public String getAnotacao() {
-        return Anotacao;
-    }
-
-    public void setAnotacao(String Anotacao) {
-        this.Anotacao = Anotacao;
-    }
-
+    
     //falta dados de anotação da modal.
     public String getNome() {
         return Nome;
@@ -132,7 +124,7 @@ public class Cliente extends GenericoModel {
     public void setBairro(String Bairro) {
         this.Bairro = Bairro;
     }
-
+    
     public Cliente(String Nome) {
         this.Nome = Nome;
     }
@@ -144,8 +136,16 @@ public class Cliente extends GenericoModel {
     public void setClienteId(Integer ClienteId) {
         this.ClienteId = ClienteId;
     }
+    
+    public ImovelProcuradoCliente getImovelProcuradoCliente() {
+        return imovelProcuradoCliente;
+    }
 
-    public Cliente(Integer ClienteId, String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
+    public void setImovelProcuradoCliente(ImovelProcuradoCliente imovelProcuradoCliente) {
+        this.imovelProcuradoCliente = imovelProcuradoCliente;
+    }
+    
+    public Cliente(Integer ClienteId, String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, ImovelProcuradoCliente imovelProcuradoCliente) {
         this.ClienteId = ClienteId;
         this.Nome = Nome;
         this.CPF = CPF;
@@ -159,10 +159,10 @@ public class Cliente extends GenericoModel {
         this.Estado = Estado;
         this.Cidade = Cidade;
         this.Bairro = Bairro;
-        this.Anotacao = Anotacao;
+        this.imovelProcuradoCliente = imovelProcuradoCliente;
     }
 
-    public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, String Anotacao) {
+    public Cliente(String Nome, String CPF, LocalDate DataNascimento, String Conjuge, String Profissao, String Telefone, String Email, String CEP, String EnderecoResidencial, String Estado, String Cidade, String Bairro, ImovelProcuradoCliente imovelProcuradoCliente) {
         this.Nome = Nome;
         this.CPF = CPF;
         this.DataNascimento = DataNascimento;
@@ -175,7 +175,7 @@ public class Cliente extends GenericoModel {
         this.Estado = Estado;
         this.Cidade = Cidade;
         this.Bairro = Bairro;
-        this.Anotacao = Anotacao;
+        this.imovelProcuradoCliente = imovelProcuradoCliente;
     }
 
     @Override
