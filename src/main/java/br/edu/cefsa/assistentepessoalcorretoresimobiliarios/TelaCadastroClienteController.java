@@ -216,19 +216,23 @@ public class TelaCadastroClienteController extends PadraoController {
     private void salvarCliente() throws IOException, SQLException, PersistenciaException, ParseException {
 
         int status = ValidaCampos();
-
-        if (status != 1) {
+        ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente();
+        imovelProcurado.numDorms = 0;
+        imovelProcurado.numVagas = 0;
+        imovelProcurado.metragem = 0;
+        if (status == 0) {
+            
             ClienteDAO DAO = new ClienteDAO();
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                     txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
-                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
+                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
 
             try {
                 if (clienteSelecionado.getCliente() != null) {
                     Cliente clienteAlterar;
                     clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                             txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), txtEndereco.getText(),
-                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
+                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
                     DAO.alterar(clienteAlterar);
                 } else {
                     DAO.inserir(cliente);
@@ -262,8 +266,8 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private int ValidaCampos() {
         LocalDate dataAtual = LocalDate.now();
-        Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
-        int idade = periodo.getYears();
+        //Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
+        //int idade = periodo.getYears();
         int statusFinal = 0;
         int status = validaCamposEmBranco();
         if (status == 1) {
@@ -285,10 +289,10 @@ public class TelaCadastroClienteController extends PadraoController {
             lbErroCEP.setText("CEP no Formato incorreto");
             statusFinal++;
         }
-        if ( idade < 18) {
+        /*if ( idade < 18) {
             lbErroDataNascimento.setText("Clientes menor de idade");
             statusFinal++;
-        }
+        }*/
 
         return statusFinal;
     }

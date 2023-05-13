@@ -19,7 +19,6 @@ public class ImovelProcuradoCliente {
     public String bairros;
     public String condicoes;
     public String faixaPreco;
-    public LocalDate prazoEntrega;
     
     public String getTipoImovel() {
         return tipoImovel;
@@ -59,14 +58,6 @@ public class ImovelProcuradoCliente {
 
     public void setMetragem(double metragem) {
         this.metragem = metragem;
-    }
-
-    public LocalDate getPrazoEntrega() {
-        return prazoEntrega;
-    }
-
-    public void setPrazoEntrega(LocalDate prazoEntrega) {
-        this.prazoEntrega = prazoEntrega;
     }
 
     public String getBairros() {
