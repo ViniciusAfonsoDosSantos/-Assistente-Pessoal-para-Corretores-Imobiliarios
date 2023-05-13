@@ -19,6 +19,8 @@ public class Parametro {
     public LocalDateTime dateTime;
     public boolean booleano;
     public Blob blob;
+    public Integer inteiro;
+    public Double decimal;
     
     public Parametro(String valor, String tipo){
         this.valor = valor;
@@ -37,6 +39,16 @@ public class Parametro {
     
     public Parametro(boolean booleano, String tipo){
         this.booleano = booleano;
+        this.tipo = tipo;
+    }
+    
+    public Parametro(Integer inteiro, String tipo){
+        this.inteiro = inteiro;
+        this.tipo = tipo;
+    }
+    
+    public Parametro(Double decimal, String tipo){
+        this.decimal = decimal;
         this.tipo = tipo;
     }
     

@@ -7,6 +7,7 @@ package br.edu.cefsa.DAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Cliente;
 import br.edu.cefsa.model.GenericoModel;
+import br.edu.cefsa.model.ImovelProcuradoCliente;
 import br.edu.cefsa.model.Parametro;
 import br.edu.cefsa.model.Usuario;
 import java.sql.Connection;
@@ -30,7 +31,27 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
 
     public ClienteDAO() {
         super.setTabela("ASSISTENTECORRETORES.CLIENTE");
-        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.CLIENTE (Nome, CPF, Data_nascimento, Conjuge,Profissao, Telefone, Email, EnderecoResidencial, Estado, Cidade, Bairro, CEP, Anotacoes) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.CLIENTE (Nome, "
+                                                                    + "CPF, "
+                                                                + "Data_nascimento, "
+                                                                + "Conjuge,Profissao, "
+                                                                + "Telefone, "
+                                                                + "Email, "
+                                                                + "EnderecoResidencial, "
+                                                                + "Estado, "
+                                                                + "Cidade, "
+                                                                + "Bairro, "
+                                                                + "CEP, "
+                                                                + "TIPO_IMOVEL,"
+                                                                + "INTENCAO_PROCURADO,"
+                                                                + "NUM_DORMS_PROCURADO,"
+                                                                + "NUM_VAGAS_PROCURADO,"
+                                                                + "METRAGEM_PROCURADO,"
+                                                                + "BAIRROS,"
+                                                                + "CONDICOES,"
+                                                                + "FAIXA_PRECO,"
+                                                                + "PRAZO_ENTREGA) "
+                                                                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.CLIENTE "
                         + "SET Nome=?,"
                         + "CPF=?, "
@@ -44,7 +65,15 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
                         + "Cidade=?, "
                         + "Bairro=?, "
                         + "CEP=?, "
-                        + "Anotacoes=? "
+                        + "TIPO_IMOVEL=?"
+                        + "INTENCAO_PROCURADO=?,"
+                        + "NUM_VAGAS_PROCURADO=?,"
+                        + "METRAGEM_PROCURADO=?,"
+                        + "BAIRROS=?,"
+                        + "CONDICOES=?,"
+                        + "FAIXA_PRECO=?,"
+                        + "NUM_DORMS_PROCURADO=?,"
+                        + "PRAZO_ENTREGA=?"
                         + "WHERE CLIENTE_ID = ?");
     }
     
@@ -64,7 +93,16 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         parametros.add(new Parametro(cliente.getCidade(), "texto"));
         parametros.add(new Parametro(cliente.getBairro(), "texto"));
         parametros.add(new Parametro(cliente.getCEP(), "texto"));
-        parametros.add(new Parametro(cliente.getAnotacao(),"texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getTipoImovel(), "texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getTipoAquisicao(), "texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getNumDorms(), "inteiro"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getNumVagas(), "inteiro"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getMetragem(), "double"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getBairros(), "texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getCondicoes(), "texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getFaixaPreco(), "texto"));
+        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getPrazoEntrega(), "data"));
+        
         if(update){
             parametros.add(new Parametro(String.valueOf(cliente.getClienteId()), "long"));
         }
@@ -82,6 +120,17 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             ResultSet result = pStatement.executeQuery();
             
             while (result.next()) {
+                ImovelProcuradoCliente imovelProcuradoCliente= new ImovelProcuradoCliente();
+                imovelProcuradoCliente.setTipoImovel(result.getString("TIPO_IMOVEL"));
+                imovelProcuradoCliente.setTipoAquisicao(result.getString("TIPO_AQUISICAO"));
+                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS"));
+                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS"));
+                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM"));
+                imovelProcuradoCliente.setBairros(result.getString("BAIRROS"));
+                imovelProcuradoCliente.setCondicoes(result.getString("CONDICOES"));
+                imovelProcuradoCliente.setFaixaPreco(result.getString("FAIXA_PRECO"));
+                imovelProcuradoCliente.setPrazoEntrega(result.getDate("PRAZO_ENTREGA").toLocalDate());
+                
                 clientes.add(new Cliente(
                         Integer.valueOf(result.getString("CLIENTE_ID")), 
                         result.getString("NOME"), 
@@ -96,8 +145,8 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
                         result.getString("ESTADO"),
                         result.getString("CIDADE"),
                         result.getString("BAIRRO"),
-                        result.getString("ANOTACOES")));
-            }
+                        imovelProcuradoCliente));
+                    }
             } catch (ClassNotFoundException ex) {
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -122,6 +171,16 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             ResultSet result = pStatement.executeQuery();
             
             if (result.next()) {
+                ImovelProcuradoCliente imovelProcuradoCliente= new ImovelProcuradoCliente();
+                imovelProcuradoCliente.setTipoImovel(result.getString("TIPO_IMOVEL"));
+                imovelProcuradoCliente.setTipoAquisicao(result.getString("TIPO_AQUISICAO"));
+                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS"));
+                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS"));
+                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM"));
+                imovelProcuradoCliente.setBairros(result.getString("BAIRROS"));
+                imovelProcuradoCliente.setCondicoes(result.getString("CONDICOES"));
+                imovelProcuradoCliente.setFaixaPreco(result.getString("FAIXA_PRECO"));
+                imovelProcuradoCliente.setPrazoEntrega(result.getDate("PRAZO_ENTREGA").toLocalDate());
                 return new Cliente(
                         result.getString("NOME"), 
                         result.getString("CPF"), 
@@ -135,7 +194,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
                         result.getString("ESTADO"),
                         result.getString("CIDADE"),
                         result.getString("BAIRRO"),
-                        result.getString("ANOTACOES"));
+                        imovelProcuradoCliente);
             }
             else
                 return null;
