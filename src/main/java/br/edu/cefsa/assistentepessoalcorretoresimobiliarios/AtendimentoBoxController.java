@@ -9,7 +9,6 @@ import br.edu.cefsa.DAO.ClienteDAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Atendimento;
 import br.edu.cefsa.model.Cliente;
-import br.edu.cefsa.model.GenericComboModel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.text.ParseException;
@@ -17,6 +16,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -53,48 +54,65 @@ public class AtendimentoBoxController {
 
     public void setData(Atendimento atendimento) throws IOException {
 
-        ClienteDAO dao = new ClienteDAO();
-        txtAnotacao.setText(atendimento.getAnotacoes());
-        atendimentoTitulo.setText("Atendimento #");
-        //cbCliente.setValue(atendimento.getCliente().getNome());
-        txtAnotacao.setDisable(true);
-        cbCliente.setDisable(true);
-        cbImovel.setDisable(true);
-        iconeEditar.setOnMouseClicked(mouseEvent -> {
-            try {
-                permiteAtualizar();
-            } catch (Exception ex) {
-                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            ClienteDAO dao = new ClienteDAO();
+            List<Cliente> listaClientes = dao.listar();
+            ObservableList ObList = FXCollections.observableList(listaClientes);
+            cbCliente.setItems(ObList);
+            txtAnotacao.setText(atendimento.getAnotacoes());
+            atendimentoTitulo.setText("Atendimento #");
+            txtAnotacao.setDisable(true);
+            cbCliente.setDisable(true);
+            cbImovel.setDisable(true);
+            iconeEditar.setOnMouseClicked(mouseEvent -> {
+                try {
+                    permiteAtualizar();
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-        });
+            });
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void setNovoAtendimento(LocalDate data) throws IOException {
 
-        atendimentoTitulo.setText("Atendimento ##");
-        txtAnotacao.setDisable(false);
-        cbCliente.setDisable(false);
-        cbImovel.setDisable(false);
-        atendimentoBox.getStyleClass().add("pane_boxcliente_selecionado");
-        iconeEditar.setGlyphName("CHECK");
-        iconeEditar.setStyleClass("icones_verde");
-        iconeEditar.setOnMouseClicked(mouseEvent -> {
+        try {
+            atendimentoTitulo.setText("Atendimento ##");
+            ClienteDAO dao = new ClienteDAO();
+            List<Cliente> listaClientes;
+            listaClientes = dao.listar();
+            ObservableList ObList = FXCollections.observableList(listaClientes);
+            cbCliente.setItems(ObList);
+            txtAnotacao.setDisable(false);
+            cbCliente.setDisable(false);
+            cbImovel.setDisable(false);
+            atendimentoBox.getStyleClass().add("pane_boxcliente_selecionado");
+            iconeEditar.setGlyphName("CHECK");
+            iconeEditar.setStyleClass("icones_verde");
+            iconeEditar.setOnMouseClicked(mouseEvent -> {
 
-            try {
-                permiteSalvar();
-                inserirOuAtualizar(data);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                try {
+                    permiteSalvar();
+                    inserirOuAtualizar(data);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-        });
+            });
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @FXML
     private void inserirOuAtualizar(LocalDate data) throws IOException {
 
         try {
+
+            
             Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), 1, 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimento);
