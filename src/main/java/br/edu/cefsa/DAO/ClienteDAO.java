@@ -122,10 +122,10 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             while (result.next()) {
                 ImovelProcuradoCliente imovelProcuradoCliente= new ImovelProcuradoCliente();
                 imovelProcuradoCliente.setTipoImovel(result.getString("TIPO_IMOVEL"));
-                imovelProcuradoCliente.setTipoAquisicao(result.getString("TIPO_AQUISICAO"));
-                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS"));
-                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS"));
-                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM"));
+                imovelProcuradoCliente.setTipoAquisicao(result.getString("INTENCAO_PROCURADO"));
+                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS_PROCURADO"));
+                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS_PROCURADO"));
+                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM_PROCURADO"));
                 imovelProcuradoCliente.setBairros(result.getString("BAIRROS"));
                 imovelProcuradoCliente.setCondicoes(result.getString("CONDICOES"));
                 imovelProcuradoCliente.setFaixaPreco(result.getString("FAIXA_PRECO"));
@@ -173,10 +173,10 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             if (result.next()) {
                 ImovelProcuradoCliente imovelProcuradoCliente= new ImovelProcuradoCliente();
                 imovelProcuradoCliente.setTipoImovel(result.getString("TIPO_IMOVEL"));
-                imovelProcuradoCliente.setTipoAquisicao(result.getString("TIPO_AQUISICAO"));
-                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS"));
-                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS"));
-                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM"));
+                imovelProcuradoCliente.setTipoAquisicao(result.getString("INTENCAO_PROCURADO"));
+                imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS_PROCURADO"));
+                imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS_PROCURADO"));
+                imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM_PROCURADO"));
                 imovelProcuradoCliente.setBairros(result.getString("BAIRROS"));
                 imovelProcuradoCliente.setCondicoes(result.getString("CONDICOES"));
                 imovelProcuradoCliente.setFaixaPreco(result.getString("FAIXA_PRECO"));

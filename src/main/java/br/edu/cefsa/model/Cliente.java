@@ -190,6 +190,6 @@ public class Cliente extends GenericoModel {
 
     @Override
     public String toString() {
-        return this.Nome;
+        return "Cliente: " + this.ClienteId.toString() + " - " + this.Nome;
     }
 }

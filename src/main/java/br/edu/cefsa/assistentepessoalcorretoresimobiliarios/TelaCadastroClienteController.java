@@ -105,7 +105,8 @@ public class TelaCadastroClienteController extends PadraoController {
     private TextField txtNumeroVagas;
 
     @FXML
-    private TextField txtPrazoEntrega;
+    private DatePicker mskPrazoEntrega;
+
 
     @FXML
     private TextField txtProfissao;
@@ -215,20 +216,31 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private void salvarCliente() throws IOException, SQLException, PersistenciaException, ParseException {
 
+        //Corrigir double - tirar ponto e virgula;
         int status = ValidaCampos();
 
         if (status != 1) {
             ClienteDAO DAO = new ClienteDAO();
+            /*ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
+                    Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText(), mskPrazoEntrega.getValue());
+        
+            ('Vinicius','12345678912' , '2019-04-13' ,'Conjuge1' ,'Profissao1 ','11123456789',
+            'afonso.vinicius1@outlook.com', 'rua1', 'sp' ,'sbc', 'tn', '12345678' ,'tipo' , 'intencao',3,3,54, 
+            'Bairro1' ,'condicao', '1-2' , '2023-07-13')
+            */
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", 3, 3, 
+                    3.2, "Bairro1", "Condição1", "FaixaPreco", mskPrazoEntrega.getValue());
+            
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                     txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
-                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
+                    txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
 
             try {
                 if (clienteSelecionado.getCliente() != null) {
                     Cliente clienteAlterar;
                     clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                             txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), txtEndereco.getText(),
-                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), new ImovelProcuradoCliente());
+                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
                     DAO.alterar(clienteAlterar);
                 } else {
                     DAO.inserir(cliente);

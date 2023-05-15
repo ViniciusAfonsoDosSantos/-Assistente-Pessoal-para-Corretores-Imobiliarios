@@ -92,4 +92,22 @@ public class ImovelProcuradoCliente {
     public void setFaixaPreco(String faixaPreco) {
         this.faixaPreco = faixaPreco;
     }
+
+    public ImovelProcuradoCliente(String tipoImovel, String tipoAquisicao, Integer numDorms, Integer numVagas, double metragem, String bairros, String condicoes, String faixaPreco, LocalDate prazoEntrega) {
+        this.tipoImovel = tipoImovel;
+        this.tipoAquisicao = tipoAquisicao;
+        this.numDorms = numDorms;
+        this.numVagas = numVagas;
+        this.metragem = metragem;
+        this.bairros = bairros;
+        this.condicoes = condicoes;
+        this.faixaPreco = faixaPreco;
+        this.prazoEntrega = prazoEntrega;
+    }
+
+    public ImovelProcuradoCliente() {
+    }
+    
+    
+    
 }
