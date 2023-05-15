@@ -23,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
 
 /**
  * FXML Controller class
@@ -47,7 +48,7 @@ public class AtendimentoBoxController {
     private TextArea txtAnotacao;
 
     @FXML
-    private ComboBox<String> cbCliente;
+    private ComboBox<Cliente> cbCliente;
 
     @FXML
     private ComboBox<?> cbImovel;
@@ -56,6 +57,22 @@ public class AtendimentoBoxController {
 
         try {
             ClienteDAO dao = new ClienteDAO();
+            
+            cbCliente.setConverter(new StringConverter<Cliente>() {
+                @Override
+                public String toString(Cliente object) {
+                    if (object == null) {
+                        return "";
+                    } else {
+                        return object.getNome();
+                    }
+                }
+
+                @Override
+                public Cliente fromString(String string) {
+                    return null;
+                }
+            });
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
@@ -82,8 +99,25 @@ public class AtendimentoBoxController {
         try {
             atendimentoTitulo.setText("Atendimento ##");
             ClienteDAO dao = new ClienteDAO();
-            List<Cliente> listaClientes;
-            listaClientes = dao.listar();
+            
+            
+            cbCliente.setConverter(new StringConverter<Cliente>() {
+                @Override
+                public String toString(Cliente object) {
+                    
+                    if (object == null) {
+                        return "";
+                    } else {
+                        return object.getNome();
+                    }
+                }
+
+                @Override
+                public Cliente fromString(String string) {
+                    return null;
+                }
+            });
+            List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
             txtAnotacao.setDisable(false);
@@ -111,9 +145,9 @@ public class AtendimentoBoxController {
     private void inserirOuAtualizar(LocalDate data) throws IOException {
 
         try {
-
-            
-            Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), 1, 1);
+            Cliente cliente = cbCliente.getValue();
+            System.out.println(cliente.getClienteId());
+            Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimento);
         } catch (PersistenciaException ex) {

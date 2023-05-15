@@ -188,8 +188,5 @@ public class Cliente extends GenericoModel {
         this.imovelProcuradoCliente = imovelProcuradoCliente;
     }
 
-    @Override
-    public String toString() {
-        return "Cliente: " + this.ClienteId.toString() + " - " + this.Nome;
-    }
+    
 }

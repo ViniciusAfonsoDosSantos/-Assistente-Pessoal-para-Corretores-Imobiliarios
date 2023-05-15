@@ -84,7 +84,7 @@ public class ImovelProcuradoCliente {
         this.faixaPreco = faixaPreco;
     }
 
-    public ImovelProcuradoCliente(String tipoImovel, String tipoAquisicao, Integer numDorms, Integer numVagas, double metragem, String bairros, String condicoes, String faixaPreco, LocalDate prazoEntrega) {
+    public ImovelProcuradoCliente(String tipoImovel, String tipoAquisicao, Integer numDorms, Integer numVagas, double metragem, String bairros, String condicoes, String faixaPreco) {
         this.tipoImovel = tipoImovel;
         this.tipoAquisicao = tipoAquisicao;
         this.numDorms = numDorms;
@@ -93,7 +93,6 @@ public class ImovelProcuradoCliente {
         this.bairros = bairros;
         this.condicoes = condicoes;
         this.faixaPreco = faixaPreco;
-        this.prazoEntrega = prazoEntrega;
     }
 
     public ImovelProcuradoCliente() {

@@ -37,6 +37,15 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
     -fx-text-fill: #FFFFFF;
 }
 
+.button_fundobranco_verde{
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-border-color: #7DCAA2;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+    -fx-text-fill: #4a4a4a;
+}
+
 .button_verde:hover{
     -fx-background-color: #7DCAA2;
     -fx-background-radius: 5px;
@@ -99,6 +108,14 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .pane_boxcliente{
     -fx-border-color: linear-gradient(to right, #1A3384, #2B49B3);
     -fx-border-width: 3px;
+    -fx-border-radius: 30px 30px 30px 30px;
+    -fx-background-color:#FFFFFF;
+    -fx-background-radius:30px 30px 30px 30px;
+}
+
+.pane_boxcliente_interno{
+    -fx-border-color: #7DCAA2;
+    -fx-border-width: 2px;
     -fx-border-radius: 30px 30px 30px 30px;
     -fx-background-color:#FFFFFF;
     -fx-background-radius:30px 30px 30px 30px;

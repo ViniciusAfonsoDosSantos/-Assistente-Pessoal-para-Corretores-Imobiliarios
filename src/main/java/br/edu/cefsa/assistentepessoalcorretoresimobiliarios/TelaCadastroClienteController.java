@@ -105,10 +105,6 @@ public class TelaCadastroClienteController extends PadraoController {
     private TextField txtNumeroVagas;
 
     @FXML
-    private DatePicker mskPrazoEntrega;
-
-
-    @FXML
     private TextField txtProfissao;
 
     @FXML
@@ -218,23 +214,20 @@ public class TelaCadastroClienteController extends PadraoController {
 
         //Corrigir double - tirar ponto e virgula;
         int status = ValidaCampos();
-        ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente();
-        imovelProcurado.numDorms = 0;
-        imovelProcurado.numVagas = 0;
-        imovelProcurado.metragem = 0;
         if (status == 0) {
             
             ClienteDAO DAO = new ClienteDAO();
-            /*ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
-                    Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText(), mskPrazoEntrega.getValue());
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
+                    Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText());
         
+            /*
             ('Vinicius','12345678912' , '2019-04-13' ,'Conjuge1' ,'Profissao1 ','11123456789',
             'afonso.vinicius1@outlook.com', 'rua1', 'sp' ,'sbc', 'tn', '12345678' ,'tipo' , 'intencao',3,3,54, 
             'Bairro1' ,'condicao', '1-2' , '2023-07-13')
-            */
-            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", 3, 3, 
-                    3.2, "Bairro1", "Condição1", "FaixaPreco", mskPrazoEntrega.getValue());
             
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", 3, 3, 
+                    3.2, "Bairro1", "Condição1", "FaixaPreco");
+            */
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                     txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
                     txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);

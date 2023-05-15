@@ -75,9 +75,8 @@
             <TextField fx:id="txtMetragem" layoutX="430.0" layoutY="85.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
             <Label layoutX="20.0" layoutY="135.0" text="Bairros" />
             <TextField fx:id="txtBairros" layoutX="21.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
-            <TextField fx:id="txtFaixaPreco" layoutX="640.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
-            <Label layoutX="640.0" layoutY="135.0" text="Faixa de preço" />
-            <Label layoutX="640.0" layoutY="70.0" text="Prazo máximo de entrega" />
+            <TextField fx:id="txtFaixaPreco" layoutX="639.0" layoutY="85.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
+            <Label layoutX="639.0" layoutY="70.0" text="Faixa de preço" />
             <Label layoutX="330.0" layoutY="135.0" text="Condições" />
             <TextField fx:id="txtCondicoes" layoutX="330.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
             <RadioButton layoutX="72.0" layoutY="21.0" mnemonicParsing="false" text="Apto">
@@ -167,7 +166,6 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <DatePicker fx:id="mskPrazoEntrega" layoutX="640.0" layoutY="85.0" prefHeight="28.0" prefWidth="253.0" />
          </children>
       </AnchorPane>
       <AnchorPane layoutX="75.0" layoutY="120.0" prefHeight="317.0" prefWidth="927.0" styleClass="pane_boxcliente" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
