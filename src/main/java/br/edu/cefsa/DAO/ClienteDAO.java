@@ -123,7 +123,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
             while (result.next()) {
                 ImovelProcuradoCliente imovelProcuradoCliente= new ImovelProcuradoCliente();
                 imovelProcuradoCliente.setTipoImovel(result.getString("TIPO_IMOVEL"));
-                imovelProcuradoCliente.setTipoAquisicao(result.getString("INTENCAO_PROCURADO"));
+                imovelProcuradoCliente.setTipoAquisicao(result.getString("TIPO_AQUISICAO"));
                 imovelProcuradoCliente.setNumDorms(result.getInt("NUM_DORMS_PROCURADO"));
                 imovelProcuradoCliente.setNumVagas(result.getInt("NUM_VAGAS_PROCURADO"));
                 imovelProcuradoCliente.setMetragem(result.getDouble("METRAGEM_PROCURADO"));

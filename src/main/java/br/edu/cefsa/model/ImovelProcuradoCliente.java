@@ -19,7 +19,6 @@ public class ImovelProcuradoCliente {
     public String bairros;
     public String condicoes;
     public String faixaPreco;
-    public LocalDate 
     
     public String getTipoImovel() {
         return tipoImovel;
