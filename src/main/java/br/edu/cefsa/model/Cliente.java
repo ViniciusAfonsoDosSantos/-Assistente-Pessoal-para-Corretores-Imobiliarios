@@ -28,7 +28,7 @@ public class Cliente extends GenericoModel {
     private String Cidade;
     private String Bairro;
     private ImovelProcuradoCliente imovelProcuradoCliente;
-    private EstadoAtendimentoCliente estadoCliente;
+    private String estadoCliente;
 
     public String getEstado() {
         return Estado;
@@ -147,11 +147,11 @@ public class Cliente extends GenericoModel {
         this.imovelProcuradoCliente = imovelProcuradoCliente;
     }
     
-    public EstadoAtendimentoCliente getEstadoCliente() {
+    public String getEstadoCliente() {
         return estadoCliente;
     }
 
-    public void setEstadoCliente(EstadoAtendimentoCliente estadoCliente) {
+    public void setEstadoCliente(String estadoCliente) {
         this.estadoCliente = estadoCliente;
     }
     

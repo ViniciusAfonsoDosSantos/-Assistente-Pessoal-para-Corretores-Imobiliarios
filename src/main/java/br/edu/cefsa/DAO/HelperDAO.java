@@ -6,6 +6,7 @@ package br.edu.cefsa.DAO;
 
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Parametro;
+import java.io.ByteArrayInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -39,10 +40,18 @@ public class HelperDAO {
                     statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
                 }
                 if("inteiro".equals(pTipo)){
-                    statement.setInt(i+1, Integer.parseInt(pValor));
+                    int valor = Integer.parseInt(pValor);
+                    statement.setInt(i+1, valor);
+                }
+                if("decimal".equals(pTipo)){
+                    double valor = Double.parseDouble(pValor);
+                    statement.setDouble(i+1, valor);
                 }
                 if("data".equals(pTipo)){  
                     statement.setDate(i+1, java.sql.Date.valueOf(pData));
+                }
+                if("blob".equals(pTipo)){
+                    statement.setBlob(i+1, new ByteArrayInputStream(pValor.getBytes()));
                 }
             }
         }

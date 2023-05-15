@@ -218,8 +218,12 @@ public class TelaCadastroClienteController extends PadraoController {
 
         //Corrigir double - tirar ponto e virgula;
         int status = ValidaCampos();
-
-        if (status != 1) {
+        ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente();
+        imovelProcurado.numDorms = 0;
+        imovelProcurado.numVagas = 0;
+        imovelProcurado.metragem = 0;
+        if (status == 0) {
+            
             ClienteDAO DAO = new ClienteDAO();
             /*ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
                     Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText(), mskPrazoEntrega.getValue());
@@ -274,8 +278,8 @@ public class TelaCadastroClienteController extends PadraoController {
     @FXML
     private int ValidaCampos() {
         LocalDate dataAtual = LocalDate.now();
-        Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
-        int idade = periodo.getYears();
+        //Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
+        //int idade = periodo.getYears();
         int statusFinal = 0;
         int status = validaCamposEmBranco();
         if (status == 1) {
@@ -297,10 +301,10 @@ public class TelaCadastroClienteController extends PadraoController {
             lbErroCEP.setText("CEP no Formato incorreto");
             statusFinal++;
         }
-        if ( idade < 18) {
+        /*if ( idade < 18) {
             lbErroDataNascimento.setText("Clientes menor de idade");
             statusFinal++;
-        }
+        }*/
 
         return statusFinal;
     }
