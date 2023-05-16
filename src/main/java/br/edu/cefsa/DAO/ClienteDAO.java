@@ -167,7 +167,7 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setLong(1,c.getID());
+            pStatement.setLong(1,c.getClienteId());
             ResultSet result = pStatement.executeQuery();
             
             if (result.next()) {

@@ -192,6 +192,9 @@ public class Cliente extends GenericoModel {
         this.ClienteId = ClienteId;
     }
 
+    public Cliente() {
+    }
+
     
     
 }
