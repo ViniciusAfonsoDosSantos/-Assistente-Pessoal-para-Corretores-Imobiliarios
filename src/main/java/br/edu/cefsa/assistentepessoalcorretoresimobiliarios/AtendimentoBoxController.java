@@ -14,12 +14,16 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +35,8 @@ import javafx.util.StringConverter;
  * @author Vinicius
  */
 public class AtendimentoBoxController {
+    
+    private DialogPane dialog;
 
     @FXML
     private AnchorPane atendimentoBox;
@@ -84,19 +90,42 @@ public class AtendimentoBoxController {
             txtAnotacao.setDisable(true);
             cbCliente.setDisable(true);
             cbImovel.setDisable(true);
+            iconeRemover.setOnMouseClicked(mouseEvent -> {
+                try {
+                    deletarAtendimento(atendimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });                        
             iconeEditar.setOnMouseClicked(mouseEvent -> {
                 try {
                     permiteAtualizar();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-
             });
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    
+    
+        public void deletarAtendimento(Atendimento atendimento) throws PersistenciaException, IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Deletar Atendimento");
+        alert.setContentText("Confirma a exclusão do Atendimento?");
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+        dialog.getStyleClass().add("dialog");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            AtendimentoDAO dao = new AtendimentoDAO();
+            System.out.println("cliente => " + atendimento);
+            dao.remover(atendimento);
+        }
+    }
+        
     public void setNovoAtendimento(LocalDate data) throws IOException {
 
         try {
@@ -138,6 +167,7 @@ public class AtendimentoBoxController {
                 }
 
             });
+            
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,6 +181,13 @@ public class AtendimentoBoxController {
             Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimento);
+            iconeRemover.setOnMouseClicked(mouseEvent -> {
+                try {
+                    deletarAtendimento(atendimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });                                 
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

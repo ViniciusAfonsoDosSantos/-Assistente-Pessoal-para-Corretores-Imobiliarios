@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  * @author gabri
  */
 public class Atendimento extends GenericoModel{
+    private Integer atendimentoId;
     private LocalDate dataAtendimento;
     private String anotacoes;
     private int clienteID;
@@ -19,12 +20,19 @@ public class Atendimento extends GenericoModel{
     private Cliente cliente;
     private Imovel imovel;
 
-    public Atendimento(LocalDate dataAtendimento, String anotacoes, int clienteID, int imovelID) {
+    public Atendimento(Integer atendimentoId, LocalDate dataAtendimento, String anotacoes, int clienteID, int imovelID) {
+        this.atendimentoId = atendimentoId;
         this.dataAtendimento = dataAtendimento;
         this.anotacoes = anotacoes;
         this.clienteID = clienteID;
         this.imovelID = imovelID;
     }
+    public Atendimento(LocalDate dataAtendimento, String anotacoes, int clienteID, int imovelID) {
+        this.dataAtendimento = dataAtendimento;
+        this.anotacoes = anotacoes;
+        this.clienteID = clienteID;
+        this.imovelID = imovelID;
+    }    
 
     public LocalDate getDataAtendimento() {
         return dataAtendimento;
@@ -73,4 +81,12 @@ public class Atendimento extends GenericoModel{
     public void setImovel(Imovel imovel) {
         this.imovel = imovel;
     }
+    
+    public Integer getAtendimentoId(){
+       return atendimentoId;
+    }
+
+    public void setAtendimentoId(Integer atendimentoId) {
+        this.atendimentoId = atendimentoId;
+    }    
 }
