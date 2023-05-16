@@ -57,7 +57,6 @@ public class AtendimentoBoxController {
 
         try {
             ClienteDAO dao = new ClienteDAO();
-            
             cbCliente.setConverter(new StringConverter<Cliente>() {
                 @Override
                 public String toString(Cliente object) {
@@ -73,12 +72,13 @@ public class AtendimentoBoxController {
                     return null;
                 }
             });
+
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
             ClienteDAO clientedao = new ClienteDAO();
             Cliente cliente = new Cliente(atendimento.getClienteID());
-            cbCliente.setValue(clientedao.listarPorID(cliente));
+            cbCliente.getSelectionModel().select(clientedao.listarPorID(cliente));
             txtAnotacao.setText(atendimento.getAnotacoes());
             atendimentoTitulo.setText("Atendimento #");
             txtAnotacao.setDisable(true);
@@ -102,12 +102,11 @@ public class AtendimentoBoxController {
         try {
             atendimentoTitulo.setText("Atendimento ##");
             ClienteDAO dao = new ClienteDAO();
-            
-            
+
             cbCliente.setConverter(new StringConverter<Cliente>() {
                 @Override
                 public String toString(Cliente object) {
-                    
+
                     if (object == null) {
                         return "";
                     } else {
