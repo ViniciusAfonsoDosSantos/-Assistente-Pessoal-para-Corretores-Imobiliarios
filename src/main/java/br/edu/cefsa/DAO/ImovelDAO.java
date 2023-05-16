@@ -27,23 +27,22 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         super.setTabela("ASSISTENTECORRETORES.IMOVEL");                  
         super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,Venda,Locacao,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.IMOVEL "
-                        + "NOME=?" +
-                        "Tipo_Imovel=?" +
-                        "Venda=?" +
-                        "Locacao=?" +
-                        "Num_Dorms=?" +
-                        "Num_Vagas=?" +
-                        "METRAGEM=?" +
-                        "RUA=?" +
-                        "BAIRRO=?" +
-                        "CIDADE=?" +
-                        "CEP=?" +
-                        "COMPLEMENTO=?" +
-                        "CARACTERISTICAS=?" +
-                        "PRAZO_ENTREGA=?" +
-                        "FAIXA_PRECO=?" +
-                        "Imagem1=?" +
-                        "Imagem2=?" +
+                        + "NOME=?," +
+                        "Tipo_Imovel=?," +
+                        "Tipo_Locacao=?," +
+                        "Num_Dorms=?," +
+                        "Num_Vagas=?," +
+                        "METRAGEM=?," +
+                        "RUA=?," +
+                        "BAIRRO=?," +
+                        "CIDADE=?," +
+                        "CEP=?," +
+                        "COMPLEMENTO=?," +
+                        "CARACTERISTICAS=?," +
+                        "PRAZO_ENTREGA=?," +
+                        "FAIXA_PRECO=?," +
+                        "Imagem1=?," +
+                        "Imagem2=?," +
                         "Imagem3=?" +
                         "WHERE IMOVEL_ID = ?");                    
     }

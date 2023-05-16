@@ -5,6 +5,7 @@
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
 import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.model.ImovelProcuradoCliente;
 
 /**
  *
@@ -28,5 +29,9 @@ public class DadoClienteSelecionado {
     
     public void setCliente(Cliente clienteSelecionado){
         this.clienteSelecionado = clienteSelecionado;
+    }
+
+    ImovelProcuradoCliente getImovelProcuradoCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

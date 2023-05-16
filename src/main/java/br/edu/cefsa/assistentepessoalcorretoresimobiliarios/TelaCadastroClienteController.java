@@ -175,7 +175,7 @@ public class TelaCadastroClienteController extends PadraoController {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        
         iconeADM.setVisible(false);
         if (usuarioLogado.getUsuario().getTipo() == true) {
             iconeADM.setVisible(true);
@@ -186,7 +186,9 @@ public class TelaCadastroClienteController extends PadraoController {
         //txtEstado.getSelectionModel().select(0);
 
         if (clienteSelecionado.getCliente() != null) {
-
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente();
+            imovelProcurado = clienteSelecionado.getCliente().getImovelProcuradoCliente();
+            
             lbTituloCliente.setText("Atualizar Cliente");
             lbTituloImovel.setText("Atualizar Imóvel Procurado");
             txtNome.setText(clienteSelecionado.getCliente().getNome());
@@ -201,6 +203,15 @@ public class TelaCadastroClienteController extends PadraoController {
             txtEndereco.setText(clienteSelecionado.getCliente().getEnderecoResidencial());
             txtEstado.setValue(EnumEstados.valueOf(clienteSelecionado.getCliente().getEstado()));
             txtBairro.setText(clienteSelecionado.getCliente().getBairro());
+            
+            txtNumeroDormitorios.setText(String.valueOf(imovelProcurado.getNumDorms()));
+            txtNumeroVagas.setText(String.valueOf(imovelProcurado.getNumVagas()));
+            txtMetragem.setText(String.valueOf(imovelProcurado.getMetragem()));
+            txtFaixaPreco.setText(imovelProcurado.getFaixaPreco());
+            txtBairros.setText(imovelProcurado.getBairros());
+            txtCondicoes.setText(imovelProcurado.getCondicoes());
+
+            
             txtCPF.setDisable(true);
 
         } else {
@@ -268,13 +279,19 @@ public class TelaCadastroClienteController extends PadraoController {
         
     }
      */
+    
     @FXML
     private int ValidaCampos() {
-        LocalDate dataAtual = LocalDate.now();
-        //Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
-        //int idade = periodo.getYears();
+        
+
+        int idade = 0;
         int statusFinal = 0;
         int status = validaCamposEmBranco();
+        if(mskDataNascimento.getValue() != null){
+            LocalDate dataAtual = LocalDate.now();
+            Period periodo = Period.between( mskDataNascimento.getValue(), dataAtual);
+            idade = periodo.getYears();
+        }
         if (status == 1) {
             return status;
         }
@@ -294,11 +311,22 @@ public class TelaCadastroClienteController extends PadraoController {
             lbErroCEP.setText("CEP no Formato incorreto");
             statusFinal++;
         }
-        /*if ( idade < 18) {
+        if ( idade < 18) {
             lbErroDataNascimento.setText("Clientes menor de idade");
             statusFinal++;
-        }*/
-
+        }
+        if (Integer.parseInt(txtNumeroDormitorios.getText()) < 0) {
+            lbErroNumeroDormitorios.setText("Numero de Dormitorios menor que 0!");
+            statusFinal++;
+        }
+        if (Integer.parseInt(txtNumeroVagas.getText()) < 0) {
+            lbErroNumeroVagas.setText("Numero de Vagas menor que 0!");
+            statusFinal++;
+        }
+        if (Integer.parseInt(txtMetragem.getText()) < 0) {
+            lbErroMetragem.setText("Metragem menor que 0!");
+            statusFinal++;
+        }        
         return statusFinal;
     }
 
@@ -306,51 +334,75 @@ public class TelaCadastroClienteController extends PadraoController {
         int status = 0;
 
         if (!ValidaDadosUtils.ValidaTexto(txtNome.getText())) {
-            lbErroNome.setText("Dado não Preenchido");
+            lbErroNome.setText("Nome não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtCPF.getText())) {
-            lbErroCPF.setText("Dado não Preenchido");
+            lbErroCPF.setText("CPF não Preenchido");
             status++;
         }
         if (mskDataNascimento.getValue() == null) {
-            lbErroDataNascimento.setText("Dado não Preenchido");
+            lbErroDataNascimento.setText("Data de Nascimento não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtProfissao.getText())) {
-            lbErroProfissao.setText("Dado não Preenchido");
+            lbErroProfissao.setText("Profissão não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtConjuge.getText())) {
-            lbErroConjuge.setText("Dado não Preenchido");
+            lbErroConjuge.setText("Conjuge não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtTelefone.getText())) {
-            lbErroTelefone.setText("Dado não Preenchido");
+            lbErroTelefone.setText("Telefone não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtEmail.getText())) {
-            lbErroEmail.setText("Dado não Preenchido");
+            lbErroEmail.setText("Email não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtEndereco.getText())) {
-            lbErroEndereço.setText("Dado não Preenchido");
+            lbErroEndereço.setText("Endereço não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtCEP.getText())) {
-            lbErroCEP.setText("Dado não Preenchido");
+            lbErroCEP.setText("CEP não Preenchido");
             status++;
         }
         if (txtEstado.getValue() == null) {
-            lbErroEstado.setText("Dado não Preenchido");
+            lbErroEstado.setText("Estado não Preenchido");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtCidade.getText())) {
-            lbErroCidade.setText("Dado não Preenchido");
+            lbErroCidade.setText("Cidade não Preenchida");
             status++;
         }
         if (!ValidaDadosUtils.ValidaTexto(txtBairro.getText())) {
-            lbErroBairro.setText("Dado não Preenchido");
+            lbErroBairro.setText("Bairro não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtNumeroDormitorios.getText())) {
+            lbErroNumeroDormitorios.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtNumeroVagas.getText())) {
+            lbErroNumeroVagas.setText("Dado não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtMetragem.getText())) {
+            lbErroMetragem.setText("Metragem não Preenchida");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtFaixaPreco.getText())) {
+            lbErroFaixaPreco.setText("Faixa de preço não Preenchida");
+            status++;
+        }        
+        if (!ValidaDadosUtils.ValidaTexto(txtBairros.getText())) {
+            lbErroBairros.setText("Bairros não Preenchidos");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCondicoes.getText())) {
+            lbErroCondicoes.setText("Condições não Preenchidas");
             status++;
         }
         return status;
