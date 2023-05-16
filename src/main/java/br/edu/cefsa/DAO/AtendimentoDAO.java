@@ -85,6 +85,7 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
         String sql = "DELETE FROM ASSISTENTECORRETORES.Atendimento WHERE ATENDIMENTO_ID= ? ";
         List parametro = new ArrayList();
         parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
+        Integer Teste = e.getID();
         try {
             HelperDAO.executaQuery(sql,parametro);
         } catch (ParseException ex) {
