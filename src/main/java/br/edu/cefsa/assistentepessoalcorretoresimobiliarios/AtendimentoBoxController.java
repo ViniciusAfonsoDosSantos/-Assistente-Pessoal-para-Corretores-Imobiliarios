@@ -76,6 +76,9 @@ public class AtendimentoBoxController {
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
+            ClienteDAO clientedao = new ClienteDAO();
+            Cliente cliente = new Cliente(atendimento.getClienteID());
+            cbCliente.setValue(clientedao.listarPorID(cliente));
             txtAnotacao.setText(atendimento.getAnotacoes());
             atendimentoTitulo.setText("Atendimento #");
             txtAnotacao.setDisable(true);
@@ -146,7 +149,6 @@ public class AtendimentoBoxController {
 
         try {
             Cliente cliente = cbCliente.getValue();
-            System.out.println(cliente.getClienteId());
             Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimento);

@@ -188,5 +188,10 @@ public class Cliente extends GenericoModel {
         this.imovelProcuradoCliente = imovelProcuradoCliente;
     }
 
+    public Cliente(Integer ClienteId) {
+        this.ClienteId = ClienteId;
+    }
+
+    
     
 }
