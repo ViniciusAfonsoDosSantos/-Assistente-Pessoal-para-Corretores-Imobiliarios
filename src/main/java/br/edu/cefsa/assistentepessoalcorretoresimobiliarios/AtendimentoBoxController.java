@@ -167,6 +167,7 @@ public class AtendimentoBoxController {
                 }
 
             });
+            
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -180,6 +181,13 @@ public class AtendimentoBoxController {
             Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimento);
+            iconeRemover.setOnMouseClicked(mouseEvent -> {
+                try {
+                    deletarAtendimento(atendimento);
+                } catch (Exception ex) {
+                    Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });                                 
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {

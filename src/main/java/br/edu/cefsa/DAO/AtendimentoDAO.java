@@ -84,8 +84,8 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
     public void remover(A e) throws PersistenciaException {
         String sql = "DELETE FROM ASSISTENTECORRETORES.Atendimento WHERE ATENDIMENTO_ID= ? ";
         List parametro = new ArrayList();
-        parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
-        Integer Teste = e.getID();
+        parametro.add(new Parametro(Integer.toString(e.getAtendimentoId()), "long"));
+        Integer Teste = e.getAtendimentoId();
         try {
             HelperDAO.executaQuery(sql,parametro);
         } catch (ParseException ex) {
@@ -140,6 +140,7 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             ResultSet result = pStatement.executeQuery();
             while (result.next()) {
                 atendimentos.add(new Atendimento(
+                        result.getInt("Atendimento_ID"),
                         result.getDate("DATA_ATENDIMENTO").toLocalDate(), 
                         result.getString("ANOTACAO_ATENDIMENTO"), 
                         result.getInt("CLIENTE_ID"),
