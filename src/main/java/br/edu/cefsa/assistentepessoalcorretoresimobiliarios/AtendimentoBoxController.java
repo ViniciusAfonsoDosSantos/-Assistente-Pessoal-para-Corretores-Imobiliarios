@@ -35,7 +35,7 @@ import javafx.util.StringConverter;
  * @author Vinicius
  */
 public class AtendimentoBoxController {
-    
+
     private DialogPane dialog;
 
     @FXML
@@ -96,7 +96,7 @@ public class AtendimentoBoxController {
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });                        
+            });
             iconeEditar.setOnMouseClicked(mouseEvent -> {
                 try {
                     permiteAtualizar();
@@ -108,10 +108,8 @@ public class AtendimentoBoxController {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    
-        public void deletarAtendimento(Atendimento atendimento) throws PersistenciaException, IOException {
+
+    public void deletarAtendimento(Atendimento atendimento) throws PersistenciaException, IOException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Deletar Atendimento");
         alert.setContentText("Confirma a exclusão do Atendimento?");
@@ -125,7 +123,7 @@ public class AtendimentoBoxController {
             dao.remover(atendimento);
         }
     }
-        
+
     public void setNovoAtendimento(LocalDate data) throws IOException {
 
         try {
@@ -160,21 +158,21 @@ public class AtendimentoBoxController {
             iconeEditar.setOnMouseClicked(mouseEvent -> {
 
                 try {
-                    permiteSalvar();
-                    inserirOuAtualizar(data);
+                    permiteSalvarNovo();
+                    inserir(data);
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             });
-            
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @FXML
-    private void inserirOuAtualizar(LocalDate data) throws IOException {
+    private void inserir(LocalDate data) throws IOException {
 
         try {
             Cliente cliente = cbCliente.getValue();
@@ -187,7 +185,7 @@ public class AtendimentoBoxController {
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            });                                 
+            });
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -197,9 +195,24 @@ public class AtendimentoBoxController {
     }
 
     @FXML
+    private void alterar(Atendimento atendimento) throws IOException {
+
+        Cliente cliente = cbCliente.getValue();
+        AtendimentoDAO dao = new AtendimentoDAO();
+        Atendimento atendimentoAlterar;
+        atendimentoAlterar = (new Atendimento(atendimento.getAtendimentoId(), atendimento.getDataAtendimento(), txtAnotacao.getText(), cliente.getClienteId(), atendimento.getImovelID()));
+        iconeEditar.setOnMouseClicked(mouseEvent -> {
+            try {
+                dao.alterar(atendimentoAlterar);
+            } catch (Exception ex) {
+                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+    }
+
     private void permiteAtualizar() throws IOException {
 
-        mudaIconeFuncao();
+        mudaIconeFuncao(null);
         txtAnotacao.setDisable(false);
         cbCliente.setDisable(false);
         cbImovel.setDisable(false);
@@ -208,9 +221,20 @@ public class AtendimentoBoxController {
     }
 
     @FXML
-    private void permiteSalvar() throws IOException {
+    private void permiteSalvarNovo() throws IOException {
 
-        mudaIconeFuncao();
+        mudaIconeFuncao(null);
+        txtAnotacao.setDisable(true);
+        cbCliente.setDisable(true);
+        cbImovel.setDisable(true);
+        atendimentoBox.getStyleClass().clear();
+        atendimentoBox.getStyleClass().add("pane_boxcliente");
+    }
+
+    private void permiteSalvarExistente(Atendimento atendimento) throws IOException {
+
+        mudaIconeFuncao(atendimento);
+        alterar(atendimento);
         txtAnotacao.setDisable(true);
         cbCliente.setDisable(true);
         cbImovel.setDisable(true);
@@ -219,16 +243,15 @@ public class AtendimentoBoxController {
     }
 
     @FXML
-    private void mudaIconeFuncao() throws IOException {
+    private void mudaIconeFuncao(Atendimento atendimento) throws IOException {
 
         if ("EDIT".equals(iconeEditar.getGlyphName())) {
             iconeEditar.setGlyphName("CHECK");
             iconeEditar.getStyleClass().clear();
             iconeEditar.setStyleClass("icones_verde");
             iconeEditar.setOnMouseClicked(mouseEvent -> {
-
                 try {
-                    permiteSalvar();
+                    permiteSalvarNovo();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -242,6 +265,10 @@ public class AtendimentoBoxController {
 
                 try {
                     permiteAtualizar();
+                    if (atendimento != null) {
+                        permiteSalvarExistente(atendimento);
+
+                    }
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
