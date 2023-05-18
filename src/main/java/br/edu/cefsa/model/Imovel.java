@@ -4,7 +4,6 @@
  */
 package br.edu.cefsa.model;
 
-import java.io.InputStream;
 import java.time.LocalDate;
 
 /**
@@ -195,4 +194,23 @@ public class Imovel extends GenericoModel {
     public void setImagem3(byte[] imagem3) {
         this.imagem3 = imagem3;
     }
+
+    public Imovel(String nome, String tipoImovel, boolean venda, boolean locacao, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco) {
+        this.nome = nome;
+        this.tipoImovel = tipoImovel;
+        this.venda = venda;
+        this.locacao = locacao;
+        this.numDorms = numDorms;
+        this.numVagas = numVagas;
+        this.metragem = metragem;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.CEP = CEP;
+        this.complemento = complemento;
+        this.caracteristicas = caracteristicas;
+        this.prazoEntrega = prazoEntrega;
+        this.faixaPreco = faixaPreco;
+    }
+    
 }

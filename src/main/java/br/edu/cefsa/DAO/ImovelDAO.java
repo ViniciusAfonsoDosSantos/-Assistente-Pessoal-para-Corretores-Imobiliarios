@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGenericoDAO<I>{
     public ImovelDAO(){
         super.setTabela("ASSISTENTECORRETORES.IMOVEL");                  
-        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,Venda,Locacao,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3 ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,Venda,Locacao,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.IMOVEL "
                         + "NOME=?," +
                         "Tipo_Imovel=?," +
@@ -52,8 +52,8 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         List parametros = new ArrayList();
         parametros.add(new Parametro(imovel.getNome(), "texto"));
         parametros.add(new Parametro(imovel.getTipoImovel(), "texto"));
-        parametros.add(new Parametro(imovel.isVenda(), "booleano"));
-        parametros.add(new Parametro(imovel.isLocacao(), "booleano"));
+        parametros.add(new Parametro(imovel.isVenda(), "boolean"));
+        parametros.add(new Parametro(imovel.isLocacao(), "boolean"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumDorms()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumVagas()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getMetragem()), "texto"));
@@ -63,7 +63,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         parametros.add(new Parametro(imovel.getCEP(), "texto"));
         parametros.add(new Parametro(imovel.getComplemento(), "texto"));
         parametros.add(new Parametro(imovel.getCaracteristicas(), "texto"));
-        parametros.add(new Parametro(imovel.getPrazoEntrega(), "dateTime"));
+        parametros.add(new Parametro(imovel.getPrazoEntrega(), "data"));
         parametros.add(new Parametro(imovel.getFaixaPreco(), "texto"));
         parametros.add(new Parametro(imovel.getImagem1(), "byte"));
         parametros.add(new Parametro(imovel.getImagem2(), "byte"));

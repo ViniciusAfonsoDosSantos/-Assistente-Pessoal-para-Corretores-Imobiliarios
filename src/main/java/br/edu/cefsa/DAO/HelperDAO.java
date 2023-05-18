@@ -29,6 +29,7 @@ public class HelperDAO {
             for(int i = 0; i < parametros.size(); i++){
                 String pTipo = parametros.get(i).tipo;
                 String pValor = parametros.get(i).valor;
+                boolean pBool = parametros.get(i).booleano;
                 LocalDate pData = parametros.get(i).date;
                 byte[] pByte = null;
                 if("byte".equals(pTipo)){
@@ -41,7 +42,7 @@ public class HelperDAO {
                     statement.setLong(i+1, Long.parseLong(pValor));
                 }
                 if("boolean".equals(pTipo)){
-                    statement.setBoolean(i+1, Boolean.parseBoolean(pValor));
+                    statement.setBoolean(i+1, pBool);
                 }
                 if("inteiro".equals(pTipo)){
                     int valor = Integer.parseInt(pValor);

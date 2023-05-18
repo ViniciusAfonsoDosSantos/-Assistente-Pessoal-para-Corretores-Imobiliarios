@@ -4,15 +4,17 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
-import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Imovel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 /**
@@ -20,7 +22,7 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Vinicius
  */
-public class ImovelBoxController  {
+public class ImovelBoxController {
 
     /**
      * Initializes the controller class.
@@ -42,11 +44,18 @@ public class ImovelBoxController  {
 
     @FXML
     private Label ruaImovel;
-    
+
+    @FXML
+    private ImageView imgRetrato;
+
     DadoImovelSelecionado imovelSelecionado = DadoImovelSelecionado.getInstancia();
 
     public void setData(Imovel imovel) throws IOException {
 
+        if (imovel.getImagem1() != null) {
+            InputStream inputStream = new ByteArrayInputStream(imovel.getImagem1());
+            imgRetrato.setImage(new Image(inputStream));
+        }
         nomeImovel.setText(imovel.getNome());
         ruaImovel.setText("Endereço: " + imovel.getRua());
         cidadeImovel.setText("Telefone: " + imovel.getCidade());
@@ -69,7 +78,7 @@ public class ImovelBoxController  {
                 Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-*/
+         */
     }
-    
+
 }
