@@ -228,7 +228,7 @@ public class TelaCadastroClienteController extends PadraoController {
         if (status == 0) {
             
             ClienteDAO DAO = new ClienteDAO();
-            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo Imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
                     Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText());
         
             /*

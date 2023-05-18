@@ -159,7 +159,7 @@ public class TelaAdicionarImovelController extends PadraoController {
                     "kk");
             */
             
-            Imovel imovel = new Imovel(txtNomeResidencia.getText(), "TipImovel", true, true, Integer.parseInt(txtNumeroDormitorios.getText()),
+            Imovel imovel = new Imovel(txtNomeResidencia.getText(), "TipImovel", "TipFinalidade", Integer.parseInt(txtNumeroDormitorios.getText()),
                     Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
                     txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
                     txtFaixaPreco.getText(), byteArray, byteArray , byteArray);

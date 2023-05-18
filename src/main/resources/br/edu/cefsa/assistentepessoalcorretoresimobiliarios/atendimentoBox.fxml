@@ -31,10 +31,25 @@
          </children>
       </Pane>
       <ComboBox fx:id="cbImovel" layoutX="14.0" layoutY="70.0" prefHeight="28.0" prefWidth="200.0" />
-      <ComboBox fx:id="cbCliente" layoutX="14.0" layoutY="124.0" prefHeight="28.0" prefWidth="200.0" />
-      <TextArea fx:id="txtAnotacao" layoutX="240.0" layoutY="70.0" prefHeight="82.0" prefWidth="526.0" />
+      <ComboBox fx:id="cbCliente" layoutX="14.0" layoutY="141.0" prefHeight="28.0" prefWidth="200.0" />
+      <TextArea fx:id="txtAnotacao" layoutX="240.0" layoutY="70.0" prefHeight="98.0" prefWidth="526.0" />
       <Label layoutX="14.0" layoutY="52.0" text="Imóvel:" />
-      <Label layoutX="13.0" layoutY="102.0" text="Cliente:" />
+      <Label layoutX="13.0" layoutY="120.0" text="Cliente:" />
       <Label layoutX="240.0" layoutY="52.0" text="Anotação:" />
+      <Label fx:id="lbErroImovel" layoutX="14.0" layoutY="103.0" prefWidth="200.0" textFill="#ff001a">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErroCliente" layoutX="14.0" layoutY="169.0" prefWidth="200.0" textFill="#ff001a">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbErroAnotacao" layoutX="240.0" layoutY="169.0" prefWidth="200.0" textFill="#ff001a">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

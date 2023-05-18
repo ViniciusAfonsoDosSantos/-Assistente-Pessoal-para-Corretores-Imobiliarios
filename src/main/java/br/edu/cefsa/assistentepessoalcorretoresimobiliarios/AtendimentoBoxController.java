@@ -58,10 +58,22 @@ public class AtendimentoBoxController {
 
     @FXML
     private ComboBox<?> cbImovel;
+    
+     @FXML
+    private Label lbErroAnotacao;
+
+    @FXML
+    private Label lbErroCliente;
+
+    @FXML
+    private Label lbErroImovel;
+
+    Atendimento atendimento;
 
     public void setData(Atendimento atendimento) throws IOException {
 
         try {
+            this.atendimento = atendimento;
             ClienteDAO dao = new ClienteDAO();
             cbCliente.setConverter(new StringConverter<Cliente>() {
                 @Override
@@ -86,13 +98,13 @@ public class AtendimentoBoxController {
             Cliente cliente = new Cliente(atendimento.getClienteID());
             cbCliente.getSelectionModel().select(clientedao.listarPorID(cliente));
             txtAnotacao.setText(atendimento.getAnotacoes());
-            atendimentoTitulo.setText("Atendimento #");
+            atendimentoTitulo.setText("Atendimento: " + atendimento.getAtendimentoId());
             txtAnotacao.setDisable(true);
             cbCliente.setDisable(true);
             cbImovel.setDisable(true);
             iconeRemover.setOnMouseClicked(mouseEvent -> {
                 try {
-                    deletarAtendimento(atendimento);
+                    deletarAtendimento();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -106,21 +118,6 @@ public class AtendimentoBoxController {
             });
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void deletarAtendimento(Atendimento atendimento) throws PersistenciaException, IOException {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Deletar Atendimento");
-        alert.setContentText("Confirma a exclusão do Atendimento?");
-        dialog = alert.getDialogPane();
-        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
-        dialog.getStyleClass().add("dialog");
-        Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK) {
-            AtendimentoDAO dao = new AtendimentoDAO();
-            System.out.println("cliente => " + atendimento);
-            dao.remover(atendimento);
         }
     }
 
@@ -158,8 +155,8 @@ public class AtendimentoBoxController {
             iconeEditar.setOnMouseClicked(mouseEvent -> {
 
                 try {
-                    permiteSalvarNovo();
                     inserir(data);
+                    permiteAtualizar();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -176,16 +173,18 @@ public class AtendimentoBoxController {
 
         try {
             Cliente cliente = cbCliente.getValue();
-            Atendimento atendimento = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
+            Atendimento atendimentoNovo = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
-            dao.inserir(atendimento);
+            dao.inserir(atendimentoNovo);
+            this.atendimento = atendimentoNovo;
             iconeRemover.setOnMouseClicked(mouseEvent -> {
                 try {
-                    deletarAtendimento(atendimento);
+                    deletarAtendimento();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             });
+
         } catch (PersistenciaException ex) {
             Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
@@ -195,24 +194,38 @@ public class AtendimentoBoxController {
     }
 
     @FXML
-    private void alterar(Atendimento atendimento) throws IOException {
+    private void alterar() throws IOException {
 
-        Cliente cliente = cbCliente.getValue();
-        AtendimentoDAO dao = new AtendimentoDAO();
-        Atendimento atendimentoAlterar;
-        atendimentoAlterar = (new Atendimento(atendimento.getAtendimentoId(), atendimento.getDataAtendimento(), txtAnotacao.getText(), cliente.getClienteId(), atendimento.getImovelID()));
-        iconeEditar.setOnMouseClicked(mouseEvent -> {
-            try {
-                dao.alterar(atendimentoAlterar);
-            } catch (Exception ex) {
-                Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        });
+        try {
+            Cliente cliente = cbCliente.getValue();
+            AtendimentoDAO dao = new AtendimentoDAO();
+            Atendimento atendimentoAlterar = new Atendimento(atendimento.getAtendimentoId(), atendimento.getDataAtendimento(), txtAnotacao.getText(), cliente.getClienteId(), atendimento.getImovelID());
+            dao.alterar(atendimentoAlterar);
+            this.atendimento = atendimentoAlterar;
+        } catch (Exception ex) {
+            Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
+
+    public void deletarAtendimento() throws PersistenciaException, IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Deletar Atendimento");
+        alert.setContentText("Confirma a exclusão do Atendimento?");
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+        dialog.getStyleClass().add("dialog");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            AtendimentoDAO dao = new AtendimentoDAO();
+            System.out.println("cliente => " + atendimento);
+            dao.remover(atendimento);
+        }
+    }
+    //
 
     private void permiteAtualizar() throws IOException {
 
-        mudaIconeFuncao(null);
+        mudaIconeFuncao();
         txtAnotacao.setDisable(false);
         cbCliente.setDisable(false);
         cbImovel.setDisable(false);
@@ -220,21 +233,10 @@ public class AtendimentoBoxController {
 
     }
 
-    @FXML
-    private void permiteSalvarNovo() throws IOException {
+    private void permiteSalvar() throws IOException {
 
-        mudaIconeFuncao(null);
-        txtAnotacao.setDisable(true);
-        cbCliente.setDisable(true);
-        cbImovel.setDisable(true);
-        atendimentoBox.getStyleClass().clear();
-        atendimentoBox.getStyleClass().add("pane_boxcliente");
-    }
-
-    private void permiteSalvarExistente(Atendimento atendimento) throws IOException {
-
-        mudaIconeFuncao(atendimento);
-        alterar(atendimento);
+        mudaIconeFuncao();
+        alterar();
         txtAnotacao.setDisable(true);
         cbCliente.setDisable(true);
         cbImovel.setDisable(true);
@@ -243,7 +245,7 @@ public class AtendimentoBoxController {
     }
 
     @FXML
-    private void mudaIconeFuncao(Atendimento atendimento) throws IOException {
+    private void mudaIconeFuncao() throws IOException {
 
         if ("EDIT".equals(iconeEditar.getGlyphName())) {
             iconeEditar.setGlyphName("CHECK");
@@ -251,7 +253,7 @@ public class AtendimentoBoxController {
             iconeEditar.setStyleClass("icones_verde");
             iconeEditar.setOnMouseClicked(mouseEvent -> {
                 try {
-                    permiteSalvarNovo();
+                    permiteSalvar();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -265,10 +267,6 @@ public class AtendimentoBoxController {
 
                 try {
                     permiteAtualizar();
-                    if (atendimento != null) {
-                        permiteSalvarExistente(atendimento);
-
-                    }
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }

@@ -25,11 +25,11 @@ import java.util.logging.Logger;
 public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGenericoDAO<I>{
     public ImovelDAO(){
         super.setTabela("ASSISTENTECORRETORES.IMOVEL");                  
-        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,Venda,Locacao,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,finalidade,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.IMOVEL "
                         + "NOME=?," +
                         "Tipo_Imovel=?," +
-                        "Tipo_Locacao=?," +
+                        "finalidade=?," +
                         "Num_Dorms=?," +
                         "Num_Vagas=?," +
                         "METRAGEM=?," +
@@ -52,8 +52,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         List parametros = new ArrayList();
         parametros.add(new Parametro(imovel.getNome(), "texto"));
         parametros.add(new Parametro(imovel.getTipoImovel(), "texto"));
-        parametros.add(new Parametro(imovel.isVenda(), "boolean"));
-        parametros.add(new Parametro(imovel.isLocacao(), "boolean"));
+        parametros.add(new Parametro(imovel.getFinalidade(), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumDorms()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumVagas()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getMetragem()), "texto"));
@@ -86,8 +85,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
                 imoveis.add(new Imovel(
                         result.getString("NOME"), 
                         result.getString("TIPO_IMOVEL"), 
-                        result.getBoolean("VENDA"),
-                        result.getBoolean("LOCACAO"),
+                        result.getString("finalidade"),
                         result.getInt("NUM_DORMS"),
                         result.getInt("NUM_VAGAS"),
                         result.getDouble("METRAGEM"),
@@ -144,8 +142,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
                 return new Imovel(
                         result.getString("NOME"), 
                         result.getString("TIPO_IMOVEL"), 
-                        result.getBoolean("VENDA"),
-                        result.getBoolean("LOCACAO"),
+                        result.getString("finalidade"),
                         result.getInt("NUM_DORMS"),
                         result.getInt("NUM_VAGAS"),
                         result.getDouble("METRAGEM"),

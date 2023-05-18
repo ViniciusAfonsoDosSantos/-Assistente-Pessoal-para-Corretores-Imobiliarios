@@ -13,8 +13,7 @@ import java.time.LocalDate;
 public class Imovel extends GenericoModel {
     private String nome;
     private String tipoImovel;
-    private boolean venda;
-    private boolean locacao;
+    private String finalidade;
     private int numDorms;
     private int numVagas;
     private double metragem;
@@ -46,21 +45,15 @@ public class Imovel extends GenericoModel {
         this.tipoImovel = tipoImovel;
     }
 
-    public boolean isVenda() {
-        return venda;
+    public String getFinalidade() {
+        return finalidade;
     }
 
-    public void setVenda(boolean venda) {
-        this.venda = venda;
+    public void setFinalidade(String finalidade) {
+        this.finalidade = finalidade;
     }
 
-    public boolean isLocacao() {
-        return locacao;
-    }
-
-    public void setLocacao(boolean locacao) {
-        this.locacao = locacao;
-    }
+    
 
     public int getNumDorms() {
         return numDorms;
@@ -82,11 +75,10 @@ public class Imovel extends GenericoModel {
         return metragem;
     }
 
-    public Imovel(String nome, String tipoImovel, boolean venda, boolean locacao, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco, byte[] imagem1, byte[] imagem2, byte[] imagem3) {
+    public Imovel(String nome, String tipoImovel, String finalidade, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco, byte[] imagem1, byte[] imagem2, byte[] imagem3) {
         this.nome = nome;
         this.tipoImovel = tipoImovel;
-        this.venda = venda;
-        this.locacao = locacao;
+        this.finalidade = finalidade;
         this.numDorms = numDorms;
         this.numVagas = numVagas;
         this.metragem = metragem;
@@ -195,11 +187,10 @@ public class Imovel extends GenericoModel {
         this.imagem3 = imagem3;
     }
 
-    public Imovel(String nome, String tipoImovel, boolean venda, boolean locacao, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco) {
+    public Imovel(String nome, String tipoImovel, String finalidade, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco) {
         this.nome = nome;
         this.tipoImovel = tipoImovel;
-        this.venda = venda;
-        this.locacao = locacao;
+        this.finalidade = finalidade;
         this.numDorms = numDorms;
         this.numVagas = numVagas;
         this.metragem = metragem;
