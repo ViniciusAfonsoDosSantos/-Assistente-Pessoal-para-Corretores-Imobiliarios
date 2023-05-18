@@ -10,6 +10,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -28,14 +29,14 @@
             <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="874.0" layoutY="43.0" size="1.3em" styleClass="icones" />
          </children>
       </Pane>
-      <Label layoutX="94.0" layoutY="85.0" text="Adicionar Imóvel" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
+      <Label fx:id="lbTituloImovel" layoutX="94.0" layoutY="85.0" text="Adicionar Imóvel" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
       <AnchorPane layoutY="131.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="603.0" prefWidth="915.0" style="-fx-background-color: white;" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0" AnchorPane.topAnchor="120.0">
          <children>
-            <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
+            <Button alignment="CENTER" layoutX="569.0" layoutY="378.0" mnemonicParsing="false" onAction="#salvarImovel" prefHeight="26.0" prefWidth="75.0" styleClass="button_fundobranco" text="Salvar" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="40.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -115,7 +116,7 @@
             <TextField fx:id="txtCaracteristicas" layoutX="20.0" layoutY="188.0" prefHeight="28.0" prefWidth="253.0" styleClass="TextField" />
             <Pane layoutX="20.0" layoutY="349.0" prefHeight="190.0" prefWidth="885.0" styleClass="pane_boxcliente_interno">
                <children>
-                  <Button layoutX="22.0" layoutY="14.0" mnemonicParsing="false" text="Adicionar Imagem">
+                  <Button fx:id="btnAdicionarImagem" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#adicionarImovelImagem" text="Adicionar Imagem">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -124,6 +125,7 @@
                         <String fx:value="button_verde" />
                      </styleClass>
                   </Button>
+                  <HBox fx:id="imagensContainer" alignment="CENTER" layoutX="14.0" layoutY="45.0" prefHeight="132.0" prefWidth="862.0" spacing="70.0" />
                </children>
             </Pane>
          </children>
@@ -147,6 +149,11 @@
                      </VBox.margin>
                   </FontAwesomeIconView>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="STAR" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

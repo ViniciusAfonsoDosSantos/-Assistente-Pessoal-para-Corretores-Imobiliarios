@@ -28,12 +28,6 @@ import javafx.scene.layout.Pane;
 public class TelaPrincipalController extends PadraoController {
 
     @FXML
-    private Pane sidebarPane;
-
-    @FXML
-    private FontAwesomeIconView iconeMenu;
-
-    @FXML
     private FontAwesomeIconView iconeADM;
 
     @FXML
@@ -51,7 +45,6 @@ public class TelaPrincipalController extends PadraoController {
             iconeADM.setVisible(true);
         }
 
-        //TESTEEEEEE
         try {
             
             ClienteDAO clienteDAO = new ClienteDAO();

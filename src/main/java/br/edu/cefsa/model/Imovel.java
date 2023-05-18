@@ -4,7 +4,7 @@
  */
 package br.edu.cefsa.model;
 
-import java.sql.Blob;
+import java.io.InputStream;
 import java.time.LocalDate;
 
 /**
@@ -27,9 +27,9 @@ public class Imovel extends GenericoModel {
     private String caracteristicas;
     private LocalDate prazoEntrega;
     private String faixaPreco;
-    private Blob imagem1;
-    private Blob imagem2;
-    private Blob imagem3;
+    private byte[] imagem1;
+    private byte[] imagem2;
+    private byte[] imagem3;
 
     public String getNome() {
         return nome;
@@ -83,7 +83,7 @@ public class Imovel extends GenericoModel {
         return metragem;
     }
 
-    public Imovel(String nome, String tipoImovel, boolean venda, boolean locacao, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco, Blob imagem1, Blob imagem2, Blob imagem3) {
+    public Imovel(String nome, String tipoImovel, boolean venda, boolean locacao, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco, byte[] imagem1, byte[] imagem2, byte[] imagem3) {
         this.nome = nome;
         this.tipoImovel = tipoImovel;
         this.venda = venda;
@@ -172,27 +172,27 @@ public class Imovel extends GenericoModel {
         this.faixaPreco = faixaPreco;
     }
 
-    public Blob getImagem1() {
+    public byte[] getImagem1() {
         return imagem1;
     }
 
-    public void setImagem1(Blob imagem1) {
+    public void setImagem1(byte[] imagem1) {
         this.imagem1 = imagem1;
     }
 
-    public Blob getImagem2() {
+    public byte[] getImagem2() {
         return imagem2;
     }
 
-    public void setImagem2(Blob imagem2) {
+    public void setImagem2(byte[] imagem2) {
         this.imagem2 = imagem2;
     }
 
-    public Blob getImagem3() {
+    public byte[] getImagem3() {
         return imagem3;
     }
 
-    public void setImagem3(Blob imagem3) {
+    public void setImagem3(byte[] imagem3) {
         this.imagem3 = imagem3;
     }
 }

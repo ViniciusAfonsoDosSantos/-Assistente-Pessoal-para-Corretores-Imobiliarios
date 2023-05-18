@@ -53,7 +53,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         parametros.add(new Parametro(imovel.getNome(), "texto"));
         parametros.add(new Parametro(imovel.getTipoImovel(), "texto"));
         parametros.add(new Parametro(imovel.isVenda(), "booleano"));
-        parametros.add(new Parametro(imovel.isLocacao(), "texto"));
+        parametros.add(new Parametro(imovel.isLocacao(), "booleano"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumDorms()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getNumVagas()), "texto"));
         parametros.add(new Parametro(String.valueOf(imovel.getMetragem()), "texto"));
@@ -65,9 +65,9 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         parametros.add(new Parametro(imovel.getCaracteristicas(), "texto"));
         parametros.add(new Parametro(imovel.getPrazoEntrega(), "dateTime"));
         parametros.add(new Parametro(imovel.getFaixaPreco(), "texto"));
-        parametros.add(new Parametro(imovel.getImagem1(), "texto"));
-        parametros.add(new Parametro(imovel.getImagem2(), "texto"));
-        parametros.add(new Parametro(imovel.getImagem3(), "texto"));
+        parametros.add(new Parametro(imovel.getImagem1(), "byte"));
+        parametros.add(new Parametro(imovel.getImagem2(), "byte"));
+        parametros.add(new Parametro(imovel.getImagem3(), "byte"));
         if(update){
             parametros.add(new Parametro(String.valueOf(imovel.getID()), "long"));
         }
@@ -99,9 +99,9 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
                         result.getString("CARACTERISTICAS"),
                         result.getDate("PRAZO_ENTREGA").toLocalDate(),
                         result.getString("FAIXA_PRECO"),
-                        result.getBlob("Imagem1"),
-                        result.getBlob("Imagem2"),
-                        result.getBlob("Imagem3")
+                        result.getBytes("Imagem1"),
+                        result.getBytes("Imagem2"),
+                        result.getBytes("Imagem3")
                         ));
             }
             } catch (ClassNotFoundException ex) {
@@ -157,9 +157,9 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
                         result.getString("CARACTERISTICAS"),
                         result.getDate("PRAZO_ENTREGA").toLocalDate(),
                         result.getString("FAIXA_PRECO"),
-                        result.getBlob("Imagem1"),
-                        result.getBlob("Imagem2"),
-                        result.getBlob("Imagem3")
+                        result.getBytes("Imagem1"),
+                        result.getBytes("Imagem2"),
+                        result.getBytes("Imagem3")
                         );
             }
             else

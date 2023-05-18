@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="150.0" prefWidth="280.0" styleClass="pane_boxcliente" stylesheets="@estiloPrincipal.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="br.edu.cefsa.assistentepessoalcorretoresimobiliarios.ImovelBoxController">
+   <children>
+      <Pane prefHeight="45.0" prefWidth="200.0" styleClass="pane_boxcliente_superior" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="nomeImovel" layoutX="14.0" layoutY="14.0" text="Nome Imovel">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <HBox layoutX="216.0" layoutY="13.0" prefHeight="0.0" prefWidth="16.0" spacing="8.0">
+               <children>
+                  <FontAwesomeIconView fx:id="iconeEditar" glyphName="EDIT" size="20" styleClass="icones" />
+                  <FontAwesomeIconView fx:id="iconeRemover" glyphName="REMOVE" size="20" styleClass="icones" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+         </children>
+      </Pane>
+      <Label fx:id="ruaImovel" layoutX="14.0" layoutY="72.0" text="Rua:" />
+      <Label fx:id="cidadeImovel" layoutX="14.0" layoutY="102.0" text="Cidade:" />
+      <Label fx:id="bairroImovel" layoutX="15.0" layoutY="128.0" text="Bairro:" />
+   </children>
+</AnchorPane>

@@ -30,6 +30,10 @@ public class HelperDAO {
                 String pTipo = parametros.get(i).tipo;
                 String pValor = parametros.get(i).valor;
                 LocalDate pData = parametros.get(i).date;
+                byte[] pByte = null;
+                if("byte".equals(pTipo)){
+                    pByte = parametros.get(i).bytes;
+                }
                 if("texto".equals(pTipo)){
                     statement.setString(i+1, pValor);
                 }
@@ -50,8 +54,8 @@ public class HelperDAO {
                 if("data".equals(pTipo)){  
                     statement.setDate(i+1, java.sql.Date.valueOf(pData));
                 }
-                if("blob".equals(pTipo)){
-                    statement.setBlob(i+1, new ByteArrayInputStream(pValor.getBytes()));
+                if("byte".equals(pTipo)){
+                    statement.setBlob(i+1, new ByteArrayInputStream(pByte));
                 }
             }
         }

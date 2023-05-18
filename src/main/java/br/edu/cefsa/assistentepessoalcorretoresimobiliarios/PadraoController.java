@@ -22,6 +22,7 @@ public class PadraoController  implements Initializable{
     
     DadoUsuarioLogado usuarioLogado = DadoUsuarioLogado.getInstancia();
     DadoClienteSelecionado clienteSelecionado = DadoClienteSelecionado.getInstancia();
+    DadoImovelSelecionado imovelSelecionado = DadoImovelSelecionado.getInstancia();
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -33,12 +34,18 @@ public class PadraoController  implements Initializable{
     }
     
     @FXML
+    protected void redirecionarListarImovel() throws IOException {
+        App.setRoot("telaListarImoveis");
+    }
+    
+    @FXML
     private void redirecionarCalendario() throws IOException {
         App.setRoot("telaCalendario");
     }
     
     @FXML
     private void redirecionarAdicionarImovel() throws IOException {
+        imovelSelecionado.setImovel(null);
         App.setRoot("telaAdicionarImovel");
     }
     
@@ -56,11 +63,6 @@ public class PadraoController  implements Initializable{
     @FXML
     private void redirecionarLogin() throws IOException {
         App.setRoot("telaLogin");
-    }
-    
-    @FXML
-    private void redirecionarExpandirCliente() throws IOException {
-        App.setRoot("telaExpansaoCliente");
     }
     
     @FXML
