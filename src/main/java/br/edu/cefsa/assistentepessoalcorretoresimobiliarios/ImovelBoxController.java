@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
 /**
  * FXML Controller class
@@ -44,9 +45,14 @@ public class ImovelBoxController {
 
     @FXML
     private Label ruaImovel;
-
+    
     @FXML
-    private ImageView imgRetrato;
+    private AnchorPane imovelBoxx;
+
+    ImageView imgRetrato;
+    
+    @FXML
+    private Label lbPreco;
 
     DadoImovelSelecionado imovelSelecionado = DadoImovelSelecionado.getInstancia();
 
@@ -54,12 +60,20 @@ public class ImovelBoxController {
 
         if (imovel.getImagem1() != null) {
             InputStream inputStream = new ByteArrayInputStream(imovel.getImagem1());
+            imgRetrato = new ImageView();
+            imgRetrato.setLayoutX(226);
+            imgRetrato.setLayoutY(50);
             imgRetrato.setImage(new Image(inputStream));
+            imgRetrato.setFitHeight(140);
+            imgRetrato.setFitWidth(190);
+            imgRetrato.setPreserveRatio(true);
+            imovelBoxx.getChildren().add(imgRetrato);
         }
         nomeImovel.setText(imovel.getNome());
         ruaImovel.setText("Endereço: " + imovel.getRua());
         cidadeImovel.setText("Telefone: " + imovel.getCidade());
         bairroImovel.setText("Email: " + imovel.getBairro());
+        lbPreco.setText("R$: " + imovel.getFaixaPreco());
         iconeEditar.setOnMouseClicked((MouseEvent event) -> {
 
             try {

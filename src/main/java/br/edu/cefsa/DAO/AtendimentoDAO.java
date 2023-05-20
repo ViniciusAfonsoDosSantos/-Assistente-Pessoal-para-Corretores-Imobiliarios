@@ -29,11 +29,11 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
     public AtendimentoDAO(){
         super.setTabela("ASSISTENTECORRETORES.Atendimento");
         super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.ATENDIMENTO (CLIENTE_ID,IMOVEL_ID,DATA_ATENDIMENTO,ANOTACAO_ATENDIMENTO) VALUES (?,?,?,?)");
-        super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.ATENDIMENTO "
-                        + "CLIENTE_ID=?" +
-                        "IMOVEL_ID=?" +
-                        "DATA_ATENDIMENTO=?" +
-                        "ANOTACAO_ATENDIMENTO=?" +
+        super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.ATENDIMENTO SET " + 
+                        "CLIENTE_ID=? , " +
+                        "IMOVEL_ID=? , " +
+                        "DATA_ATENDIMENTO=? , " +
+                        "ANOTACAO_ATENDIMENTO=? " +
                         "WHERE ATENDIMENTO_ID = ?");                    
     }
     
@@ -125,6 +125,36 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
             }
         }
         return null;
+    }
+    
+    public int listarUltimoAtendimento() throws PersistenciaException {
+        String sql = "select MAX(ATENDIMENTO_ID) AS ATENDIMENTO_ID from ASSISTENTECORRETORES.ATENDIMENTO";
+        Connection connection = null;
+        try {
+            connection = Conexao.getInstance().getConnection();
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            ResultSet result = pStatement.executeQuery();
+            
+            if (result.next()) {
+                
+                return result.getInt("ATENDIMENTO_ID");
+                                   
+            }
+            else
+                return 0;
+            }
+        catch (ClassNotFoundException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return 0;
     }
     
     public List listarPorData(LocalDate e) throws PersistenciaException {

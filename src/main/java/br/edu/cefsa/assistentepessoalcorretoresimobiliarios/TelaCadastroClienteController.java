@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
@@ -172,6 +173,24 @@ public class TelaCadastroClienteController extends PadraoController {
 
     @FXML
     private Label lbErroTipo;
+    
+     @FXML
+    private RadioButton rbApto;
+
+    @FXML
+    private RadioButton rbCasa;
+
+    @FXML
+    private RadioButton rbComl;
+
+    @FXML
+    private RadioButton rbFlat;
+
+    @FXML
+    private RadioButton rbInvestimento;
+
+    @FXML
+    private RadioButton rbUso;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -210,8 +229,27 @@ public class TelaCadastroClienteController extends PadraoController {
             txtFaixaPreco.setText(imovelProcurado.getFaixaPreco());
             txtBairros.setText(imovelProcurado.getBairros());
             txtCondicoes.setText(imovelProcurado.getCondicoes());
-
             
+            if("Apto".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoImovel())){
+                
+                rbApto.setSelected(true);
+            }
+            else if("Casa".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoImovel())){
+                rbCasa.setSelected(true);
+            }
+            else if("Coml".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoImovel())){
+                rbComl.setSelected(true);
+            }
+            else if("Flat".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoImovel())){
+                rbFlat.setSelected(true);
+            }
+
+            if("Uso".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoAquisicao())){
+                rbUso.setSelected(true);
+            }
+            else if("Investimento".equals(clienteSelecionado.getCliente().getImovelProcuradoCliente().getTipoAquisicao())){
+                rbInvestimento.setSelected(true);
+            }
             txtCPF.setDisable(true);
 
         } else {
@@ -228,17 +266,13 @@ public class TelaCadastroClienteController extends PadraoController {
         if (status == 0) {
             
             ClienteDAO DAO = new ClienteDAO();
-            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo Imovel", "Tipo Aquisição", Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
+            RadioButton tipoImovelSelecionado = (RadioButton) tipoMoradia.getSelectedToggle();
+            String tipoImovel = tipoImovelSelecionado.getText();
+            RadioButton qualUsoSelecionado = (RadioButton) qualUso.getSelectedToggle();
+            String tipoFinalidade = qualUsoSelecionado.getText();
+            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente(tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()), Integer.parseInt(txtNumeroVagas.getText()), 
                     Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText());
-        
-            /*
-            ('Vinicius','12345678912' , '2019-04-13' ,'Conjuge1' ,'Profissao1 ','11123456789',
-            'afonso.vinicius1@outlook.com', 'rua1', 'sp' ,'sbc', 'tn', '12345678' ,'tipo' , 'intencao',3,3,54, 
-            'Bairro1' ,'condicao', '1-2' , '2023-07-13')
-            
-            ImovelProcuradoCliente imovelProcurado = new ImovelProcuradoCliente("Tipo imovel", "Tipo Aquisição", 3, 3, 
-                    3.2, "Bairro1", "Condição1", "FaixaPreco");
-            */
+    
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
                     txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
                     txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);

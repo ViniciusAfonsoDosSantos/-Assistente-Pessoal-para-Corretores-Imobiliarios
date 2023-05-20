@@ -28,23 +28,23 @@
             <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
             <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="USERS" layoutX="11.0" layoutY="97.0" onMouseClicked="#redirecionarTelaPrincipal" selectionFill="BLACK" size="1.5em" styleClass="icones" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="HOME" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="STAR" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -67,7 +67,6 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="865.0" layoutY="42.0" size="1.3em" styleClass="icones" />
          </children>
       </Pane>
       <AnchorPane layoutX="75.0" layoutY="489.0" prefHeight="213.0" prefWidth="927.0" styleClass="pane_boxcliente" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="12.0">
@@ -84,22 +83,22 @@
             <Label layoutX="639.0" layoutY="70.0" text="Faixa de preço" />
             <Label layoutX="330.0" layoutY="135.0" text="Condições" />
             <TextField fx:id="txtCondicoes" layoutX="330.0" layoutY="155.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
-            <RadioButton layoutX="72.0" layoutY="21.0" mnemonicParsing="false" text="Apto">
+            <RadioButton fx:id="rbApto" layoutX="72.0" layoutY="21.0" mnemonicParsing="false" text="Apto">
                <toggleGroup>
                   <ToggleGroup fx:id="tipoMoradia" />
                </toggleGroup>
                <font>
                   <Font size="14.0" />
                </font></RadioButton>
-            <RadioButton layoutX="148.0" layoutY="21.0" mnemonicParsing="false" text="Casa" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbCasa" layoutX="148.0" layoutY="21.0" mnemonicParsing="false" text="Casa" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font></RadioButton>
-            <RadioButton layoutX="224.0" layoutY="21.0" mnemonicParsing="false" text="Flat" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbFlat" layoutX="224.0" layoutY="21.0" mnemonicParsing="false" text="Flat" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font></RadioButton>
-            <RadioButton layoutX="291.0" layoutY="21.0" mnemonicParsing="false" text="Coml" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbComl" layoutX="291.0" layoutY="21.0" mnemonicParsing="false" text="Coml" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font></RadioButton>
@@ -113,7 +112,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="730.0" layoutY="21.0" mnemonicParsing="false" text="Uso">
+            <RadioButton fx:id="rbUso" layoutX="730.0" layoutY="21.0" mnemonicParsing="false" text="Uso">
                <font>
                   <Font size="14.0" />
                </font>
@@ -121,7 +120,7 @@
                   <ToggleGroup fx:id="qualUso" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="793.0" layoutY="21.0" mnemonicParsing="false" text="Investimento" toggleGroup="$qualUso">
+            <RadioButton fx:id="rbInvestimento" layoutX="793.0" layoutY="21.0" mnemonicParsing="false" text="Investimento" toggleGroup="$qualUso">
                <font>
                   <Font size="14.0" />
                </font>
@@ -166,7 +165,7 @@
                   <Font size="10.0" />
                </font>
             </Label>
-            <Label fx:id="lbErroFaixaPreco" layoutX="639.0" layoutY="183.0" prefHeight="15.0" prefWidth="181.0" textFill="#ff001a">
+            <Label fx:id="lbErroFaixaPreco" layoutX="639.0" layoutY="113.0" prefHeight="15.0" prefWidth="181.0" textFill="#ff001a">
                <font>
                   <Font size="10.0" />
                </font>

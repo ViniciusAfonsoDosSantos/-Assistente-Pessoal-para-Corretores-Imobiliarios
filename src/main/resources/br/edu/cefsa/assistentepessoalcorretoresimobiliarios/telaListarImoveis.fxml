@@ -16,14 +16,13 @@
    <children>
       <Pane layoutX="85.0" layoutY="10.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="0.0">
          <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="STAR" layoutX="21.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="MAP" layoutX="21.0" layoutY="46.0" size="2em" />
             <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
             <Label layoutX="69.0" layoutY="28.0" text="Imóveis">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="874.0" layoutY="43.0" size="1.3em" styleClass="icones" />
          </children>
       </Pane>
       <Pane layoutX="20.0" layoutY="20.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -33,23 +32,23 @@
             <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
             <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="USERS" layoutX="11.0" layoutY="97.0" onMouseClicked="#redirecionarTelaPrincipal" selectionFill="BLACK" size="1.5em" styleClass="icones" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="HOME" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="STAR" layoutX="11.0" layoutY="133.0" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
@@ -73,7 +72,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
          <graphic>
-            <FontAwesomeIconView glyphName="MAP" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icone" />
+            <FontAwesomeIconView glyphName="HOME" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icone" />
          </graphic>
       </Button>
       <VBox layoutX="85.0" layoutY="125.0" prefHeight="619.0" prefWidth="904.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="120.0">

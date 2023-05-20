@@ -58,7 +58,7 @@ public class TelaListarImoveisController extends PadraoController {
                 ImovelBoxController imovelBoxController = fxmlLoader.getController();
                 imovelBoxController.setData(imovel);
 
-                if (column == 3) {
+                if (column == 2) {
                     column = 0;
                     ++row;
                 }

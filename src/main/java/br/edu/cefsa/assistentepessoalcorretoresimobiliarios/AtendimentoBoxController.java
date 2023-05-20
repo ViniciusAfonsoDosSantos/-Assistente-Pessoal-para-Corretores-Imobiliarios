@@ -6,9 +6,11 @@ package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
 import br.edu.cefsa.DAO.AtendimentoDAO;
 import br.edu.cefsa.DAO.ClienteDAO;
+import br.edu.cefsa.DAO.ImovelDAO;
 import br.edu.cefsa.exception.PersistenciaException;
 import br.edu.cefsa.model.Atendimento;
 import br.edu.cefsa.model.Cliente;
+import br.edu.cefsa.model.Imovel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.text.ParseException;
@@ -57,7 +59,7 @@ public class AtendimentoBoxController {
     private ComboBox<Cliente> cbCliente;
 
     @FXML
-    private ComboBox<?> cbImovel;
+    private ComboBox<Imovel> cbImovel;
     
      @FXML
     private Label lbErroAnotacao;
@@ -75,6 +77,7 @@ public class AtendimentoBoxController {
         try {
             this.atendimento = atendimento;
             ClienteDAO dao = new ClienteDAO();
+            ImovelDAO imovelDAO = new ImovelDAO();
             cbCliente.setConverter(new StringConverter<Cliente>() {
                 @Override
                 public String toString(Cliente object) {
@@ -90,13 +93,32 @@ public class AtendimentoBoxController {
                     return null;
                 }
             });
+            cbImovel.setConverter(new StringConverter<Imovel>() {
+                @Override
+                public String toString(Imovel object) {
+                    if (object == null) {
+                        return "";
+                    } else {
+                        return object.getNome();
+                    }
+                }
+
+                @Override
+                public Imovel fromString(String string) {
+                    return null;
+                }
+            });
 
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
-            ClienteDAO clientedao = new ClienteDAO();
             Cliente cliente = new Cliente(atendimento.getClienteID());
-            cbCliente.getSelectionModel().select(clientedao.listarPorID(cliente));
+            cbCliente.getSelectionModel().select(dao.listarPorID(cliente));
+            List<Imovel> listaImoveis = imovelDAO.listar();
+            ObservableList ObListImoveis = FXCollections.observableList(listaImoveis);
+            cbImovel.setItems(ObListImoveis);
+            //Imovel imovel = new Imovel(atendimento.getImovelID());
+            //cbImovel.getSelectionModel().select(imovelDAO.listarPorID(imovel));
             txtAnotacao.setText(atendimento.getAnotacoes());
             atendimentoTitulo.setText("Atendimento: " + atendimento.getAtendimentoId());
             txtAnotacao.setDisable(true);
@@ -126,6 +148,7 @@ public class AtendimentoBoxController {
         try {
             atendimentoTitulo.setText("Atendimento ##");
             ClienteDAO dao = new ClienteDAO();
+            ImovelDAO imovelDAO = new ImovelDAO();
 
             cbCliente.setConverter(new StringConverter<Cliente>() {
                 @Override
@@ -143,9 +166,28 @@ public class AtendimentoBoxController {
                     return null;
                 }
             });
+            cbImovel.setConverter(new StringConverter<Imovel>() {
+                @Override
+                public String toString(Imovel object) {
+                    if (object == null) {
+                        return "";
+                    } else {
+                        return object.getNome();
+                    }
+                }
+
+                @Override
+                public Imovel fromString(String string) {
+                    return null;
+                }
+            });
+            
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
+            List<Imovel> listaImoveis = imovelDAO.listar();
+            ObservableList ObListImoveis = FXCollections.observableList(listaImoveis);
+            cbImovel.setItems(ObListImoveis);
             txtAnotacao.setDisable(false);
             cbCliente.setDisable(false);
             cbImovel.setDisable(false);
@@ -173,10 +215,13 @@ public class AtendimentoBoxController {
 
         try {
             Cliente cliente = cbCliente.getValue();
+            Imovel imovel = cbImovel.getValue();
+            //Falta id no imovel;
             Atendimento atendimentoNovo = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimentoNovo);
             this.atendimento = atendimentoNovo;
+            atendimento.setAtendimentoId(dao.listarUltimoAtendimento());
             iconeRemover.setOnMouseClicked(mouseEvent -> {
                 try {
                     deletarAtendimento();
@@ -199,7 +244,7 @@ public class AtendimentoBoxController {
         try {
             Cliente cliente = cbCliente.getValue();
             AtendimentoDAO dao = new AtendimentoDAO();
-            Atendimento atendimentoAlterar = new Atendimento(atendimento.getAtendimentoId(), atendimento.getDataAtendimento(), txtAnotacao.getText(), cliente.getClienteId(), atendimento.getImovelID());
+            Atendimento atendimentoAlterar = new Atendimento(atendimento.getAtendimentoId(), atendimento.getDataAtendimento(), txtAnotacao.getText(), cliente.getClienteId(), 1);
             dao.alterar(atendimentoAlterar);
             this.atendimento = atendimentoAlterar;
         } catch (Exception ex) {

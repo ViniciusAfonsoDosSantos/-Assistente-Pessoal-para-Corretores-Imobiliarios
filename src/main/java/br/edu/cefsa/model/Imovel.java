@@ -95,6 +95,7 @@ public class Imovel extends GenericoModel {
         this.imagem3 = imagem3;
     }
 
+    
     public void setMetragem(double metragem) {
         this.metragem = metragem;
     }

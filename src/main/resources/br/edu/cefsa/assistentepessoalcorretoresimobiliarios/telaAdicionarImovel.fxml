@@ -19,14 +19,13 @@
    <children>
       <Pane layoutX="83.0" prefHeight="75.0" prefWidth="705.0" style="-fx-background-color: #FFFFFF;" styleClass="pane" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="35.0">
          <children>
-            <FontAwesomeIconView fill="#2b49b3" glyphName="MAP" layoutX="20.0" layoutY="46.0" size="2em" />
+            <FontAwesomeIconView fill="#2b49b3" glyphName="HOME" layoutX="20.0" layoutY="46.0" size="2em" />
             <FontAwesomeIconView glyphName="ARROW_RIGHT" layoutX="51.0" layoutY="42.0" size="1em" />
             <Label layoutX="69.0" layoutY="28.0" text="Adicionar Imóvel">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <FontAwesomeIconView fill="GREY" glyphName="QUESTION_CIRCLE" layoutX="874.0" layoutY="43.0" size="1.3em" styleClass="icones" />
          </children>
       </Pane>
       <Label fx:id="lbTituloImovel" layoutX="94.0" layoutY="85.0" text="Adicionar Imóvel" AnchorPane.leftAnchor="98.0" AnchorPane.topAnchor="84.0">
@@ -60,18 +59,16 @@
             <TextField fx:id="txtNumeroVagas" layoutX="212.0" layoutY="256.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
             <Label layoutX="415.0" layoutY="238.0" text="Metragem (M²)" />
             <TextField fx:id="txtMetragem" layoutX="415.0" layoutY="256.0" prefHeight="28.0" prefWidth="150.0" styleClass="TextField" />
-            <Label layoutX="616.0" layoutY="170.0" text="Prazo máximo de entrega" />
-            <DatePicker fx:id="mskPrazoEntrega" layoutX="616.0" layoutY="188.0" prefHeight="28.0" prefWidth="286.0" />
-            <Label layoutX="616.0" layoutY="238.0" text="Faixa de preço" />
-            <TextField fx:id="txtFaixaPreco" layoutX="615.0" layoutY="256.0" prefHeight="28.0" prefWidth="286.0" styleClass="TextField" />
-            <Label layoutX="318.0" layoutY="170.0" text="Condições" />
-            <TextField fx:id="txtCondicoes" layoutX="318.0" layoutY="188.0" prefHeight="28.0" prefWidth="254.0" styleClass="TextField" />
-            <Label layoutX="22.0" layoutY="309.0" text="Tipo:">
+            <Label layoutX="318.0" layoutY="169.0" text="Prazo máximo de entrega" />
+            <DatePicker fx:id="mskPrazoEntrega" layoutX="319.0" layoutY="188.0" prefHeight="28.0" prefWidth="254.0" />
+            <Label layoutX="616.0" layoutY="169.0" text="Faixa de preço" />
+            <TextField fx:id="txtFaixaPreco" layoutX="608.0" layoutY="188.0" prefHeight="28.0" prefWidth="286.0" styleClass="TextField" />
+            <Label layoutX="593.0" layoutY="246.0" text="Tipo:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="72.0" layoutY="310.0" mnemonicParsing="false" text="Apto">
+            <RadioButton fx:id="rbApto" layoutX="635.0" layoutY="245.0" mnemonicParsing="false" text="Apto">
                <toggleGroup>
                   <ToggleGroup fx:id="tipoMoradia" />
                </toggleGroup>
@@ -79,27 +76,27 @@
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="148.0" layoutY="310.0" mnemonicParsing="false" text="Casa" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbCasa" layoutX="702.0" layoutY="246.0" mnemonicParsing="false" text="Casa" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="224.0" layoutY="310.0" mnemonicParsing="false" text="Flat" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbFlat" layoutX="772.0" layoutY="245.0" mnemonicParsing="false" text="Flat" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <RadioButton layoutX="291.0" layoutY="310.0" mnemonicParsing="false" text="Coml" toggleGroup="$tipoMoradia">
+            <RadioButton fx:id="rbComl" layoutX="833.0" layoutY="245.0" mnemonicParsing="false" text="Coml" toggleGroup="$tipoMoradia">
                <font>
                   <Font size="14.0" />
                </font>
             </RadioButton>
-            <Label layoutX="676.0" layoutY="309.0" text="Para:">
+            <Label layoutX="593.0" layoutY="280.0" text="Para:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <RadioButton layoutX="718.0" layoutY="309.0" mnemonicParsing="false" text="Venda">
+            <RadioButton fx:id="rbVenda" layoutX="635.0" layoutY="280.0" mnemonicParsing="false" text="Venda">
                <font>
                   <Font size="14.0" />
                </font>
@@ -107,7 +104,7 @@
                   <ToggleGroup fx:id="qualUso" />
                </toggleGroup>
             </RadioButton>
-            <RadioButton layoutX="793.0" layoutY="309.0" mnemonicParsing="false" text="Locação" toggleGroup="$qualUso">
+            <RadioButton fx:id="rbLocacao" layoutX="712.0" layoutY="280.0" mnemonicParsing="false" text="Locação" toggleGroup="$qualUso">
                <font>
                   <Font size="14.0" />
                </font>
@@ -116,18 +113,93 @@
             <TextField fx:id="txtCaracteristicas" layoutX="20.0" layoutY="188.0" prefHeight="28.0" prefWidth="253.0" styleClass="TextField" />
             <Pane layoutX="20.0" layoutY="349.0" prefHeight="190.0" prefWidth="885.0" styleClass="pane_boxcliente_interno">
                <children>
-                  <Button fx:id="btnAdicionarImagem" layoutX="22.0" layoutY="14.0" mnemonicParsing="false" onAction="#adicionarImovelImagem" text="Adicionar Imagem">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <styleClass>
-                        <String fx:value="button_fundobranco_verde" />
-                        <String fx:value="button_verde" />
-                     </styleClass>
-                  </Button>
-                  <HBox fx:id="imagensContainer" alignment="CENTER" layoutX="14.0" layoutY="45.0" prefHeight="132.0" prefWidth="862.0" spacing="70.0" />
+                  <HBox fx:id="imagensContainer" alignment="CENTER" layoutX="14.0" layoutY="11.0" prefHeight="166.0" prefWidth="862.0" spacing="70.0" />
                </children>
             </Pane>
+            <Button fx:id="btnAdicionarImagem" layoutX="34.0" layoutY="306.0" mnemonicParsing="false" onAction="#adicionarImovelImagem" text="Adicionar Imagem">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="button_fundobranco_verde" />
+                  <String fx:value="button_verde" />
+               </styleClass>
+            </Button>
+            <Label fx:id="lbErroNomeResidencia" layoutX="22.0" layoutY="68.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroCEP" layoutX="319.0" layoutY="68.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroEnderecoResidencia" layoutX="616.0" layoutY="68.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroCidade" layoutX="22.0" layoutY="141.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroBairro" layoutX="319.0" layoutY="141.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroComplemento" layoutX="616.0" layoutY="141.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroNomeCaracteristicas" layoutX="22.0" layoutY="216.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroPrazoEntrega" layoutX="319.0" layoutY="216.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroFaixaPreco" layoutX="612.0" layoutY="216.0" prefWidth="200.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroNumeroDormitorios" layoutX="22.0" layoutY="282.0" prefHeight="15.0" prefWidth="166.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroVagas" layoutX="212.0" layoutY="282.0" prefHeight="15.0" prefWidth="166.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroMetragem" layoutX="419.0" layoutY="282.0" prefHeight="15.0" prefWidth="166.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroTipo" layoutX="593.0" layoutY="262.0" prefHeight="15.0" prefWidth="166.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroFinalidade" layoutX="593.0" layoutY="298.0" prefHeight="15.0" prefWidth="166.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
+            <Label fx:id="lbErroAdicionarImagem" layoutX="39.0" layoutY="333.0" prefHeight="15.0" prefWidth="261.0" textFill="#ff001a">
+               <font>
+                  <Font size="10.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <Pane layoutX="10.0" layoutY="10.0" prefHeight="580.0" prefWidth="45.0" styleClass="sidebar" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -137,23 +209,23 @@
             <FontAwesomeIconView glyphName="USER" layoutX="12.0" layoutY="728.0" onMouseClicked="#redirecionarOpcoesUsuario" size="2.5em" styleClass="icones" />
             <VBox alignment="CENTER" layoutX="14.0" layoutY="251.0">
                <children>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" fill="#2b49b3" glyphName="HOME" onMouseClicked="#redirecionarTelaPrincipal" size="1.5em" styleClass="icones" text="" />
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="USERS" layoutX="11.0" layoutY="97.0" onMouseClicked="#redirecionarTelaPrincipal" selectionFill="BLACK" size="1.5em" styleClass="icones" />
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="ADDRESS_BOOK" onMouseClicked="#redirecionarCadastrarCliente" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="HOME" onMouseClicked="#redirecionarAdicionarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </FontAwesomeIconView>
+                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="MAP" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>
                   </FontAwesomeIconView>
                   <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="CALENDAR" onMouseClicked="#redirecionarCalendario" selectionFill="BLACK" size="1.5em" styleClass="icones">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                  </FontAwesomeIconView>
-                  <FontAwesomeIconView boundsType="LOGICAL_VERTICAL_CENTER" glyphName="STAR" onMouseClicked="#redirecionarListarImovel" selectionFill="BLACK" size="1.5em" styleClass="icones">
                      <VBox.margin>
                         <Insets top="15.0" />
                      </VBox.margin>

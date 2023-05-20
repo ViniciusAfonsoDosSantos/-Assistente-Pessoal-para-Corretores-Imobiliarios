@@ -31,7 +31,10 @@ import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import javafx.scene.control.RadioButton;
 import javax.imageio.ImageIO;
 
 /**
@@ -72,9 +75,6 @@ public class TelaAdicionarImovelController extends PadraoController {
     private TextField txtComplemento;
 
     @FXML
-    private TextField txtCondicoes;
-
-    @FXML
     private TextField txtEndereco;
 
     @FXML
@@ -96,12 +96,77 @@ public class TelaAdicionarImovelController extends PadraoController {
     private Label lbTituloImovel;
 
     @FXML
+    private RadioButton rbApto;
+
+    @FXML
+    private RadioButton rbCasa;
+
+    @FXML
+    private RadioButton rbComl;
+
+    @FXML
+    private RadioButton rbFlat;
+
+    @FXML
+    private RadioButton rbLocacao;
+
+    @FXML
+    private RadioButton rbVenda;
+
+    @FXML
     private Button btnAdicionarImagem;
 
     @FXML
     private HBox imagensContainer;
+    
+     @FXML
+    private Label lbErroAdicionarImagem;
 
-    Queue<File> filaImagens = new LinkedList<File>();
+    @FXML
+    private Label lbErroBairro;
+
+    @FXML
+    private Label lbErroCEP;
+
+    @FXML
+    private Label lbErroCidade;
+
+    @FXML
+    private Label lbErroComplemento;
+
+    @FXML
+    private Label lbErroEnderecoResidencia;
+
+    @FXML
+    private Label lbErroFaixaPreco;
+
+    @FXML
+    private Label lbErroFinalidade;
+
+    @FXML
+    private Label lbErroMetragem;
+
+    @FXML
+    private Label lbErroNomeCaracteristicas;
+
+    @FXML
+    private Label lbErroNomeResidencia;
+
+    @FXML
+    private Label lbErroNumeroDormitorios;
+
+    @FXML
+    private Label lbErroPrazoEntrega;
+
+    @FXML
+    private Label lbErroTipo;
+
+    @FXML
+    private Label lbErroVagas;
+
+    Queue<byte[]> filaImagens = new LinkedList<byte[]>();
+
+    byte[] byteArray = null;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -113,19 +178,52 @@ public class TelaAdicionarImovelController extends PadraoController {
 
         if (imovelSelecionado.getImovel() != null) {
 
-            lbTituloImovel.setText("Atualizar Imovel");
-            txtNomeResidencia.setText(imovelSelecionado.getImovel().getNome());
-            txtCEP.setText(imovelSelecionado.getImovel().getCEP());
-            txtEndereco.setText(imovelSelecionado.getImovel().getRua());
-            txtCidade.setText(imovelSelecionado.getImovel().getCidade());
-            txtBairro.setText(imovelSelecionado.getImovel().getBairro());
-            txtComplemento.setText(imovelSelecionado.getImovel().getComplemento());
-            txtCaracteristicas.setText(imovelSelecionado.getImovel().getCaracteristicas());
-            mskPrazoEntrega.setValue(imovelSelecionado.getImovel().getPrazoEntrega());
-            txtNumeroDormitorios.setText(String.valueOf(imovelSelecionado.getImovel().getNumDorms()));
-            txtNumeroVagas.setText(String.valueOf(imovelSelecionado.getImovel().getNumVagas()));
-            txtMetragem.setText(String.valueOf(imovelSelecionado.getImovel().getMetragem()));
-            txtFaixaPreco.setText(imovelSelecionado.getImovel().getFaixaPreco());
+            try {
+                lbTituloImovel.setText("Atualizar Imovel");
+                txtNomeResidencia.setText(imovelSelecionado.getImovel().getNome());
+                txtCEP.setText(imovelSelecionado.getImovel().getCEP());
+                txtEndereco.setText(imovelSelecionado.getImovel().getRua());
+                txtCidade.setText(imovelSelecionado.getImovel().getCidade());
+                txtBairro.setText(imovelSelecionado.getImovel().getBairro());
+                txtComplemento.setText(imovelSelecionado.getImovel().getComplemento());
+                txtCaracteristicas.setText(imovelSelecionado.getImovel().getCaracteristicas());
+                mskPrazoEntrega.setValue(imovelSelecionado.getImovel().getPrazoEntrega());
+                txtNumeroDormitorios.setText(String.valueOf(imovelSelecionado.getImovel().getNumDorms()));
+                txtNumeroVagas.setText(String.valueOf(imovelSelecionado.getImovel().getNumVagas()));
+                txtMetragem.setText(String.valueOf(imovelSelecionado.getImovel().getMetragem()));
+                txtFaixaPreco.setText(imovelSelecionado.getImovel().getFaixaPreco());
+                
+                if ("Apto".equals(imovelSelecionado.getImovel().getTipoImovel())) {
+                    rbApto.setSelected(true);
+                } else if ("Casa".equals(imovelSelecionado.getImovel().getTipoImovel())) {
+                    rbCasa.setSelected(true);
+                } else if ("Coml".equals(imovelSelecionado.getImovel().getTipoImovel())) {
+                    rbComl.setSelected(true);
+                } else if ("Flat".equals(imovelSelecionado.getImovel().getTipoImovel())) {
+                    rbFlat.setSelected(true);
+                }
+
+                if ("Venda".equals(imovelSelecionado.getImovel().getFinalidade())) {
+                    rbVenda.setSelected(true);
+                } else if ("Locacao".equals(imovelSelecionado.getImovel().getFinalidade())) {
+                    rbLocacao.setSelected(true);
+                }
+                filaImagens.add(imovelSelecionado.getImovel().getImagem1());
+                filaImagens.add(imovelSelecionado.getImovel().getImagem2());
+                filaImagens.add(imovelSelecionado.getImovel().getImagem3());
+
+                adicionarImagemTela();
+
+            } catch (IOException ex) {
+                Logger.getLogger(TelaAdicionarImovelController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(TelaAdicionarImovelController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(TelaAdicionarImovelController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaAdicionarImovelController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         } else {
 
             lbTituloImovel.setText("Cadastrar Imóvel");
@@ -136,43 +234,23 @@ public class TelaAdicionarImovelController extends PadraoController {
     private void salvarImovel() throws IOException, SQLException, PersistenciaException, ParseException {
 
         //Corrigir double - tirar ponto e virgula;
-        byte[] byteArray = null;
         int status = 0;
         if (status == 0) {
 
-            for (int i = 0; i < filaImagens.size(); i++) {
-
-                BufferedImage imagem = ImageIO.read(filaImagens.remove());
-                ByteArrayOutputStream bytesImg = new ByteArrayOutputStream();
-                ImageIO.write((BufferedImage) imagem, "jpg", bytesImg);//seta a imagem para bytesImg
-                bytesImg.flush();//limpa a variável
-                byteArray = bytesImg.toByteArray();//Converte ByteArrayOutputStream para byte[] 
-                bytesImg.close();//fecha a conversão
-            }
-
             ImovelDAO DAO = new ImovelDAO();
 
-            /*
-            Imovel imovel = new Imovel("kkk", "TipImovel", true, true, 2,
-                    2, 2.2, "kkk", "kkk",
-                    "kk", "kk", "kk", "kk", mskPrazoEntrega.getValue(),
-                    "kk");
-            */
-            
-            Imovel imovel = new Imovel(txtNomeResidencia.getText(), "TipImovel", "TipFinalidade", Integer.parseInt(txtNumeroDormitorios.getText()),
+            RadioButton tipoImovelSelecionado = (RadioButton) tipoMoradia.getSelectedToggle();
+            String tipoImovel = tipoImovelSelecionado.getText();
+            RadioButton qualUsoSelecionado = (RadioButton) qualUso.getSelectedToggle();
+            String tipoFinalidade = qualUsoSelecionado.getText();
+            Imovel imovel = new Imovel(txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
                     Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
                     txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
-                    txtFaixaPreco.getText(), byteArray, byteArray , byteArray);
+                    txtFaixaPreco.getText(), filaImagens.remove(), filaImagens.remove(), filaImagens.remove());
 
             try {
                 if (imovelSelecionado.getImovel() != null) {
-                    /*
-                    Cliente clienteAlterar;
-                    clienteAlterar = new Cliente(clienteSelecionado.getCliente().getClienteId(), txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
-                            txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText(), txtEndereco.getText(),
-                            txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
-                    DAO.alterar(clienteAlterar);
-                     */
+                   
                 } else {
                     DAO.inserir(imovel);
                 }
@@ -199,11 +277,23 @@ public class TelaAdicionarImovelController extends PadraoController {
         if (selectedFile != null) {
 
             if (filaImagens.size() < 3) {
-
-                filaImagens.add(selectedFile);
+                BufferedImage imagem = ImageIO.read(selectedFile);
+                ByteArrayOutputStream bytesImg = new ByteArrayOutputStream();
+                ImageIO.write((BufferedImage) imagem, "jpg", bytesImg);//seta a imagem para bytesImg
+                bytesImg.flush();//limpa a variável
+                byteArray = bytesImg.toByteArray();//Converte ByteArrayOutputStream para byte[] 
+                bytesImg.close();//fecha a conversão
+                filaImagens.add(byteArray);
             } else {
+                BufferedImage imagem = ImageIO.read(selectedFile);
+                ByteArrayOutputStream bytesImg = new ByteArrayOutputStream();
+                ImageIO.write((BufferedImage) imagem, "jpg", bytesImg);//seta a imagem para bytesImg
+                bytesImg.flush();//limpa a variável
+                byteArray = bytesImg.toByteArray();//Converte ByteArrayOutputStream para byte[] 
+                bytesImg.close();//fecha a conversão
                 filaImagens.remove();
-                filaImagens.add(selectedFile);
+                filaImagens.add(byteArray);
+
             }
 
             adicionarImagemTela();
@@ -219,14 +309,15 @@ public class TelaAdicionarImovelController extends PadraoController {
 
         imagensContainer.getChildren().clear();
         for (int i = 0; i < filaImagens.size(); i++) {
-            File f = filaImagens.remove();
-            Image imagemPura = new Image(f.toURI().toString());
+            byte[] byteArray2 = filaImagens.remove();
+            InputStream inputStream = new ByteArrayInputStream(byteArray2);
+            Image imagemPura = new Image(inputStream);
             ImageView imagem = new ImageView(imagemPura);
-            imagem.setFitHeight(120);
+            imagem.setFitHeight(160);
             imagem.setFitWidth(220);
             imagem.setPreserveRatio(true);
             imagensContainer.getChildren().add(imagem);
-            filaImagens.add(f);
+            filaImagens.add(byteArray2);
         }
 
     }

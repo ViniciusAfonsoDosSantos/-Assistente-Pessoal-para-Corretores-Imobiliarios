@@ -66,15 +66,14 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
                         + "Cidade=?, "
                         + "Bairro=?, "
                         + "CEP=?, "
-                        + "TIPO_IMOVEL=?"
+                        + "TIPO_IMOVEL=?,"
                         + "TIPO_AQUISICAO=?,"
                         + "NUM_DORMS_PROCURADO=?,"
                         + "NUM_VAGAS_PROCURADO=?,"
                         + "METRAGEM_PROCURADO=?,"
                         + "BAIRROS=?,"
                         + "CONDICOES=?,"
-                        + "FAIXA_PRECO=?,"
-                        + "NUM_DORMS_PROCURADO=?,"
+                        + "FAIXA_PRECO=?"
                         + "WHERE CLIENTE_ID = ?");
     }
     

@@ -75,7 +75,7 @@ public class HelperDAO {
             throw new PersistenciaException("Não foi possível carregar o driver de conexão com a base de dados");
         } catch (SQLException ex) {
             //.getLogger(UsuarioDAO.class.getName()).log(LEVEL.SEVERE, null, ex);
-            throw new PersistenciaException("Erro ao enviar o comando para a base de dados");
+            throw new PersistenciaException(ex);
         } finally {
             try {
                 connection.close();
