@@ -4,7 +4,7 @@
  */
 package br.edu.cefsa.model;
 
-import br.edu.cefsa.enumeradores.EstadoAtendimentoCliente;
+import br.edu.cefsa.enumeradores.StatusAtendimentoCliente;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

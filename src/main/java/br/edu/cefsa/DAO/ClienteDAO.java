@@ -73,7 +73,8 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
                         + "METRAGEM_PROCURADO=?,"
                         + "BAIRROS=?,"
                         + "CONDICOES=?,"
-                        + "FAIXA_PRECO=?"
+                        + "FAIXA_PRECO=?,"
+                        + "ESTADO_CLIENTE=?"
                         + "WHERE CLIENTE_ID = ?");
     }
     
@@ -95,9 +96,9 @@ public class ClienteDAO<C extends Cliente> extends GenericoDAO<C> implements IGe
         parametros.add(new Parametro(cliente.getCEP(), "texto"));
         parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getTipoImovel(), "texto"));
         parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getTipoAquisicao(), "texto"));
-        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getNumDorms(), "texto"));
-        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getNumVagas(), "texto"));
-        parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getMetragem(), "texto"));
+        parametros.add(new Parametro(String.valueOf(cliente.getImovelProcuradoCliente().getNumDorms()), "texto"));
+        parametros.add(new Parametro(String.valueOf(cliente.getImovelProcuradoCliente().getNumVagas()), "texto"));
+        parametros.add(new Parametro(String.valueOf(cliente.getImovelProcuradoCliente().getMetragem()), "texto"));
         parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getBairros(), "texto"));
         parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getCondicoes(), "texto"));
         parametros.add(new Parametro(cliente.getImovelProcuradoCliente().getFaixaPreco(), "texto"));

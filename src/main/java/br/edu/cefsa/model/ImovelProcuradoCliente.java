@@ -13,8 +13,8 @@ import java.time.LocalDate;
 public class ImovelProcuradoCliente {
     public String tipoImovel;
     public String tipoAquisicao;
-    public Integer numDorms;
-    public Integer numVagas;
+    public int numDorms;
+    public int numVagas;
     public double metragem;
     public String bairros;
     public String condicoes;

@@ -8,7 +8,7 @@ package br.edu.cefsa.enumeradores;
  *
  * @author gabri
  */
-public enum EstadoAtendimentoCliente {
+public enum StatusAtendimentoCliente {
     Andamento,
     Concluído,
     Cancelado
