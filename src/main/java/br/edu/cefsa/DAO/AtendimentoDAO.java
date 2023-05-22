@@ -34,7 +34,7 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
                         "IMOVEL_ID=? , " +
                         "DATA_ATENDIMENTO=? , " +
                         "ANOTACAO_ATENDIMENTO=? " +
-                        "WHERE ATENDIMENTO_ID = ?");                    
+                        "WHERE ATENDIMENTO_ID =?");                    
     }
     
     @Override
@@ -43,9 +43,9 @@ public class AtendimentoDAO<A extends Atendimento> extends GenericoDAO<A> implem
         parametros.add(new Parametro(String.valueOf(atendimento.getClienteID()), "texto"));
         parametros.add(new Parametro(String.valueOf(atendimento.getImovelID()), "texto"));
         parametros.add(new Parametro(atendimento.getDataAtendimento(), "data"));
-        parametros.add(new Parametro(atendimento.getAnotacoes(), "texto"));
+        parametros.add(new Parametro(String.valueOf(atendimento.getAnotacoes()), "texto"));
         if(update){
-            parametros.add(new Parametro(String.valueOf(atendimento.getID()), "long"));
+            parametros.add(new Parametro(String.valueOf(atendimento.getAtendimentoId()), "long"));
         }
         return parametros;}
 

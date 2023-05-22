@@ -5,7 +5,6 @@
 package br.edu.cefsa.model;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  *
