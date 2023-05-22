@@ -51,6 +51,7 @@ public class TelaCalendarioController extends PadraoController {
 
     @FXML
     private Label txtMes;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,8 +82,9 @@ public class TelaCalendarioController extends PadraoController {
     }
 
     @FXML
-    private void desenharCalendario() {
+    public void desenharCalendario() {
 
+        calendar.getChildren().clear();
         try {
             txtAno.setText(String.valueOf(dateFocus.getYear()));
             txtMes.setText(String.valueOf(dateFocus.getMonth().getDisplayName(TextStyle.FULL, new Locale("pt", "BR"))));
@@ -211,6 +213,7 @@ public class TelaCalendarioController extends PadraoController {
             stage.setScene(scene);
             stage.show();
             TelaMostraAtendimentos telaMostraAtendimentos = fxmlLoader.getController();
+            telaMostraAtendimentos.setParentController(this);
             telaMostraAtendimentos.setAtendimento(currentDate, dateFocus.getMonth(), dateFocus.getYear());
 
         } catch (Exception ex) {

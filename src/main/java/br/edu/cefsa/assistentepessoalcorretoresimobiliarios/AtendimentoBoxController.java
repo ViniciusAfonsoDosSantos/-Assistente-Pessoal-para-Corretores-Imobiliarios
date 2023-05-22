@@ -13,6 +13,7 @@ import br.edu.cefsa.model.Cliente;
 import br.edu.cefsa.model.Imovel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
+import java.lang.ModuleLayer.Controller;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.List;
@@ -60,8 +61,8 @@ public class AtendimentoBoxController {
 
     @FXML
     private ComboBox<Imovel> cbImovel;
-    
-     @FXML
+
+    @FXML
     private Label lbErroAnotacao;
 
     @FXML
@@ -71,6 +72,12 @@ public class AtendimentoBoxController {
     private Label lbErroImovel;
 
     Atendimento atendimento;
+
+    private TelaMostraAtendimentos parentController;
+
+    public void setParentController(TelaMostraAtendimentos parentController) {
+        this.parentController = parentController;
+    }
 
     public void setData(Atendimento atendimento) throws IOException {
 
@@ -146,7 +153,7 @@ public class AtendimentoBoxController {
     public void setNovoAtendimento(LocalDate data) throws IOException {
 
         try {
-            atendimentoTitulo.setText("Atendimento ##");
+            atendimentoTitulo.setText("Novo Atendimento");
             ClienteDAO dao = new ClienteDAO();
             ImovelDAO imovelDAO = new ImovelDAO();
 
@@ -181,7 +188,7 @@ public class AtendimentoBoxController {
                     return null;
                 }
             });
-            
+
             List<Cliente> listaClientes = dao.listar();
             ObservableList ObList = FXCollections.observableList(listaClientes);
             cbCliente.setItems(ObList);
@@ -220,6 +227,7 @@ public class AtendimentoBoxController {
             Atendimento atendimentoNovo = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
             AtendimentoDAO dao = new AtendimentoDAO();
             dao.inserir(atendimentoNovo);
+            parentController.desenhaCalendarioOutraTela();
             this.atendimento = atendimentoNovo;
             atendimento.setAtendimentoId(dao.listarUltimoAtendimento());
             iconeRemover.setOnMouseClicked(mouseEvent -> {
@@ -264,6 +272,8 @@ public class AtendimentoBoxController {
             AtendimentoDAO dao = new AtendimentoDAO();
             System.out.println("cliente => " + atendimento);
             dao.remover(atendimento);
+            parentController.limpaGrid();
+            parentController.criaAtendimentos(0, 1);
         }
     }
     //

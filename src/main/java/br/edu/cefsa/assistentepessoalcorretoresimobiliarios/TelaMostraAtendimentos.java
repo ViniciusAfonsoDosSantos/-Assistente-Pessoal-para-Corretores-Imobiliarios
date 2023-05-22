@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -37,10 +38,19 @@ public class TelaMostraAtendimentos implements Initializable {
     private List<Atendimento> atendimentos;
     
     private LocalDate data;
+    
+    @FXML
+    private AtendimentoBoxController atendimentoBoxController;
+    
+    private TelaCalendarioController parentController;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        //TESTEEEEEE
+        //TESTEEEEE...
+    }
+    
+    public void setParentController(TelaCalendarioController parentController) {
+        this.parentController = parentController;
     }
 
     public void setAtendimento(Integer diaAtendimento, Month mes, Integer ano) throws IOException {
@@ -56,27 +66,41 @@ public class TelaMostraAtendimentos implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("atendimentoBox.fxml"));
         AnchorPane atendimentoBox = fxmlLoader.load();
-        AtendimentoBoxController atendimentoBoxController = fxmlLoader.getController();
+        atendimentoBoxController = fxmlLoader.getController();
+        atendimentoBoxController.setParentController(this);
         atendimentoBoxController.setNovoAtendimento(data);
         paneMostraAtendimentos.add(atendimentoBox, 0, 1);
         GridPane.setMargin(atendimentoBox, new Insets(10));
         criaAtendimentos(0, 2);
-
+    }
+    
+    public void desenhaCalendarioOutraTela() throws IOException {
+        parentController.desenharCalendario();
+    }
+    
+    public void limpaGrid() throws IOException {
+        paneMostraAtendimentos.getChildren().clear();
     }
 
     public void criaAtendimentos(int column, int row) throws IOException {
 
         try {
 
+            
             AtendimentoDAO dao = new AtendimentoDAO();
             atendimentos = dao.listarPorData(data);
+            
+            if(atendimentos.isEmpty()){
+                parentController.desenharCalendario();
+            }
 
             for (Atendimento atendimento : atendimentos) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("atendimentoBox.fxml"));
                 AnchorPane atendimentoBox = fxmlLoader.load();
-                AtendimentoBoxController atendimentoBoxController = fxmlLoader.getController();
+                atendimentoBoxController = fxmlLoader.getController();
+                atendimentoBoxController.setParentController(this);
                 atendimentoBoxController.setData(atendimento);
 
                 if (column == 1) {
