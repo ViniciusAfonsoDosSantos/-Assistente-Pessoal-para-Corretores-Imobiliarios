@@ -65,7 +65,7 @@
       </AnchorPane>
       <AnchorPane fx:id="camada2" prefHeight="580.0" prefWidth="507.0" style="-fx-background-color: #F5F5F5;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label fx:id="lbLogo" layoutX="191.0" layoutY="176.0" text="LOGO">
+            <Label fx:id="lbLogo" layoutX="42.0" layoutY="199.0" text="CORRETOR MASTER">
                <font>
                   <Font name="Broadway" size="40.0" />
                </font>

@@ -31,6 +31,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
+import utils.ValidaDadosUtils;
 
 /**
  * FXML Controller class
@@ -124,8 +125,8 @@ public class AtendimentoBoxController {
             List<Imovel> listaImoveis = imovelDAO.listar();
             ObservableList ObListImoveis = FXCollections.observableList(listaImoveis);
             cbImovel.setItems(ObListImoveis);
-            //Imovel imovel = new Imovel(atendimento.getImovelID());
-            //cbImovel.getSelectionModel().select(imovelDAO.listarPorID(imovel));
+            Imovel imovel = new Imovel(atendimento.getImovelID());
+            cbImovel.getSelectionModel().select(imovelDAO.listarPorID(imovel));
             txtAnotacao.setText(atendimento.getAnotacoes());
             atendimentoTitulo.setText("Atendimento: " + atendimento.getAtendimentoId());
             txtAnotacao.setDisable(true);
@@ -219,31 +220,38 @@ public class AtendimentoBoxController {
 
     @FXML
     private void inserir(LocalDate data) throws IOException {
-
-        try {
+        
+        
+        int status = validaDados();
+        if (status == 0) {
             Cliente cliente = cbCliente.getValue();
             Imovel imovel = cbImovel.getValue();
             //Falta id no imovel;
-            Atendimento atendimentoNovo = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), 1);
+            Atendimento atendimentoNovo = new Atendimento(data, txtAnotacao.getText(), cliente.getClienteId(), imovel.getImovelId());
             AtendimentoDAO dao = new AtendimentoDAO();
-            dao.inserir(atendimentoNovo);
+            try {
+                dao.inserir(atendimentoNovo);
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             parentController.desenhaCalendarioOutraTela();
             this.atendimento = atendimentoNovo;
-            atendimento.setAtendimentoId(dao.listarUltimoAtendimento());
+            try {
+                atendimento.setAtendimentoId(dao.listarUltimoAtendimento());
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
+            }
             iconeRemover.setOnMouseClicked(mouseEvent -> {
                 try {
                     deletarAtendimento();
                 } catch (Exception ex) {
                     Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
                 }
+
             });
-
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(AtendimentoBoxController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     @FXML
@@ -328,5 +336,33 @@ public class AtendimentoBoxController {
 
             });
         }
+    }
+
+    public Integer validaDados() {
+        int status = 0;
+        Cliente cliente = cbCliente.getValue();
+        Imovel imovel = cbImovel.getValue();
+
+        try {
+            if (!ValidaDadosUtils.ValidaTexto(String.valueOf(cliente.getID()))) {
+                lbErroCliente.setText("Cliente não Preenchido");
+                status++;
+
+            }
+            if (!ValidaDadosUtils.ValidaTexto(String.valueOf(imovel.getID()))) {
+                lbErroImovel.setText("Imovel não Preenchido");
+                status++;
+
+            }
+        } catch (Exception ex) {
+            status++;
+            lbErroCliente.setText("Imovel ou Cliente não Preenchidos");
+        }
+
+        if (!ValidaDadosUtils.ValidaTexto(txtAnotacao.getText())) {
+            lbErroAnotacao.setText("Anotação não Preenchida");
+            status++;
+        }
+        return status;
     }
 }

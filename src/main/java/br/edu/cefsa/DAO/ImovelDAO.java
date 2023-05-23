@@ -83,6 +83,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
             ResultSet result = pStatement.executeQuery();
             while (result.next()) {
                 imoveis.add(new Imovel(
+                        Integer.valueOf(result.getString("Imovel_ID")), 
                         result.getString("NOME"), 
                         result.getString("TIPO_IMOVEL"), 
                         result.getString("finalidade"),
@@ -135,7 +136,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         try {
             connection = Conexao.getInstance().getConnection();
             PreparedStatement pStatement = connection.prepareStatement(sql);
-            pStatement.setLong(1,e.getID());
+            pStatement.setLong(1,e.getImovelId());
             ResultSet result = pStatement.executeQuery();
             
             if (result.next()) {

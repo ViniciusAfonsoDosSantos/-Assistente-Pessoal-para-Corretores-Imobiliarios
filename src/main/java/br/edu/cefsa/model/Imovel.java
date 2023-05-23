@@ -11,6 +11,7 @@ import java.time.LocalDate;
  * @author gabri
  */
 public class Imovel extends GenericoModel {
+    private Integer imovelId;
     private String nome;
     private String tipoImovel;
     private String finalidade;
@@ -36,6 +37,14 @@ public class Imovel extends GenericoModel {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public int getImovelId() {
+        return imovelId;
+    }
+
+    public void setImovelId(Integer ClienteId) {
+        this.imovelId = ClienteId;
+    }    
 
     public String getTipoImovel() {
         return tipoImovel;
@@ -94,6 +103,33 @@ public class Imovel extends GenericoModel {
         this.imagem2 = imagem2;
         this.imagem3 = imagem3;
     }
+        public Imovel(Integer imovelId,String nome, String tipoImovel, String finalidade, int numDorms, int numVagas, double metragem, String rua, String bairro, String cidade, String CEP, String complemento, String caracteristicas, LocalDate prazoEntrega, String faixaPreco, byte[] imagem1, byte[] imagem2, byte[] imagem3) {
+        this.imovelId = imovelId;
+        this.nome = nome;
+        this.tipoImovel = tipoImovel;
+        this.finalidade = finalidade;
+        this.numDorms = numDorms;
+        this.numVagas = numVagas;
+        this.metragem = metragem;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = cidade;
+        this.CEP = CEP;
+        this.complemento = complemento;
+        this.caracteristicas = caracteristicas;
+        this.prazoEntrega = prazoEntrega;
+        this.faixaPreco = faixaPreco;
+        this.imagem1 = imagem1;
+        this.imagem2 = imagem2;
+        this.imagem3 = imagem3;
+    }
+        
+    public Imovel(Integer imovelId) {
+        this.imovelId = imovelId;
+    }
+
+    public Imovel() {
+    }        
 
     
     public void setMetragem(double metragem) {
