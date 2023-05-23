@@ -4,14 +4,22 @@
  */
 package br.edu.cefsa.assistentepessoalcorretoresimobiliarios;
 
+import br.edu.cefsa.DAO.ClienteDAO;
+import br.edu.cefsa.DAO.ImovelDAO;
+import br.edu.cefsa.exception.PersistenciaException;
+import br.edu.cefsa.model.Cliente;
 import br.edu.cefsa.model.Imovel;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,8 +36,12 @@ public class ImovelBoxController {
     /**
      * Initializes the controller class.
      */
+    private DialogPane dialog;
+     
     @FXML
     private Label bairroImovel;
+
+   
 
     @FXML
     private Label cidadeImovel;
@@ -83,16 +95,33 @@ public class ImovelBoxController {
                 Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-        /*
+        
                 iconeRemover.setOnMouseClicked((MouseEvent event) -> {
 
             try {
-                deletarCliente(cliente);
+                deletarCliente(imovel);
             } catch (IOException | PersistenciaException ex) {
                 Logger.getLogger(ClienteBoxController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
-         */
+         
+    }
+    
+    public void deletarCliente(Imovel imovel) throws PersistenciaException, IOException {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Deletar Imovel");
+        alert.setContentText("Confirma a exclusão do Imovel?");
+        dialog = alert.getDialogPane();
+        dialog.getStylesheets().add(getClass().getResource("estiloPrincipal.css").toString());
+        dialog.getStyleClass().add("dialog");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+            ImovelDAO dao = new ImovelDAO();
+            dao.remover(imovel);
+            App.setRoot("telaListarImoveis");
+            System.out.println("cliente => " + imovel);
+        }
     }
 
 }
