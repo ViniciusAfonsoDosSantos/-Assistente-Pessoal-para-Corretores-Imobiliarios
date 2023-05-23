@@ -121,7 +121,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
     public void remover(I e) throws PersistenciaException {
         String sql = "DELETE FROM ASSISTENTECORRETORES.Imovel WHERE Imovel_ID= ? ";
         List parametro = new ArrayList();
-        parametro.add(new Parametro(Integer.toString(e.getID()), "long"));
+        parametro.add(new Parametro(Integer.toString(e.getImovelId()), "long"));
         try {
             HelperDAO.executaQuery(sql,parametro);
         } catch (ParseException ex) {

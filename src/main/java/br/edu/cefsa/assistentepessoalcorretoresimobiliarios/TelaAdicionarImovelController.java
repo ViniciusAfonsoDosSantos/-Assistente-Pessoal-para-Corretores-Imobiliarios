@@ -34,8 +34,11 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.time.LocalDate;
+import java.time.Period;
 import javafx.scene.control.RadioButton;
 import javax.imageio.ImageIO;
+import utils.ValidaDadosUtils;
 
 /**
  * FXML Controller class
@@ -234,7 +237,7 @@ public class TelaAdicionarImovelController extends PadraoController {
     private void salvarImovel() throws IOException, SQLException, PersistenciaException, ParseException {
 
         //Corrigir double - tirar ponto e virgula;
-        int status = 0;
+        int status = ValidaCampos();
         if (status == 0) {
 
             ImovelDAO DAO = new ImovelDAO();
@@ -250,7 +253,12 @@ public class TelaAdicionarImovelController extends PadraoController {
 
             try {
                 if (imovelSelecionado.getImovel() != null) {
-                   
+                    Imovel imovelAlterar = new Imovel(txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
+                    Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
+                    txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
+                    txtFaixaPreco.getText(), filaImagens.remove(), filaImagens.remove(), filaImagens.remove());
+                    DAO.alterar(imovelAlterar);
+
                 } else {
                     DAO.inserir(imovel);
                 }
@@ -259,7 +267,6 @@ public class TelaAdicionarImovelController extends PadraoController {
                 Logger.getLogger(TelaLoginController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
     }
 
     @FXML
@@ -321,4 +328,103 @@ public class TelaAdicionarImovelController extends PadraoController {
         }
 
     }
+    
+    
+        @FXML
+    private int ValidaCampos() {
+        int statusFinal = 0;
+        int status = validaCamposEmBranco();
+        if (status == 1) {
+            return status;
+        }
+        if (!ValidaDadosUtils.VerificaCEP(txtCEP.getText())) {
+            lbErroCEP.setText("CEP no Formato incorreto");
+            statusFinal++;
+        }
+        if(filaImagens.size() < 3){
+            lbErroAdicionarImagem.setText("Favor adicionar pelo menos 3 imagens");
+            statusFinal++;        
+        }        
+        if (Integer.parseInt(txtNumeroDormitorios.getText()) < 0) {
+            lbErroNumeroDormitorios.setText("Numero de Dormitorios menor que 0!");
+            statusFinal++;
+        }
+        if (Integer.parseInt(txtNumeroVagas.getText()) < 0) {
+            lbErroVagas.setText("Numero de Vagas menor que 0!");
+            statusFinal++;
+        }
+        if (Integer.parseInt(txtMetragem.getText()) < 0) {
+            lbErroMetragem.setText("Metragem menor que 0!");
+            statusFinal++;
+        }  
+
+        return statusFinal;
+    }
+
+    private int validaCamposEmBranco() {
+        int status = 0;
+        RadioButton tipoImovelSelecionado = (RadioButton) tipoMoradia.getSelectedToggle();
+        
+        RadioButton qualUsoSelecionado = (RadioButton) qualUso.getSelectedToggle();
+        
+        
+        if (!ValidaDadosUtils.ValidaTexto(txtNomeResidencia.getText())) {
+            lbErroNomeResidencia.setText("Nome da Residencia não Preenchido");
+            status++;
+        }
+        if (tipoImovelSelecionado == null) {
+            lbErroTipo.setText("Tipo não Preenchido");
+            status++;
+        }
+        if (mskPrazoEntrega.getValue() == null) {
+            lbErroPrazoEntrega.setText("Prazo de Entrega não Preenchido");
+            status++;
+        }
+        if (qualUsoSelecionado == null) {
+            lbErroFinalidade.setText("Finalidade não Preenchida");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtNumeroDormitorios.getText())) {
+            lbErroNumeroDormitorios.setText("Numero de Dormitorios não Preenchidos");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCidade.getText())) {
+            lbErroCidade.setText("Cidade não Preenchida");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCEP.getText())) {
+            lbErroCEP.setText("CEP não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtEndereco.getText())) {
+            lbErroEnderecoResidencia.setText("Endereço não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtNumeroVagas.getText())) {
+            lbErroVagas.setText("Vagas não Preenchidas");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtMetragem.getText())) {
+            lbErroMetragem.setText("Metragem não Preenchida");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtBairro.getText())) {
+            lbErroBairro.setText("Bairro não Preenchido");
+            status++;
+        }          
+        if (!ValidaDadosUtils.ValidaTexto(txtComplemento.getText())) {
+            lbErroComplemento.setText("Complemento não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtCaracteristicas.getText())) {
+            lbErroNomeCaracteristicas.setText("Caracteristicas não Preenchido");
+            status++;
+        }
+        if (!ValidaDadosUtils.ValidaTexto(txtFaixaPreco.getText())) {
+            lbErroFaixaPreco.setText("Faixa de Preço não Preenchida");
+            status++;
+        }
+        return status;
+    }
+    
 }
