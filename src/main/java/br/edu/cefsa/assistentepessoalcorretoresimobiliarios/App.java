@@ -20,6 +20,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("telaLogin"));
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("Corretor Master");
         stage.show();
     }
 

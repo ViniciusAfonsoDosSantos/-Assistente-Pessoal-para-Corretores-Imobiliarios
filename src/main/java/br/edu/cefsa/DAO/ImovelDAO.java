@@ -26,7 +26,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
     public ImovelDAO(){
         super.setTabela("ASSISTENTECORRETORES.IMOVEL");                  
         super.setInsertSQL("INSERT INTO ASSISTENTECORRETORES.IMOVEL (NOME,Tipo_Imovel,finalidade,Num_Dorms,Num_Vagas,METRAGEM,RUA,BAIRRO,CIDADE,CEP,COMPLEMENTO,CARACTERISTICAS,PRAZO_ENTREGA,FAIXA_PRECO,Imagem1,Imagem2,Imagem3) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
-        super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.IMOVEL "
+        super.setUpdateSQL("UPDATE ASSISTENTECORRETORES.IMOVEL SET "
                         + "NOME=?," +
                         "Tipo_Imovel=?," +
                         "finalidade=?," +
@@ -68,7 +68,7 @@ public class ImovelDAO<I extends Imovel> extends GenericoDAO<I> implements IGene
         parametros.add(new Parametro(imovel.getImagem2(), "byte"));
         parametros.add(new Parametro(imovel.getImagem3(), "byte"));
         if(update){
-            parametros.add(new Parametro(String.valueOf(imovel.getID()), "long"));
+            parametros.add(new Parametro(String.valueOf(imovel.getImovelId()), "long"));
         }
         return parametros;}
 

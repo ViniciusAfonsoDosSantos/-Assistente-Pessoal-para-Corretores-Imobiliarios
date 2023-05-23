@@ -246,20 +246,20 @@ public class TelaAdicionarImovelController extends PadraoController {
             String tipoImovel = tipoImovelSelecionado.getText();
             RadioButton qualUsoSelecionado = (RadioButton) qualUso.getSelectedToggle();
             String tipoFinalidade = qualUsoSelecionado.getText();
-            Imovel imovel = new Imovel(txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
-                    Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
-                    txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
-                    txtFaixaPreco.getText(), filaImagens.remove(), filaImagens.remove(), filaImagens.remove());
-
+            
             try {
                 if (imovelSelecionado.getImovel() != null) {
-                    Imovel imovelAlterar = new Imovel(txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
+                    Imovel imovelAlterar = new Imovel(imovelSelecionado.getImovel().getImovelId(),txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
                     Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
                     txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
                     txtFaixaPreco.getText(), filaImagens.remove(), filaImagens.remove(), filaImagens.remove());
                     DAO.alterar(imovelAlterar);
 
                 } else {
+                    Imovel imovel = new Imovel(txtNomeResidencia.getText(), tipoImovel, tipoFinalidade, Integer.parseInt(txtNumeroDormitorios.getText()),
+                    Integer.parseInt(txtNumeroVagas.getText()), Double.parseDouble(txtMetragem.getText()), txtEndereco.getText(), txtBairro.getText(),
+                    txtCidade.getText(), txtCEP.getText(), txtComplemento.getText(), txtCaracteristicas.getText(), mskPrazoEntrega.getValue(),
+                    txtFaixaPreco.getText(), filaImagens.remove(), filaImagens.remove(), filaImagens.remove());
                     DAO.inserir(imovel);
                 }
                 redirecionarListarImovel();
