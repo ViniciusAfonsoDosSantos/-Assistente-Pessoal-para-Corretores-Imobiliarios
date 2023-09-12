@@ -83,8 +83,8 @@ public class ImovelBoxController {
         }
         nomeImovel.setText(imovel.getNome());
         ruaImovel.setText("Endereço: " + imovel.getRua());
-        cidadeImovel.setText("Telefone: " + imovel.getCidade());
-        bairroImovel.setText("Email: " + imovel.getBairro());
+        cidadeImovel.setText("Cidade: " + imovel.getCidade());
+        bairroImovel.setText("Bairro: " + imovel.getBairro());
         lbPreco.setText("R$: " + imovel.getFaixaPreco());
         iconeEditar.setOnMouseClicked((MouseEvent event) -> {
 

@@ -274,9 +274,10 @@ public class TelaCadastroClienteController extends PadraoController {
                     Double.parseDouble(txtMetragem.getText()), txtBairros.getText(), txtCondicoes.getText(), txtFaixaPreco.getText());
     
             Cliente cliente = new Cliente(txtNome.getText(), txtCPF.getText(), mskDataNascimento.getValue(), txtConjuge.getText(),
-                    txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtEndereco.getText(), txtCEP.getText(),
+                    txtProfissao.getText(), txtTelefone.getText(), txtEmail.getText(), txtCEP.getText() , txtEndereco.getText(),
                     txtEstado.getValue().toString(), txtCidade.getText(), txtBairro.getText(), imovelProcurado);
 
+            
             try {
                 if (clienteSelecionado.getCliente() != null) {
                     Cliente clienteAlterar;
